@@ -12,17 +12,17 @@ NAME=$2
 
 # File paths
 CPP_FILE="src/${FOLDER}/${NAME}.cpp"
-HEADER_FILE="include/${FOLDER}/${NAME}.hpp"
+HEADER_FILE="header/${FOLDER}/${NAME}.hpp"
 TEST_FILE="unit_tests/${FOLDER}/test_${NAME}.cpp"
 
 # Create directories
 mkdir -p "src/${FOLDER}"
-mkdir -p "include/${FOLDER}"
+mkdir -p "header/${FOLDER}"
 mkdir -p "unit_tests/${FOLDER}"
 
 # Create .cpp file
 cat > "$CPP_FILE" <<EOF
-#include "${NAME}.hpp"
+
 
 // Implement your ${NAME} logic here.
 EOF
