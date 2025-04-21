@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "arrays/isValidSequence.hpp"
+#include "arrays/is_valid_sequence.hpp"
 
 
 
