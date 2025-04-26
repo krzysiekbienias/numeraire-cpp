@@ -67,4 +67,79 @@ TEST(LinkedListTest, GetMiddleEmptyList) {
     EXPECT_THROW(list.getMiddle(), std::runtime_error);
 }
 
+TEST(LinkedListTest, Search_EmptyList_ReturnsFalse) {
+    LinkedList list;
+    EXPECT_FALSE(list.search(10));
+}
+
+TEST(LinkedListTest, Search_ValueExists_ReturnsTrue) {
+    LinkedList list;
+    list.insertAtEnd(1);
+    list.insertAtEnd(2);
+    list.insertAtEnd(3);
+    list.insertAtEnd(4);
+    list.insertAtEnd(5);
+    EXPECT_TRUE(list.search(3));
+}
+
+TEST(LinkedListTest, Search_ValueDoesNotExist_ReturnsFalse) {
+    LinkedList list;
+    list.insertAtEnd(1);
+    list.insertAtEnd(2);
+    list.insertAtEnd(3);
+    list.insertAtEnd(4);
+    list.insertAtEnd(5);
+    EXPECT_FALSE(list.search(6));
+}
+
+TEST(LinkedListTest, Search_FirstAndLastElement) {
+    LinkedList list;
+    list.insertAtEnd(10);
+    list.insertAtEnd(20);
+    list.insertAtEnd(30);
+    EXPECT_TRUE(list.search(10));
+    EXPECT_TRUE(list.search(30));
+}
+
+// --- Unit tests for remove_tail() ---
+
+TEST(LinkedListTest, RemoveTail_EmptyList_NoCrash) {
+    LinkedList list;
+    list.remove_tail();
+    EXPECT_FALSE(list.search(0)); // Should still be empty
+}
+
+TEST(LinkedListTest, RemoveTail_SingleNodeList) {
+    LinkedList list;
+    list.insertAtEnd(99);
+    list.remove_tail();
+    EXPECT_FALSE(list.search(99));
+}
+
+TEST(LinkedListTest, RemoveTail_MultipleNodes) {
+    LinkedList list;
+    list.insertAtEnd(1);
+    list.insertAtEnd(2);
+    list.insertAtEnd(3);
+    list.remove_tail();
+    EXPECT_FALSE(list.search(3));
+    EXPECT_TRUE(list.search(1));
+    EXPECT_TRUE(list.search(2));
+}
+
+TEST(LinkedListTest, RemoveTail_Twice) {
+    LinkedList list;
+    list.insertAtEnd(1);
+    list.insertAtEnd(2);
+    list.insertAtEnd(3);
+    list.insertAtEnd(4);
+    list.remove_tail(); // Removes 4
+    list.remove_tail(); // Removes 3
+    EXPECT_FALSE(list.search(4));
+    EXPECT_FALSE(list.search(3));
+    EXPECT_TRUE(list.search(1));
+    EXPECT_TRUE(list.search(2));
+}
+
+
 //You don’t need to manually delete anything because the LinkedList destructor is automatically called when each LinkedList object goes out of scope at the end of each test.

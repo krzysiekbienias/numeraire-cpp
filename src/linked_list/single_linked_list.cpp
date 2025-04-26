@@ -61,3 +61,29 @@ int LinkedList::getMiddle() const{
     return slow->value;
 }
 
+
+bool LinkedList::search(int value)const{
+    Node * current = head;
+    while(current!=nullptr){
+        if (current->value==value){
+            return true;
+        }
+        current=current->next;
+        
+    }
+    return false;
+    }
+
+
+void LinkedList::remove_tail(){
+    if (head ==nullptr or head->next==nullptr){
+        head=nullptr;
+        return ;
+    }
+    Node * current =head;
+    while(current->next!=nullptr && current->next->next !=nullptr){
+        current=current->next;
+        
+    }
+    current->next=nullptr;
+}

@@ -22,7 +22,8 @@ public:
     bool isEmpty() const;
     void insertAtEnd(int value);
     int getMiddle() const;
-    
+    bool search(int value) const;
+    void remove_tail();
     
     
 };
