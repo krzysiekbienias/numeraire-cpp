@@ -46,3 +46,18 @@ void LinkedList::insertAtEnd(int value){
     current->next=newNode;
     
 }
+
+int LinkedList::getMiddle() const{
+    if (!head){
+        throw std::runtime_error("List is empty");
+    }
+    
+    Node * slow=head;
+    Node * fast=head;
+    while (fast && fast->next){
+        slow=slow->next;
+        fast=fast->next->next;
+    }
+    return slow->value;
+}
+

@@ -21,6 +21,7 @@ public:
     int size() const;
     bool isEmpty() const;
     void insertAtEnd(int value);
+    int getMiddle() const;
     
     
     
