@@ -2,7 +2,7 @@
 
 std::vector<int> smallestDifference(std::vector<int> &arrayOne, std::vector<int> &arrayTwo) {
     std ::sort(arrayOne.begin(),arrayOne.end());
-    std ::sort(arrayOne.begin(),arrayTwo.end());
+    std ::sort(arrayTwo.begin(),arrayTwo.end());
     size_t i=0;
     size_t j=0;
     int minDiff=std::numeric_limits<int>::max();
