@@ -30,3 +30,45 @@
 *.exe
 *.out
 *.app
+
+# === CMake generated ===
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+install_manifest.txt
+
+# === Build directories ===
+/build/
+/xcode_build/
+/cmake-build-*/
+
+# === IDE/Editor files ===
+
+# Xcode
+*.xcworkspace
+*.xcuserdata
+*.xcuserdatad
+*.xcuserstate
+DerivedData/
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+
+# JetBrains CLion
+.idea/
+*.iml
+
+# VSCode
+.vscode/
+
+# === System files ===
+.DS_Store
+Thumbs.db
+
+# === Backup & temp files ===
+*~
+*.swp
+*.swo
+*.tmp
