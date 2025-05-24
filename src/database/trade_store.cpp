@@ -3,13 +3,21 @@
 #include <unistd.h>
 #include"core/trade.hpp"
 #include"utils/logger.hpp"
+#include"utils/sqlite_utils.hpp"
+#include"core/trade_factory.hpp"
 
-TradesStore::TradesStore(const std::string& db_path) : db(nullptr) {
-    open(db_path);
+
+TradesStore::TradesStore(const std::string& db_path) {
+    db = sqlite_utils::openDatabase(db_path);
+
+    if (!db) {
+        Logger::get()->error("❌ TradesStore failed to initialize DB connection.");
+        // you could even throw here if needed
+    }
 }
 
 TradesStore::~TradesStore() {
-    close();
+    sqlite_utils::closeDatabase(db);
 }
 
 
@@ -61,53 +69,34 @@ void TradesStore::close() {
 
 
 std::optional<Trade> TradesStore::getTradeById(int trade_id) {
-    const char* sql = R"(
-        SELECT trade_id, underlying_ticker, product_type, payoff, trade_date,
+    const std::string sql = R"(
+        SELECT trade_id, asset_class, underlying_ticker, product_type, payoff, trade_date,
                trade_maturity, dividend, option_style, structured_params,
                user_id, strike
         FROM wiener_tradebook
         WHERE trade_id = ?;
     )";
 
-    sqlite3_stmt* stmt;
-    if (sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr) != SQLITE_OK) {
-        Logger::get()->error( "Failed to prepare query for all trades: {}", sqlite3_errmsg(db));
-        return std::nullopt;
-    }
+    auto stmtOpt = sqlite_utils::prepareStatement(db, sql);
+    if (!stmtOpt) return std::nullopt;
 
-    sqlite3_bind_int(stmt, 1, trade_id); // bind input
+    sqlite3_stmt* stmt = *stmtOpt;
+    sqlite_utils::bindInt(stmt, 1, trade_id);
 
-    Trade t;
-    bool found = false;
+    std::optional<Trade> tradeOpt = std::nullopt;
+
     if (sqlite3_step(stmt) == SQLITE_ROW) {
-        found = true;
-        t.trade_id = sqlite3_column_int(stmt, 0);
-        t.underlying_ticker = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 1));
-        t.product_type = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 2));
-        t.payoff = sqlite3_column_type(stmt, 3) != SQLITE_NULL
-            ? std::optional<std::string>{reinterpret_cast<const char*>(sqlite3_column_text(stmt, 3))}
-            : std::nullopt;
-        t.trade_date = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 4));
-        t.trade_maturity = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 5));
-        t.dividend = sqlite3_column_double(stmt, 6);
-        t.option_style = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 7));
-        t.structured_params = sqlite3_column_type(stmt, 8) != SQLITE_NULL
-            ? std::optional<std::string>{reinterpret_cast<const char*>(sqlite3_column_text(stmt, 8))}
-            : std::nullopt;
-        t.user_id = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 9));
-        t.strike = sqlite3_column_type(stmt, 10) != SQLITE_NULL
-            ? std::optional<double>{sqlite3_column_double(stmt, 10)}
-            : std::nullopt;
+        tradeOpt = TradeFactory::buildFromRow(stmt);
     }
 
     sqlite3_finalize(stmt);
-    return found ? std::optional<Trade>{t} : std::nullopt;
+    return tradeOpt;
 }
 
 
 std::vector<Trade> TradesStore::getAllTrades() {
     const char* sql = R"(
-        SELECT trade_id, underlying_ticker, product_type, payoff, trade_date,
+        SELECT trade_id, asset_class, underlying_ticker, product_type, payoff, trade_date,
                trade_maturity, dividend, option_style, structured_params,
                user_id, strike
         FROM wiener_tradebook;
@@ -122,26 +111,51 @@ std::vector<Trade> TradesStore::getAllTrades() {
     }
 
     while (sqlite3_step(stmt) == SQLITE_ROW) {
-        Trade t;
-        t.trade_id = sqlite3_column_int(stmt, 0);
-        t.underlying_ticker = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 1));
-        t.product_type = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 2));
-        t.payoff = sqlite3_column_type(stmt, 3) != SQLITE_NULL
-            ? std::optional<std::string>{reinterpret_cast<const char*>(sqlite3_column_text(stmt, 3))}
-            : std::nullopt;
-        t.trade_date = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 4));
-        t.trade_maturity = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 5));
-        t.dividend = sqlite3_column_double(stmt, 6);
-        t.option_style = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 7));
-        t.structured_params = sqlite3_column_type(stmt, 8) != SQLITE_NULL
-            ? std::optional<std::string>{reinterpret_cast<const char*>(sqlite3_column_text(stmt, 8))}
-            : std::nullopt;
-        t.user_id = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 9));
-        t.strike = sqlite3_column_type(stmt, 10) != SQLITE_NULL
-            ? std::optional<double>{sqlite3_column_double(stmt, 10)}
-            : std::nullopt;
+        TradeMetaData meta;
+        meta.trade_id       = sqlite3_column_int(stmt, 0);
+        meta.asset_class    = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 1));
+        std::string ticker  = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 2));
+        meta.product_type   = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 3));
 
-        trades.push_back(std::move(t));
+        std::optional<std::string> payoff =
+            sqlite3_column_type(stmt, 4) != SQLITE_NULL
+                ? std::optional<std::string>{reinterpret_cast<const char*>(sqlite3_column_text(stmt, 4))}
+                : std::nullopt;
+
+        meta.trade_date     = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 5));
+        meta.trade_maturity = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 6));
+        double dividend     = sqlite3_column_double(stmt, 7);
+        meta.option_style   = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 8));
+
+        std::optional<std::string> structured_params =
+            sqlite3_column_type(stmt, 9) != SQLITE_NULL
+                ? std::optional<std::string>{reinterpret_cast<const char*>(sqlite3_column_text(stmt, 9))}
+                : std::nullopt;
+
+        meta.user_id = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 10));
+        std::optional<double> strike =
+            sqlite3_column_type(stmt, 11) != SQLITE_NULL
+                ? std::optional<double>{sqlite3_column_double(stmt, 11)}
+                : std::nullopt;
+
+        Trade trade;
+
+        if (meta.asset_class == "Equity") {
+            EquityTradeData eq;
+            eq.underlying_ticker = ticker;
+            eq.dividend = dividend;
+            eq.strike = strike;
+            eq.payoff = payoff;
+            eq.structured_params = structured_params;
+
+            trade.meta = meta;
+            trade.assetData = eq;
+        } else {
+            Logger::get()->warn("⚠️ Skipping trade with unsupported asset class: {}", meta.asset_class);
+            continue;  // Skip unsupported trades
+        }
+
+        trades.push_back(std::move(trade));
     }
 
     sqlite3_finalize(stmt);
