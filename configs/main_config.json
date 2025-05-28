@@ -1,0 +1,5 @@
+{
+  "SCHEDULE_CONFIG": "/configs/schedule_config.json",
+  "SECRETS_CONFIG": "/configs/secrets.json",
+  "DB_PATH":"/db.sqlite3"
+}
