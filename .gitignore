@@ -42,6 +42,7 @@ install_manifest.txt
 /build/
 /xcode_build/
 /cmake-build-*/
+/ninja_build/
 
 # === IDE/Editor files ===
 
