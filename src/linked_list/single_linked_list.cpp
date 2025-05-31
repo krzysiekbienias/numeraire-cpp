@@ -47,6 +47,19 @@ void LinkedList::insertAtEnd(int value){
     
 }
 
+void LinkedList::insertAtFront(int value){
+    Node* newNode=new Node(value);
+    if(head==nullptr){
+        head=newNode;
+        return;
+    }
+    newNode->next=head;
+    head=newNode;
+    
+    
+}
+
+
 int LinkedList::getMiddle() const{
     if (!head){
         throw std::runtime_error("List is empty");
@@ -75,7 +88,7 @@ bool LinkedList::search(int value)const{
     }
 
 
-void LinkedList::remove_tail(){
+void LinkedList::removeTail(){
     if (head ==nullptr or head->next==nullptr){
         head=nullptr;
         return ;
@@ -86,4 +99,33 @@ void LinkedList::remove_tail(){
         
     }
     current->next=nullptr;
+}
+
+
+void LinkedList::removeKthNode(int k){
+    //I need dummy node becasue it may happen that head itself is the node we need to remove
+    
+     
+    Node * dummy =new Node(-1);
+    dummy->next =head;
+    Node * leader=dummy;
+    Node * trailer=dummy;
+    for (int i=0;i<k;++i){
+        if (leader->next==nullptr){
+            delete dummy; // we need to revert to orginal version
+            return; // k is too large nothing to remove
+        }
+        leader=leader->next;
+    }
+    while (leader->next!=nullptr) {
+        leader=leader->next;
+        trailer=trailer->next;
+    }
+    // if we get to the end with leader it means that trailer is one node before k
+    Node * toDelete=trailer->next;
+    trailer->next=toDelete->next;
+    delete toDelete;
+    //we also need to get back to default settings where head is a first node, not a dummy node.
+    head=dummy->next;
+    delete dummy;
 }
