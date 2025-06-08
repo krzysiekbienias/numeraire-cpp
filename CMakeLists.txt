@@ -36,18 +36,18 @@ find_library(QUANTLIB_LIBRARY QuantLib PATHS /opt/homebrew/lib REQUIRED)
 file(GLOB_RECURSE CORE_SRC src/core/*.cpp)
 file(GLOB_RECURSE UTILS_SRC src/utils/*.cpp)
 file(GLOB_RECURSE PRICING_SRC src/pricing/*.cpp)
-file(GLOB_RECURSE ASSET_EQUITY_SRC src/asset_classes/equity/*.cpp)
-file(GLOB_RECURSE ASSET_FX_SRC src/asset_classes/fx/*.cpp)
-file(GLOB_RECURSE ASSET_RATES_SRC src/asset_classes/rates/*.cpp)
+file(GLOB_RECURSE ASSET_EQUITY_SRC src/asset_class/equity/*.cpp)
+file(GLOB_RECURSE ASSET_FX_SRC src/asset_class/fx/*.cpp)
+file(GLOB_RECURSE ASSET_RATES_SRC src/asset_class/rates/*.cpp)
 file(GLOB_RECURSE DATABASE_SRC src/database/*.cpp)
 
 
 file(GLOB_RECURSE CORE_HEADERS header/core/*.hpp)
 file(GLOB_RECURSE UTILS_HEADERS header/utils/*.hpp)
 file(GLOB_RECURSE PRICING_HEADERS header/pricing/*.hpp)
-file(GLOB_RECURSE ASSET_EQUITY_HEADERS header/asset_classes/equity/*.hpp)
-file(GLOB_RECURSE ASSET_FX_HEADERS header/asset_classes/fx/*.hpp)
-file(GLOB_RECURSE ASSET_RATES_HEADERS header/asset_classes/rates/*.hpp)
+file(GLOB_RECURSE ASSET_EQUITY_HEADERS header/asset_class/equity/*.hpp)
+file(GLOB_RECURSE ASSET_FX_HEADERS header/asset_class/fx/*.hpp)
+file(GLOB_RECURSE ASSET_RATES_HEADERS header/asset_class/rates/*.hpp)
 file(GLOB_RECURSE ENUMS_HEADERS header/enums/*.hpp)
 file(GLOB_RECURSE DATABASE_HEADERS header/database/*.hpp)
 
@@ -81,10 +81,10 @@ target_include_directories(project_lib PUBLIC
     header/core
     header/utils
     header/pricing
-    header/asset_classes
-    header/asset_classes/equity
-    header/asset_classes/fx
-    header/asset_classes/rates
+    header/asset_class
+    header/asset_class/equity
+    header/asset_class/fx
+    header/asset_class/rates
     header/database	 
     /opt/homebrew/include
 )
@@ -108,10 +108,10 @@ if(EXISTS ${MAIN_SRC})
         ${CMAKE_SOURCE_DIR}/header/core
         ${CMAKE_SOURCE_DIR}/header/utils
         ${CMAKE_SOURCE_DIR}/header/pricing
-        ${CMAKE_SOURCE_DIR}/header/asset_classes
-        ${CMAKE_SOURCE_DIR}/header/asset_classes/equity
-        ${CMAKE_SOURCE_DIR}/header/asset_classes/fx
-        ${CMAKE_SOURCE_DIR}/header/asset_classes/rates
+        ${CMAKE_SOURCE_DIR}/header/asset_class
+        ${CMAKE_SOURCE_DIR}/header/asset_class/equity
+        ${CMAKE_SOURCE_DIR}/header/asset_class/fx
+        ${CMAKE_SOURCE_DIR}/header/asset_class/rates
     )
 	
 endif()
@@ -132,7 +132,7 @@ target_include_directories(test_environment PRIVATE
     header/core
     header/utils
     header/pricing
-    header/asset_classes
+    header/asset_class
 )
 
 add_test(NAME AllTests COMMAND test_environment)
