@@ -10,3 +10,11 @@ int nthFibbonaci(int n,std::unordered_map<int,int>& lookup){
     lookup[n]=nthFibbonaci(n-1, lookup)+nthFibbonaci(n-2, lookup);
     return lookup[n];
 }
+
+
+//If is required to pass only one argument we may use overlopading function as presented below.
+int nthFibbonaci(int n){
+    std::unordered_map<int, int> lookup;
+    return nthFibbonaci(n, lookup);
+}
+
