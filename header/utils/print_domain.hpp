@@ -5,6 +5,7 @@
 
 namespace domain_debug {
     void printTrade(const std::optional<Trade>& t_opt);
-    void printSchedule(const QuantLib::Schedule& schedule);
+    void printGeneratedScheduleDates(const QuantLib::Schedule& schedule);
+    void printScheduleConfig(const ScheduleGenerator& scheduleGen);
     void printTradeBook(const std::vector<Trade>& trades);
 }

@@ -1,10 +1,23 @@
 #include"utils/print_domain.hpp"
 #include<iostream>
+#include"enum_mappers.hpp"
 
 
 namespace domain_debug {
 
-void printSchedule(const QuantLib::Schedule& schedule){
+void printScheduleConfig(const ScheduleGenerator& scheduleGen) {
+    std::cout << "📅 Schedule Configuration:\n";
+
+    // For clarity, we assume your enums can be converted to strings with `enum_utils` (optional but clean)
+    std::cout << "  Calendar Type      : " << enum_utils::toString(scheduleGen.getCalendarType()) << "\n";
+    std::cout << "  Frequency          : " << enum_utils::toString(scheduleGen.getFrequency()) << "\n";
+    std::cout << "  Business Convention: " << enum_utils::toString(scheduleGen.getDateConvention()) << "\n";
+    std::cout << "  Generation Rule    : " << enum_utils::toString(scheduleGen.getDateRule()) << "\n";
+    std::cout << "  Day Count Basis    : " << enum_utils::toString(scheduleGen.getDayCountEnum()) << "\n";
+}
+
+//this prints dates between start and end date.
+void printGeneratedScheduleDates(const QuantLib::Schedule& schedule){
     std::cout << "Generated schedule:\n";
     for (const auto& date : schedule) {
         std::cout << date << " falls on a "<<date.weekday()<< "\n";
@@ -20,13 +33,28 @@ void printTrade(const std::optional<Trade>& t_opt) {
 
     const Trade& t = *t_opt;
 
-    std::cout << "Trade #" << t.trade_id << " [" << t.underlying_ticker << "]\n";
-    std::cout << "  Product: " << t.product_type << ", Style: " << t.option_style << "\n";
-    if (t.payoff) std::cout << "  Payoff: " << *t.payoff << "\n";
-    if (t.strike) std::cout << "  Strike: " << *t.strike << "\n";
-    std::cout << "  Maturity: " << t.trade_maturity << ", Date: " << t.trade_date << "\n";
-    if (t.structured_params)
-        std::cout << "  Structured params: " << *t.structured_params << "\n";
+    // Print metadata
+    std::cout << "Trade #" << t.meta.trade_id << " | Asset Class: " << t.meta.asset_class << "\n";
+    std::cout << "  Product: " << t.meta.product_type << ", Style: " << t.meta.option_style << "\n";
+    std::cout << "  Trade Date: " << t.meta.trade_date << ", Maturity: " << t.meta.trade_maturity << "\n";
+    std::cout << "  User: " << t.meta.user_id << "\n";
+
+    // Print asset-specific info (currently only Equity supported)
+    std::visit([](const auto& asset) {
+        using T = std::decay_t<decltype(asset)>;
+        if constexpr (std::is_same_v<T, EquityTradeData>) {
+            std::cout << "  Underlying: " << asset.underlying_ticker << "\n";
+            std::cout << "  Dividend: " << asset.dividend << "\n";
+            if (asset.strike)
+                std::cout << "  Strike: " << *asset.strike << "\n";
+            if (asset.payoff)
+                std::cout << "  Payoff: " << *asset.payoff << "\n";
+            if (asset.structured_params)
+                std::cout << "  Structured Params: " << *asset.structured_params << "\n";
+        } else {
+            std::cout << "⚠️  Unknown or unsupported asset type.\n";
+        }
+    }, t.assetData);
 }
 
 void printTradeBook(const std::vector<Trade>& trades) {
@@ -36,10 +64,15 @@ void printTradeBook(const std::vector<Trade>& trades) {
     }
 
     for (const auto& t : trades) {
-        printTrade(t);  // This uses the overload for confirmed Trade&
+        printTrade(std::make_optional(t));  // Reuse the logic
         std::cout << "\n";
     }
 }
+
+
+
+
+
 
 }
 
