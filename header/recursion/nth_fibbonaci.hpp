@@ -2,4 +2,4 @@
 #include <unordered_map>
 
 // Declare your nth_fibbonaci interface here.
-int nthFibbonaci(int n,std::unordered_map<int,int>& lookup);
+int nthFibbonaci(int n);
