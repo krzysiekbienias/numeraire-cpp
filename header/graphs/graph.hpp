@@ -13,8 +13,9 @@ private:
 public:
     ~Graph();
     GraphNode* addNode(int);
-    void addEdge(int fromId,int toId);
-    void display() const;
+    void addEdge(int fromId,int toId,bool directed=false);
+    void display(bool directed = false) const;
+    void displayAdjacencyList(bool directed = false) const;
     void dfs(int startId) const;
     
 };
