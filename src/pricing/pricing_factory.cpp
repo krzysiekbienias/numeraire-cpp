@@ -5,10 +5,6 @@
 #include "utils/json_utils.hpp"
 
 
-
-
-
-
 PricingFactory::PricingFactory(const std::string& valuationDate):m_valuationDate(valuationDate){};
 
 PricingFactory::PricingFactory(const std::string& valuationDate,
@@ -164,7 +160,43 @@ const double PricingFactory::getStrike() const {
     return equity.strike.value();
 }
 
+
+const std::string PricingFactory::getOptionStyle() const {
+    if (!m_trade.has_value()) {
+        throw std::runtime_error("❌ No trade is set in PricingFactory.");
+    }
+
+    const Trade& trade = m_trade.value();
+
+    const std::string& style = trade.meta.option_style;
+
+    if (style.empty()) {
+        throw std::runtime_error("❌ Option style is missing in TradeMetaData.");
+    }
+
+    return style;
+}
+
+const std::string PricingFactory::getPayoff()const{
+    if (!m_trade.has_value()) {
+        throw std::runtime_error("❌ No trade is set in ProcingFactory.");
+    }
+    const Trade & trade =m_trade.value();
+    if (!std::holds_alternative<EquityTradeData>(trade.assetData)){
+        throw std::runtime_error("❌ Trade does not contain equity data — cannot extract strike.");
+        
+    }
+    const auto & equity=std::get<EquityTradeData>(trade.assetData);
+    if(!equity.payoff.has_value()){
+        throw std::runtime_error("❌ Trade does not contain equity data - cannot extract payoff.");
+    }
+    return equity.payoff.value();
+}
+
 const double PricingFactory::getRiskFreeRate()const{
     return m_marketEnv->getRiskFreeRate();
 }
 
+const double PricingFactory::getVolatility()const{
+    return m_marketEnv->getVolatility();
+}
