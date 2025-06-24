@@ -1,13 +1,13 @@
-#include "pricing_factory.hpp"
+#include "pricing/asset_class/equity/equity_pricer_factory.hpp"
 #include "core/pricing_environment.hpp"
 #include "utils/date_utils.hpp"
 #include "logger.hpp"
 #include "utils/json_utils.hpp"
 
 
-PricingFactory::PricingFactory(const std::string& valuationDate):m_valuationDate(valuationDate){};
+EquityPricerFactory::EquityPricerFactory(const std::string& valuationDate):m_valuationDate(valuationDate){};
 
-PricingFactory::PricingFactory(const std::string& valuationDate,
+EquityPricerFactory::EquityPricerFactory(const std::string& valuationDate,
                                const std::string& scheduleConfigPath)
     : m_valuationDate(valuationDate) {
     
@@ -17,11 +17,11 @@ PricingFactory::PricingFactory(const std::string& valuationDate,
 }
 
 
-const ScheduleGenerator& PricingFactory:: getScheduleConfig() const{
+const ScheduleGenerator& EquityPricerFactory:: getScheduleConfig() const{
     return m_scheduleGen;
 }
 
-void PricingFactory::setTrade(const Trade& trade) {
+void EquityPricerFactory::setTrade(const Trade& trade) {
     // Step 1: Validate and parse trade_date and maturity using date_utils
 
     try {
@@ -54,7 +54,7 @@ void PricingFactory::setTrade(const Trade& trade) {
 
 
 
-QuantLib::Schedule PricingFactory::buildSchedule() const {
+QuantLib::Schedule EquityPricerFactory::buildSchedule() const {
     if (!m_trade.has_value()) {
         Logger::get()->error("❌ Cannot build schedule: trade not set.");
         throw std::runtime_error("Trade is not set.");
@@ -73,7 +73,7 @@ QuantLib::Schedule PricingFactory::buildSchedule() const {
 }
 
 
-double PricingFactory::computeYearFraction() const {
+double EquityPricerFactory::computeYearFraction() const {
     if (!m_trade.has_value()) {
         Logger::get()->error("❌ Cannot compute year fraction: trade not set.");
         throw std::runtime_error("Trade is not set.");
@@ -100,12 +100,12 @@ double PricingFactory::computeYearFraction() const {
     return yearFraction;
 }
 
-void PricingFactory::setMarketEnvironment(const MarketEnvironment& env){
+void EquityPricerFactory::setMarketEnvironment(const MarketEnvironment& env){
     m_marketEnv=env;
 }
 
 
-void PricingFactory::extractUnderlyingPrice() {
+void EquityPricerFactory::extractUnderlyingPrice() {
     if (!m_marketEnv.has_value()) {
             throw std::runtime_error("Market environment not available.");
         }
@@ -122,7 +122,7 @@ void PricingFactory::extractUnderlyingPrice() {
         Logger::get()->info("📦 Underlying price extracted and stored: {}", m_underlyingPrice);
 }
 
-const std::string PricingFactory::getUnderlierTicker() const {
+std::string EquityPricerFactory::getUnderlierTicker() const {
     if (!m_trade.has_value()) {
         throw std::runtime_error("Trade not set in PricingFactory.");
     }
@@ -136,11 +136,11 @@ const std::string PricingFactory::getUnderlierTicker() const {
     return eqData.underlying_ticker;
 }
 
-const double PricingFactory:: getUnderlierPrice()const{
+double EquityPricerFactory:: getUnderlierPrice()const{
     return m_underlyingPrice;
 }
 
-const double PricingFactory::getStrike() const {
+double EquityPricerFactory::getStrike() const {
     if (!m_trade.has_value()) {
         throw std::runtime_error("❌ No trade is set in PricingFactory.");
     }
@@ -161,7 +161,7 @@ const double PricingFactory::getStrike() const {
 }
 
 
-const std::string PricingFactory::getOptionStyle() const {
+std::string EquityPricerFactory::getOptionStyle() const {
     if (!m_trade.has_value()) {
         throw std::runtime_error("❌ No trade is set in PricingFactory.");
     }
@@ -177,7 +177,7 @@ const std::string PricingFactory::getOptionStyle() const {
     return style;
 }
 
-const std::string PricingFactory::getPayoff()const{
+std::string EquityPricerFactory::getPayoff()const{
     if (!m_trade.has_value()) {
         throw std::runtime_error("❌ No trade is set in ProcingFactory.");
     }
@@ -193,10 +193,10 @@ const std::string PricingFactory::getPayoff()const{
     return equity.payoff.value();
 }
 
-const double PricingFactory::getRiskFreeRate()const{
+double EquityPricerFactory::getRiskFreeRate()const{
     return m_marketEnv->getRiskFreeRate();
 }
 
-const double PricingFactory::getVolatility()const{
+double EquityPricerFactory::getVolatility()const{
     return m_marketEnv->getVolatility();
 }

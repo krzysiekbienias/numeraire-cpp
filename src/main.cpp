@@ -6,81 +6,82 @@
 #include "utils/print_domain.hpp"
 #include "utils/path_utils.hpp"
 #include "database/trade_store.hpp"
-#include "pricing/pricing_factory.hpp"
 #include "utils/json_utils.hpp"
-#include "asset_class/equity/black_scholes_pricer.hpp"
+#include "pricing/asset_class/equity/product_pricers/plain_vanilla_option_pricer.hpp"
+#include "pricing/asset_class/equity/equity_pricer_factory.hpp"
 
 
 int main(int argc, char** argv) {
     std::cout << "Welcome to Numeraire++ pricing engine!\n";
     print_utils::printBoxedLabel("Load main config");
-    std::string projectPath=resolveProjectPath(argv[0]);
-    std::string mainConfigPath=resolveMainConfigPath(argv[0]);
-    JsonLoader::load("main",mainConfigPath); //loads nad cashes under "main"
-    std::unordered_map<std::string, std::string> mainConfigMap=JsonLoader::toStringMap("main");
-    
 
-    print_utils::printBoxedLabel("📦 Pricing Setup");
-    
-    
-    std::string valuationDate="17-01-2025";
-    int tradeID=2;
-    std::cout << "💼 Trade ID        : " << tradeID << "\n";
-    std::cout << "📆 Valuation Date  : " << valuationDate << "\n";
-    
-    
+    std::string projectPath = resolveProjectPath(argv[0]);
+    std::string mainConfigPath = resolveMainConfigPath(argv[0]);
+    JsonLoader::load("main", mainConfigPath);
+    auto mainConfigMap = JsonLoader::toStringMap("main");
+
+    std::string valuationDate = "17-01-2025";
+
     print_utils::printBoxedLabel("📡 Trade Retrieval");
-    
-    TradesStore tradeStore(projectPath+ mainConfigMap.at("DB_PATH"));
+    TradesStore tradeStore(projectPath + mainConfigMap.at("DB_PATH"));
+    std::vector<Trade> allTrades = tradeStore.getAllTrades();
+    std::cout << "📋 Total trades retrieved: " << allTrades.size() << "\n";
 
-    std::cout << "🔍 Looking up trade ID: " << tradeID << " in trade store...\n";
-    auto tradeOpt = tradeStore.getTradeById(tradeID);
-    if (!tradeOpt) {
-        std::cout << "❌ Trade not found. Aborting pricing.\n";
-        return 1;
+    JsonLoader::load("secrets", projectPath + mainConfigMap.at("SECRETS_CONFIG"));
+    auto secretsMap = JsonLoader::toStringMap("secrets");
+
+    static BlackScholesModel bsModel;
+
+    int pricedCount = 0;
+    int skippedCount = 0;
+    int totalPricedWithAPI = 0;
+
+    for (const auto& trade : allTrades) {
+        print_utils::printBoxedLabel("🧾 Trade ID " + std::to_string(trade.meta.trade_id));
+
+        try {
+            if (trade.meta.asset_class != "Equity" || trade.meta.product_type != "PlainVanillaOption") {
+                std::cout << "⚠️ Skipping unsupported trade type: " << trade.meta.product_type << "\n";
+                skippedCount++;
+                continue;
+            }
+
+            EquityPricerFactory pf(valuationDate, projectPath + mainConfigMap.at("SCHEDULE_CONFIG"));
+            pf.setTrade(trade);
+            pf.buildSchedule();
+
+            MarketEnvironment marketEnv(valuationDate);
+            marketEnv.configurePolygonAPI(secretsMap.at("POLYGON_IO_API_KEY"));
+            marketEnv.fetchUnderlyingPrice(pf.getUnderlierTicker());
+            marketEnv.setVolatility(0.3);
+            marketEnv.setRiskFreeRate(0.03);
+
+            pf.setMarketEnvironment(marketEnv);
+            pf.extractUnderlyingPrice();
+
+            PlainVanillaOption pricer(pf, bsModel);
+            double price = pricer.price();
+            std::cout << "💰 Price: " << price << "\n";
+
+            pricedCount++;
+            totalPricedWithAPI++;
+
+            if (totalPricedWithAPI % 5 == 0) {
+                std::cout << "⏳ Reached 5 pricing API calls, sleeping 30s...\n";
+                std::this_thread::sleep_for(std::chrono::seconds(70));
+            }
+
+        } catch (const std::exception& ex) {
+            std::cout << "❌ Pricing failed: " << ex.what() << "\n";
+            skippedCount++;
+        }
     }
-    domain_debug::printTrade(tradeOpt);
-    
-    print_utils::printBoxedLabel("🏗️  Pricing Factory");
-    std::cout << "🛠️  Building pricing factory...\n\n";
-    std::cout << "✅ Trade loaded successfully into PricingFactory.\n";
-    
-    
-    
-    PricingFactory pf{valuationDate,
-                     projectPath+mainConfigMap.at("SCHEDULE_CONFIG")};
-    pf.setTrade(* tradeOpt);
-    pf.buildSchedule();
-    
-    JsonLoader::load("secrets",projectPath+mainConfigMap.at("SECRETS_CONFIG"));
-    std::unordered_map<std::string, std::string> secretsMap=JsonLoader::toStringMap("secrets");
-    
-    domain_debug::printScheduleConfig(pf.getScheduleConfig());
-    double yearFraction =pf.computeYearFraction();
-    std::cout << "📐 Year Fraction: " << yearFraction << "\n";
-    print_utils::printBoxedLabel("Market Environment ");
-    
-    MarketEnvironment marketEnvironemnt{valuationDate};
-    marketEnvironemnt.configurePolygonAPI(secretsMap.at("POLYGON_IO_API_KEY"));
-    marketEnvironemnt.fetchUnderlyingPrice(pf.getUnderlierTicker());
-    marketEnvironemnt.getUnderlyingPrice();
-    marketEnvironemnt.setVolatility(0.3);
-    marketEnvironemnt.setRiskFreeRate(0.03);
-    
-    //Inject MarketEnvironemnt Into factory
-    pf.setMarketEnvironment(marketEnvironemnt);
-    pf.extractUnderlyingPrice();
-    print_utils::printBoxedLabel("✅ Pricing Setup Complete");
-    
-    print_utils::printBoxedLabel("Analytical Price");
-    BlackScholesPricer analyticalPrice;
-    analyticalPrice.price(pf);
-    
-    
-    
-    
-    
-    
+
+    print_utils::printBoxedLabel("📊 Portfolio Pricing Summary");
+    std::cout << "✅ Priced successfully : " << pricedCount << "\n";
+    std::cout << "⚠️ Skipped or failed   : " << skippedCount << "\n";
+    std::cout << "📈 Total trades        : " << allTrades.size() << "\n";
+
     return 0;
 }
 
