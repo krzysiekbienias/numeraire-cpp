@@ -1,0 +1,7 @@
+{
+  "CALENDAR": "UK",
+  "BUSINESS_DAY_CONVENTION": "ModifiedFollowing",
+  "FREQUENCY": "Daily",
+  "DAY_COUNT": "Actual365",
+  "DATE_GENERATION_RULE":"Forward"
+}
