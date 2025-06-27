@@ -3,6 +3,13 @@ project(numeraire-cpp)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+
+# === Ustawienie wspólnego folderu na binarki niezależnie od konfiguracji
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_SOURCE_DIR}/bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_SOURCE_DIR}/bin)
+
 # Debug flags
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0 -g -fno-inline -DDEBUG")
 set(CMAKE_INTERPROCEDURAL_OPTIMIZATION OFF)
@@ -40,6 +47,7 @@ file(GLOB_RECURSE ASSET_EQUITY_SRC src/asset_class/equity/*.cpp)
 file(GLOB_RECURSE ASSET_FX_SRC src/asset_class/fx/*.cpp)
 file(GLOB_RECURSE ASSET_RATES_SRC src/asset_class/rates/*.cpp)
 file(GLOB_RECURSE DATABASE_SRC src/database/*.cpp)
+file(GLOB_RECURSE SIMULATION_SRC src/simulation/*.cpp)
 
 
 file(GLOB_RECURSE CORE_HEADERS header/core/*.hpp)
@@ -50,8 +58,10 @@ file(GLOB_RECURSE ASSET_FX_HEADERS header/asset_class/fx/*.hpp)
 file(GLOB_RECURSE ASSET_RATES_HEADERS header/asset_class/rates/*.hpp)
 file(GLOB_RECURSE ENUMS_HEADERS header/enums/*.hpp)
 file(GLOB_RECURSE DATABASE_HEADERS header/database/*.hpp)
+file(GLOB_RECURSE SIMULATION_HEADERS header/simulation/*.hpp)
 
-set(MAIN_SRC ${CMAKE_SOURCE_DIR}/src/main.cpp)
+set(CACHE_MARKET_SRC ${CMAKE_SOURCE_DIR}/src/cache_market_data.cpp)
+set(PRICE_PORTFOLIO_SRC ${CMAKE_SOURCE_DIR}/src/price_portfolio.cpp)
 
 # === Library Target ===
 add_library(project_lib)
@@ -64,6 +74,7 @@ target_sources(project_lib PRIVATE
     ${ASSET_FX_SRC}
     ${ASSET_RATES_SRC}
     ${DATABASE_SRC}
+    ${SIMULATION_SRC}
 
     ${CORE_HEADERS}	
     ${UTILS_HEADERS}
@@ -73,6 +84,7 @@ target_sources(project_lib PRIVATE
     ${ASSET_RATES_HEADERS}
     ${ENUMS_HEADERS}
     ${DATABASE_HEADERS}
+    ${SIMULATION_HEADERS}
 )
 
 target_include_directories(project_lib PUBLIC
@@ -85,7 +97,8 @@ target_include_directories(project_lib PUBLIC
     header/asset_class/equity
     header/asset_class/fx
     header/asset_class/rates
-    header/database	 
+    header/database
+    header/simulation
     /opt/homebrew/include
 )
 
@@ -99,11 +112,13 @@ target_link_libraries(project_lib PUBLIC
     ${SQLITE3_LIBRARY}
 )
 
-# === Main Executable ===
-if(EXISTS ${MAIN_SRC})
-    add_executable(numeraire-cpp ${MAIN_SRC})
-    target_link_libraries(numeraire-cpp PRIVATE project_lib)
-	target_include_directories(numeraire-cpp PRIVATE
+
+
+# === Market Caching Executable ===
+if(EXISTS ${CACHE_MARKET_SRC})
+    add_executable(cache_market_data ${CACHE_MARKET_SRC})
+    target_link_libraries(cache_market_data PRIVATE project_lib)
+    target_include_directories(cache_market_data PRIVATE
         ${CMAKE_SOURCE_DIR}/header
         ${CMAKE_SOURCE_DIR}/header/core
         ${CMAKE_SOURCE_DIR}/header/utils
@@ -112,9 +127,27 @@ if(EXISTS ${MAIN_SRC})
         ${CMAKE_SOURCE_DIR}/header/asset_class/equity
         ${CMAKE_SOURCE_DIR}/header/asset_class/fx
         ${CMAKE_SOURCE_DIR}/header/asset_class/rates
+        ${CMAKE_SOURCE_DIR}/header/simulation
     )
-	
 endif()
+
+# === Portfolio Pricing Executable ===
+if(EXISTS ${PRICE_PORTFOLIO_SRC})
+    add_executable(price_portfolio ${PRICE_PORTFOLIO_SRC})
+    target_link_libraries(price_portfolio PRIVATE project_lib)
+    target_include_directories(price_portfolio PRIVATE
+        ${CMAKE_SOURCE_DIR}/header
+        ${CMAKE_SOURCE_DIR}/header/core
+        ${CMAKE_SOURCE_DIR}/header/utils
+        ${CMAKE_SOURCE_DIR}/header/pricing
+        ${CMAKE_SOURCE_DIR}/header/asset_class
+        ${CMAKE_SOURCE_DIR}/header/asset_class/equity
+        ${CMAKE_SOURCE_DIR}/header/asset_class/fx
+        ${CMAKE_SOURCE_DIR}/header/asset_class/rates
+        ${CMAKE_SOURCE_DIR}/header/simulation
+    )
+endif()
+
 
 # === Unit Tests ===
 enable_testing()
@@ -133,6 +166,7 @@ target_include_directories(test_environment PRIVATE
     header/utils
     header/pricing
     header/asset_class
+    header/simulation
 )
 
 add_test(NAME AllTests COMMAND test_environment)
@@ -140,8 +174,15 @@ add_test(NAME AllTests COMMAND test_environment)
 # === Xcode Source Grouping ===
 source_group(TREE ${CMAKE_SOURCE_DIR}/src PREFIX "src" FILES 
     ${CORE_SRC} ${UTILS_SRC} ${PRICING_SRC} 
-    ${ASSET_EQUITY_SRC} ${ASSET_FX_SRC} ${ASSET_RATES_SRC} ${MAIN_SRC} ${DATABASE_SRC})
-source_group(TREE ${CMAKE_SOURCE_DIR}/header PREFIX "header" FILES 
+    ${ASSET_EQUITY_SRC} ${ASSET_FX_SRC} ${ASSET_RATES_SRC} ${MAIN_SRC} ${DATABASE_SRC} ${SIMULATION_SRC})
+source_group(TREE ${CMAKE_SOURCE_DIR}/header PREFIX "header" FILES
     ${CORE_HEADERS} ${UTILS_HEADERS} ${PRICING_HEADERS} 
-    ${ASSET_EQUITY_HEADERS} ${ASSET_FX_HEADERS} ${ASSET_RATES_HEADERS} ${ENUMS_HEADERS} ${DATABASE_HEADERS})
+    ${ASSET_EQUITY_HEADERS} ${ASSET_FX_HEADERS} ${ASSET_RATES_HEADERS} ${ENUMS_HEADERS} ${DATABASE_HEADERS} ${SIMULATION_HEADERS})
 source_group(TREE ${CMAKE_SOURCE_DIR}/unit_tests PREFIX "unit_tests" FILES ${TEST_SRC})
+
+# === Source Groups for Xcode/VisualStudio ===
+file(GLOB CONFIG_FILES configs/*)
+source_group(TREE ${CMAKE_SOURCE_DIR}/configs PREFIX "configs" FILES ${CONFIG_FILES})
+
+# Dodaj pliki JSON do targetu (żeby Xcode je widział)
+target_sources(project_lib PRIVATE ${CONFIG_FILES})

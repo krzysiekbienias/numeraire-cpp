@@ -43,6 +43,10 @@ install_manifest.txt
 /xcode_build/
 /cmake-build-*/
 /ninja_build/
+/bin/
+
+# === Runtime data ===
+cached_market_data/
 
 # === IDE/Editor files ===
 
