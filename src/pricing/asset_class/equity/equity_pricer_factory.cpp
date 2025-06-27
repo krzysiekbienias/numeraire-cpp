@@ -1,8 +1,13 @@
 #include "pricing/asset_class/equity/equity_pricer_factory.hpp"
-#include "core/pricing_environment.hpp"
+#include "core/market_environment.hpp"
 #include "utils/date_utils.hpp"
 #include "logger.hpp"
 #include "utils/json_utils.hpp"
+#include "../pricing/models/black_scholes_model.hpp"
+#include "../pricing/asset_class/equity/product_pricers/plain_vanilla_option_pricer.hpp"
+#include "../pricing/asset_class/equity/product_pricers/digital_option_pricer.hpp"
+#include "../pricing/asset_class/equity/product_pricers/asset_or_nothing.hpp"
+
 
 
 EquityPricerFactory::EquityPricerFactory(const std::string& valuationDate):m_valuationDate(valuationDate){};
@@ -200,3 +205,51 @@ double EquityPricerFactory::getRiskFreeRate()const{
 double EquityPricerFactory::getVolatility()const{
     return m_marketEnv->getVolatility();
 }
+
+double EquityPricerFactory::getCashPayoff() const {
+    if (!m_trade.has_value()) {
+        throw std::runtime_error("❌ No trade loaded in factory.");
+    }
+    
+    const Trade& trade = m_trade.value();
+    if (!std::holds_alternative<EquityTradeData>(trade.assetData)) {
+        throw std::runtime_error("❌ Not an equity trade.");
+    }
+    
+    const auto& equityData = std::get<EquityTradeData>(trade.assetData);
+    if (!equityData.structured_params.has_value()) {
+        throw std::runtime_error("❌ Missing structured_params.");
+    }
+    
+    auto json = json_utils::parseFromString(equityData.structured_params.value());
+    
+    if (!json.contains("cash_payout")) {
+        throw std::runtime_error("❌ 'cash_payout' not found in structured_params.");
+    }
+    
+    return json.at("cash_payout").get<double>();
+}
+    
+std::unique_ptr<OptionPricer> EquityPricerFactory::createPricer() const {
+    if (!m_trade.has_value()) {
+        throw std::runtime_error("❌ No trade set in factory — cannot create pricer.");
+    }
+    
+    const std::string& product = m_trade->meta.product_type;
+    static BlackScholesModel model;
+    
+    if (product == "PlainVanillaOption") {
+        return std::make_unique<PlainVanillaOption>(*this, model);
+    }
+    else if (product == "DigitalOption") {
+        return std::make_unique<DigitalOption>(*this, model);
+    }
+    else if (product == "AssetOrNothingOption") {
+        return std::make_unique<AssetOrNothing>(*this, model);
+    }
+    
+    else {
+        throw std::runtime_error("❌ Unsupported product type: " + product);
+    }
+}
+

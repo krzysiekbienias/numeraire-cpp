@@ -1,9 +1,10 @@
 #pragma once
 
 #include "core/trade.hpp"
-#include "core/pricing_environment.hpp"
+#include "core/market_environment.hpp"
 #include "core/schedule_generator.hpp"
 #include "pricing_factory_interface.hpp"
+#include "../pricing/option_pricer.hpp"
 
 class EquityPricerFactory :public IPricerFactory {
 public:
@@ -35,6 +36,10 @@ public:
     double getDividend() const;
     double getRiskFreeRate() const override;
     std::string getPayoff() const override;
+    double getCashPayoff() const;
+    
+    // Product Pricer creation
+    std::unique_ptr<OptionPricer> createPricer() const;
     
 private:
     std::string m_valuationDate;
