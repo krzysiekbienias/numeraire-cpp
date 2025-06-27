@@ -2,7 +2,7 @@
 #include <string>
 #include <ql/time/schedule.hpp>
 #include "core/trade.hpp"
-#include "core/pricing_environment.hpp"
+#include "core/market_environment.hpp"
 
 class IPricerFactory {
 public:
