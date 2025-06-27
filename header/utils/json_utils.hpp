@@ -50,7 +50,23 @@ public:
     
     static bool isFlatObject(const std::string& jsonIdentifier);
     static std::unordered_map<std::string, std::string> toStringMap(const std::string& jsonIdentifier);
+    
+
 
 };
+
+namespace json_utils {
+
+    inline nlohmann::json parseFromString(const std::string& rawJson) {
+        try {
+            return nlohmann::json::parse(rawJson);
+        } catch (const nlohmann::json::parse_error& e) {
+            throw std::runtime_error("Failed to parse JSON string: " + std::string(e.what()));
+        }
+    }
+
+}
+
+
 
 #endif // CONFIG_LOADER_HPP

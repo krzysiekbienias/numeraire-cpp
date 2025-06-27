@@ -9,6 +9,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <string>
+#include <iomanip>
 
 namespace print_utils {
 
@@ -121,16 +122,30 @@ void printUnorderedMapOfUnorderedSets(const std::unordered_map<K, std::unordered
     }
 }
 
+
 void printBoxedLabel(const std::string& label, int totalWidth = 40) {
-    const int padding = 2; // for '| ' and ' |'
-    int contentWidth = totalWidth - padding;
+    const int padding = 4;  // '| ' + ' |'
+    int contentWidth = std::max(1, totalWidth - padding);
 
-    std::cout << "\n+" << std::string(contentWidth, '=') << "+\n";
-    std::cout << "| " << label << std::string(contentWidth - label.length(), ' ') << "|\n";
-    std::cout << "+" << std::string(contentWidth, '=') << "+\n";
+    std::string displayLabel = label;
+    if (static_cast<int>(label.length()) > contentWidth) {
+        if (contentWidth >= 3)
+            displayLabel = label.substr(0, contentWidth - 3) + "...";
+        else
+            displayLabel = label.substr(0, contentWidth); // fallback
+    }
+
+    int remainingSpace = contentWidth - static_cast<int>(displayLabel.length());
+
+    std::string leftPad(remainingSpace / 2, ' ');
+    std::string rightPad(remainingSpace - leftPad.length(), ' ');
+
+    std::string horizontalBar = "+" + std::string(contentWidth, '=') + "+";
+
+    std::cout << "\n" << horizontalBar << "\n";
+    std::cout << "| " << leftPad << displayLabel << rightPad << " |\n";
+    std::cout << horizontalBar << "\n";
 }
-
-
 }
 
 

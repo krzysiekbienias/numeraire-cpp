@@ -1,6 +1,8 @@
 #include<string>
 #include<ql/time/date.hpp>
 #include"utils/logger.hpp"
+#include <iomanip>
+#include <sstream>
 
 
 namespace date_utils {
@@ -24,6 +26,14 @@ QuantLib::Date toQLDateDDMMYYYY (const std::string& dateStr){
     }
 
     return QuantLib::Date(d, QuantLib::Month(m), y);
+}
+
+std::string toStringYYYYMMDD(const QuantLib::Date& date) {
+    std::ostringstream oss;
+    oss << date.year() << "-";
+    oss << std::setw(2) << std::setfill('0') << static_cast<int>(date.month()) << "-";
+    oss << std::setw(2) << std::setfill('0') << date.dayOfMonth();
+    return oss.str();
 }
 
 }
