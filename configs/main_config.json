@@ -2,5 +2,6 @@
   "SCHEDULE_CONFIG": "/configs/schedule_config.json",
   "SCHEDULE_CONFIG_MC":"/configs/schedule_config_mc.json",
   "SECRETS_CONFIG": "/configs/secrets.json",
-  "DB_PATH":"/db.sqlite3"
+  "DB_PATH":"/db.sqlite3",
+  "MARKET_CACHE_DIR":"cached_market_data"
 }
