@@ -53,6 +53,10 @@ void MarketEnvironment::setHistoricalPrices(const std::vector<double>& prices) {
     m_historicalPrices = prices;
 }
 
+const std::vector<double>& MarketEnvironment::getHistoricalPrices() const {
+    return m_historicalPrices;
+}
+
 void MarketEnvironment::estimateDriftAndVolatility() {
     if (m_historicalPrices.size() < 2) {
         throw std::runtime_error("❌ Not enough historical prices to estimate drift and volatility.");

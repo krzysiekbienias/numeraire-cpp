@@ -22,17 +22,13 @@ void MarketEnvCache::loadFromFile(const std::string& path) {
 
     for (const auto& [ticker, envData] : tickers.items()) {
         MarketEnvironment env(m_valuationDate);
+
         if (envData.contains("spot")) {
             env.setUnderlyingPriceManually(envData.at("spot").get<double>());
         }
-        if (envData.contains("drift")) {
-            env.setRiskFreeRate(envData.at("drift").get<double>()); // optional: separate setter for drift
-        }
-        if (envData.contains("volatility")) {
-            env.setVolatility(envData.at("volatility").get<double>());
-        }
+
         if (envData.contains("historical_prices")) {
-            // Could store historical_prices if later needed
+            env.setHistoricalPrices(envData.at("historical_prices").get<std::vector<double>>());
         }
 
         m_envs[ticker] = env;
@@ -50,8 +46,11 @@ void MarketEnvCache::saveToFile(const std::string& path) const {
         if (env.getUnderlyingPrice().has_value()) {
             envData["spot"] = env.getUnderlyingPrice().value();
         }
-        envData["drift"] = env.getHistoricalDrift();
-        envData["volatility"] = env.getHistoricalVolatility();
+
+        const auto& hist = env.getHistoricalPrices();
+        if (!hist.empty()) {
+            envData["historical_prices"] = hist;
+        }
 
         tickers[ticker] = envData;
     }
@@ -62,6 +61,7 @@ void MarketEnvCache::saveToFile(const std::string& path) const {
     if (!out.is_open()) {
         throw std::runtime_error("❌ Could not write cache file: " + path);
     }
+
     out << j.dump(4);
 }
 
