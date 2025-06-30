@@ -10,7 +10,7 @@ MarketDataFetcher::MarketDataFetcher(const std::string& valuationDate, const std
     : m_valuationDate(valuationDate), m_apiKey(apiKey) {}
 
 bool MarketDataFetcher::fetchSpotPrice(MarketEnvironment& env, const std::string& ticker) {
-    auto spotOpt = queryPolygonPrice(ticker);
+    auto spotOpt = queryPolygonPrice(ticker,m_valuationDate);
     if (!spotOpt.has_value()) {
         std::cerr << "❌ Failed to fetch price for: " << ticker << "\n";
         return false;
@@ -19,49 +19,38 @@ bool MarketDataFetcher::fetchSpotPrice(MarketEnvironment& env, const std::string
     return true;
 }
 
-bool MarketDataFetcher::fetchHistoricalDriftAndVolatility(MarketEnvironment& env, const std::string& ticker, size_t requiredObs) {
-    auto closesOpt = queryPolygonHistoricalTimeSeries(ticker, requiredObs);
-    if (!closesOpt.has_value() || closesOpt->size() < 2) {
-        std::cerr << "❌ Failed to retrieve valid historical prices for " << ticker << "\n";
-        return false;
-    }
-
-    const auto& prices = *closesOpt;
-    std::vector<double> logReturns;
-    for (size_t i = 1; i < prices.size(); ++i) {
-        logReturns.push_back(std::log(prices[i] / prices[i - 1]));
-    }
-
-    double mean = std::accumulate(logReturns.begin(), logReturns.end(), 0.0) / logReturns.size();
-    double sq_sum = std::inner_product(logReturns.begin(), logReturns.end(), logReturns.begin(), 0.0);
-    double stddev = std::sqrt((sq_sum / logReturns.size()) - (mean * mean));
-
-    const double annualFactor = std::sqrt(252.0);
-    env.setRiskFreeRate(0.0);  // drift is real-world, not risk-neutral
-    env.setVolatility(stddev * annualFactor);
 
 
-    return true;
-}
-
-std::optional<double> MarketDataFetcher::queryPolygonPrice(const std::string& ticker) const {
-    std::string url = "https://api.polygon.io/v2/aggs/ticker/" + ticker + "/prev?adjusted=true&apiKey=" + m_apiKey;
+std::optional<double> MarketDataFetcher::queryPolygonPrice(const std::string& ticker, const std::string& valuationDate) const {
+    QuantLib::Date qlValuationDate = date_utils::toQLDateDDMMYYYY(m_valuationDate);
+    std::string urlDate= date_utils::toStringYYYYMMDD(qlValuationDate);
+    std::string url = "https://api.polygon.io/v1/open-close/" + ticker + "/" + urlDate + "?adjusted=true&apiKey=" + m_apiKey;
     auto response = cpr::Get(cpr::Url{url});
 
+    std::cout << "🔍 [queryPolygonPrice] URL: " << url << "\n";
     std::cout << "🔍 Response Status Code: " << response.status_code << "\n";
     std::cout << "🔍 Response Error Message: " << response.error.message << "\n";
-    std::cout << "🔍 Response Text: " << response.text << "\n";
-    std::cout << "🔍 Response Header Count: " << response.header.size() << "\n";
 
     if (response.status_code != 200) {
         std::cerr << "❌ HTTP error: " << response.status_code << "\n";
         return std::nullopt;
     }
 
-    auto json = nlohmann::json::parse(response.text);
-    if (json.contains("results") && !json["results"].empty()) {
-        return json["results"][0]["c"].get<double>();
+    nlohmann::json json;
+    try {
+        json = nlohmann::json::parse(response.text);
+    } catch (const std::exception& e) {
+        std::cerr << "❌ JSON parse error: " << e.what() << "\n";
+        return std::nullopt;
     }
+
+    if (json.contains("close")) {
+        double close = json["close"].get<double>();
+        std::cout << "📅 Snapshot price for " << ticker << " on " << valuationDate << " → " << close << "\n";
+        return close;
+    }
+
+    std::cerr << "❌ No 'close' field found in response for " << ticker << " on " << valuationDate << "\n";
     return std::nullopt;
 }
 
@@ -96,8 +85,19 @@ std::optional<std::vector<double>> MarketDataFetcher::queryPolygonHistoricalTime
     if (!json.contains("results")) return std::nullopt;
 
     std::vector<double> closes;
+    std::cout << "📅 Historical prices with dates:\n";
     for (const auto& record : json["results"]) {
-        closes.push_back(record["c"].get<double>());
+        auto ts = record["t"].get<int64_t>();  // UNIX ms
+        double close = record["c"].get<double>();
+
+        // Convert UNIX timestamp to date
+        std::time_t t = ts / 1000;
+        std::tm* tm = std::gmtime(&t);
+        char buf[16];
+        std::strftime(buf, sizeof(buf), "%Y-%m-%d", tm);
+
+        std::cout << "  " << buf << "  →  " << close << "\n";
+        closes.push_back(close);
     }
 
     if (closes.size() < 2) return std::nullopt;
