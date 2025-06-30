@@ -4,25 +4,20 @@
 
 SimulationEngine::SimulationEngine(
     size_t numPaths,
-    size_t numSteps,
+    const std::vector<double>& dt,
     double spot,
-    double rate,
+    double drift,
     double volatility,
-    double maturity,
     std::shared_ptr<IDiscretizationScheme> scheme
 )
     : m_numPaths(numPaths),
-      m_numSteps(numSteps),
+      m_numSteps(dt.size()),
       m_spot(spot),
-      m_rate(rate),
+      m_rate(drift),
       m_vol(volatility),
-      m_maturity(maturity),
-      m_scheme(std::move(scheme)) //🚀 perf
+      m_scheme(std::move(scheme)),
+      m_paths1D(numPaths * dt.size(), 0.0)
 {
-    m_paths1D.resize(m_numPaths * m_numSteps, 0.0);
-}
-
-void SimulationEngine::setTimeSteps(const std::vector<double>& dt) {
     m_scheme->setTimeSteps(dt);
 }
 

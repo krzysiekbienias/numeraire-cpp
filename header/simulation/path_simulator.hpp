@@ -6,11 +6,10 @@ class SimulationEngine {
 public:
     SimulationEngine(
         size_t numPaths,
-        size_t numSteps,
+        const std::vector<double>& dt,
         double spot,
-        double rate,
+        double drift,           // under P measure
         double volatility,
-        double maturity,
         std::shared_ptr<IDiscretizationScheme> scheme
     );
 
