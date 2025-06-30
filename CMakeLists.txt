@@ -62,6 +62,7 @@ file(GLOB_RECURSE SIMULATION_HEADERS header/simulation/*.hpp)
 
 set(CACHE_MARKET_SRC ${CMAKE_SOURCE_DIR}/src/cache_market_data.cpp)
 set(PRICE_PORTFOLIO_SRC ${CMAKE_SOURCE_DIR}/src/price_portfolio.cpp)
+set(SIMULATE_PATHS_SRC ${CMAKE_SOURCE_DIR}/src/simulate_paths.cpp)
 
 # === Library Target ===
 add_library(project_lib)
@@ -144,6 +145,21 @@ if(EXISTS ${PRICE_PORTFOLIO_SRC})
         ${CMAKE_SOURCE_DIR}/header/asset_class/equity
         ${CMAKE_SOURCE_DIR}/header/asset_class/fx
         ${CMAKE_SOURCE_DIR}/header/asset_class/rates
+        ${CMAKE_SOURCE_DIR}/header/simulation
+    )
+endif()
+
+# === Simulation Executable ===
+if(EXISTS ${SIMULATE_PATHS_SRC})
+    add_executable(simulate_paths ${SIMULATE_PATHS_SRC})
+    target_link_libraries(simulate_paths PRIVATE project_lib)
+    target_include_directories(simulate_paths PRIVATE
+        ${CMAKE_SOURCE_DIR}/header
+        ${CMAKE_SOURCE_DIR}/header/core
+        ${CMAKE_SOURCE_DIR}/header/utils
+        ${CMAKE_SOURCE_DIR}/header/pricing
+        ${CMAKE_SOURCE_DIR}/header/database
+        ${CMAKE_SOURCE_DIR}/header/asset_class
         ${CMAKE_SOURCE_DIR}/header/simulation
     )
 endif()
