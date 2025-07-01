@@ -105,6 +105,24 @@ double EquityPricerFactory::computeYearFraction() const {
     return yearFraction;
 }
 
+std::vector<double> EquityPricerFactory::computeYearFractionVector() const {
+    if (!m_trade.has_value()) {
+        throw std::runtime_error("❌ Cannot compute year fraction vector: trade not set.");
+    }
+
+    QuantLib::Schedule schedule = buildSchedule();  // wygeneruj harmonogram
+
+    const auto& dayCounter = m_scheduleGen.getDayCounter();
+    std::vector<double> dts;
+
+    for (size_t i = 0; i < schedule.size() - 1; ++i) {
+        double dt = dayCounter.yearFraction(schedule[i], schedule[i + 1]);
+        dts.push_back(dt);
+    }
+
+    return dts;
+}
+
 void EquityPricerFactory::setMarketEnvironment(const MarketEnvironment& env){
     m_marketEnv=env;
 }

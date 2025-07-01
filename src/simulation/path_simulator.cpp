@@ -1,6 +1,8 @@
 # include "simulation/path_simulator.hpp"
 #include <fstream>
 #include <nlohmann/json.hpp>
+#include <string>
+#include <iostream>
 
 SimulationEngine::SimulationEngine(
     size_t numPaths,
@@ -18,18 +20,25 @@ SimulationEngine::SimulationEngine(
       m_scheme(std::move(scheme)),
       m_paths1D(numPaths * dt.size(), 0.0)
 {
-    m_scheme->setTimeSteps(dt);
+    m_dts=dt;
 }
 
 void SimulationEngine::run() {
+    size_t stepsPlusOne = m_numSteps + 1;
+    m_paths1D.resize(m_numPaths * stepsPlusOne, 0.0);
+
     for (size_t i = 0; i < m_numPaths; ++i) {
         double current = m_spot;
+        m_paths1D[i * stepsPlusOne + 0] = current;  // 🔥 dodaj t₀
+
         for (size_t j = 0; j < m_numSteps; ++j) {
-            double next = m_scheme->simulateNextStep(current, j);
-            m_paths1D[i * m_numSteps + j] = next;
-            current = next;
+            double dt = m_dts[j];
+            current = m_scheme->nextStep(current, dt, m_rate, m_vol);
+            m_paths1D[i * stepsPlusOne + (j + 1)] = current;  // 📈 przesunięcie +1
         }
     }
+
+    m_numSteps = stepsPlusOne;  // aktualizujemy info o liczbie kroków (dla eksportu)
 }
 
 const std::vector<double>& SimulationEngine::getPaths() const {
@@ -38,6 +47,18 @@ const std::vector<double>& SimulationEngine::getPaths() const {
 
 void SimulationEngine::exportToCSV(const std::string& filepath) const {
     std::ofstream out(filepath);
+    if (!out.is_open()) {
+        throw std::runtime_error("❌ Cannot open file for writing: " + filepath);
+    }
+
+    // 🔠 Nagłówek: t0, t1, ..., tN
+    for (size_t j = 0; j < m_numSteps; ++j) {
+        out << "t" << j;
+        if (j < m_numSteps - 1) out << ",";
+    }
+    out << "\n";
+
+    // 🧪 Każda ścieżka
     for (size_t i = 0; i < m_numPaths; ++i) {
         for (size_t j = 0; j < m_numSteps; ++j) {
             out << m_paths1D[i * m_numSteps + j];
@@ -46,7 +67,6 @@ void SimulationEngine::exportToCSV(const std::string& filepath) const {
         out << "\n";
     }
 }
-
 void SimulationEngine::exportToJson(const std::string& filepath) const {
     nlohmann::json jsonPaths;
     for (size_t i = 0; i < m_numPaths; ++i) {

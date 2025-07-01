@@ -28,9 +28,15 @@ public:
     // 🔍 GETTERS — real-world P-measure (e.g. for risk analytics)
     double getHistoricalDrift() const;
     double getHistoricalVolatility() const;
+    
+    const std::vector<double>& getHistoricalPrices() const;
 
     // 📈 Historical data setters
     void setHistoricalPrices(const std::vector<double>& prices);
+    
+    
+    
+    
 
     // 📊 Estimate drift and volatility based on historical prices
     void estimateDriftAndVolatility();

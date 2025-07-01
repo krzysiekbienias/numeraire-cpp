@@ -69,19 +69,22 @@ int main(int argc, char** argv) {
     int failedCount = 0;
     int apiCallCount = 0;
     
-    
+    int tradeLimit=1000;
+    int processed=0;
 
     for (const auto& trade : trades) {
         if (!std::holds_alternative<EquityTradeData>(trade.assetData)) continue;
+        if(processed>=tradeLimit) break;
 
         std::string ticker = std::get<EquityTradeData>(trade.assetData).underlying_ticker;
         print_utils::printBoxedLabel("📥 Fetching market data for: " + ticker);
         totalTickers++;
+        processed++;
 
         MarketEnvironment env(valuationDate);
 
         // --- Snapshot ---
-        auto spotOpt = fetcher.queryPolygonPrice(ticker);
+        auto spotOpt = fetcher.queryPolygonPrice(ticker,valuationDate);
         apiCallCount++;
         if (!spotOpt.has_value()) {
             std::cout << "❌ No spot price for " << ticker << ", skipping.\n";

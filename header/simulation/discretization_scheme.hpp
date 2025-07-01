@@ -1,4 +1,6 @@
 # pragma once
+# include <string>
+
 
 class IDiscretizationScheme {
 public:
@@ -8,10 +10,8 @@ public:
         double current,
         double dt,
         double drift,
-        double diffusion
+        double volatility
     ) const = 0;
 
     virtual std::string name() const = 0;
-    virtual void setTimeSteps(const std::vector<double>& dt) = 0;
-    virtual double simulateNextStep(double current, size_t stepIndex) const = 0;
 };

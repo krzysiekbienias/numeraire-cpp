@@ -48,6 +48,9 @@ install_manifest.txt
 # === Runtime data ===
 cached_market_data/
 
+# === Output data ===
+csv_paths
+
 # === IDE/Editor files ===
 
 # Xcode
