@@ -2,22 +2,22 @@
 #include "dynamic_programming/gold_mine.hpp"
 #include "matrix/is_within_bounds.hpp"
 
-// Implement your gold_mine logic here.
-int goldMine(const std::vector<std::vector<int>> & mine){
-    int rows =mine.size();
-    int cols=mine[0].size();
-    std::vector<std::vector<int>> dp(rows,std::vector<int>(cols,0));
-    //we start with fill in the first row
-    for (int i=0;i<cols;++i){
-        dp[0][i]=mine[0][i];
+int goldMine(const std::vector<std::vector<int>>& mine){
+    size_t rows=mine.size();
+    size_t columns=mine[0].size();
+    std::vector<std::vector<int>>dp(rows,std::vector<int>(columns,0));
+    //first row
+    for(size_t c=0;c<columns;++c){
+        dp[0][c]=mine[0][c];
     }
-    
-    for (int r=1;r<rows;++r){
-        for (int c=0;c<cols;++c){
-            dp[r][c]=mine[r][c]+std::max({dp[r-1][c],dp[r-1][c+1],dp[r-1][c-1]});
+    for (size_t r=1;r<rows;++r){
+        for (size_t c=0;c<columns;++c){
+            int top_left=(c>0) ? dp[r-1][c-1]:0;
+            int top=dp[r-1][c];
+            int top_right=c+1<columns ? dp[r-1][c+1]:0;
+            dp[r][c]=mine[r][c]+std::max({top_left,top,top_right});
+            
         }
-    
     }
-    int maxElementFromLastRow=*std::max_element(dp[rows-1].begin(), dp[rows-1].end());
-    return maxElementFromLastRow;
+    return *std::max_element(dp[rows-1].begin(), dp[rows-1].end());
 }

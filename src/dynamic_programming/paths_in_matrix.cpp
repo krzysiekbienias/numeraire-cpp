@@ -1,4 +1,3 @@
-
 #include "dynamic_programming/paths_in_matrix.hpp"
 #include <vector>
 #include <iostream>
@@ -50,5 +49,4 @@ int pathsInMatrix(const std::vector<std::vector<int>>& grid){
     return dp[rows-1][cols-1];
     
 }
-
 

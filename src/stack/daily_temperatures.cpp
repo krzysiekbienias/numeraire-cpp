@@ -14,5 +14,4 @@ std::vector<int> dailyTemperatures(const std::vector<int>& temperatures){
         stack.push_back(i);
     }
     return answer;
-    
 }
