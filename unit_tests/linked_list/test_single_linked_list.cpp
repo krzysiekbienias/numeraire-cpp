@@ -105,14 +105,14 @@ TEST(LinkedListTest, Search_FirstAndLastElement) {
 
 TEST(LinkedListTest, RemoveTail_EmptyList_NoCrash) {
     LinkedList list;
-    list.remove_tail();
+    list.removeTail();
     EXPECT_FALSE(list.search(0)); // Should still be empty
 }
 
 TEST(LinkedListTest, RemoveTail_SingleNodeList) {
     LinkedList list;
     list.insertAtEnd(99);
-    list.remove_tail();
+    list.removeTail();
     EXPECT_FALSE(list.search(99));
 }
 
@@ -121,7 +121,7 @@ TEST(LinkedListTest, RemoveTail_MultipleNodes) {
     list.insertAtEnd(1);
     list.insertAtEnd(2);
     list.insertAtEnd(3);
-    list.remove_tail();
+    list.removeTail();
     EXPECT_FALSE(list.search(3));
     EXPECT_TRUE(list.search(1));
     EXPECT_TRUE(list.search(2));
@@ -133,8 +133,8 @@ TEST(LinkedListTest, RemoveTail_Twice) {
     list.insertAtEnd(2);
     list.insertAtEnd(3);
     list.insertAtEnd(4);
-    list.remove_tail(); // Removes 4
-    list.remove_tail(); // Removes 3
+    list.removeTail(); // Removes 4
+    list.removeTail(); // Removes 3
     EXPECT_FALSE(list.search(4));
     EXPECT_FALSE(list.search(3));
     EXPECT_TRUE(list.search(1));

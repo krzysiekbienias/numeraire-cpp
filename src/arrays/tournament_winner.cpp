@@ -15,7 +15,7 @@ std::string getWinner(std::vector<std::string>teams,int result) {
     }
 }
 
-std::string turnamentWinner(std::vector<std::vector<std::string>> competitions, std::vector<int> results) {
+std::string tournamentWinner(std::vector<std::vector<std::string>> competitions, std::vector<int> results) {
     // prepare a container for teams/
     
     std::unordered_map<std::string,int> table;

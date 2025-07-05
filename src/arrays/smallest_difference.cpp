@@ -7,7 +7,7 @@ std::vector<int> smallestDifference(std::vector<int> &arrayOne, std::vector<int>
     size_t j=0;
     int minDiff=std::numeric_limits<int>::max();
     std::vector<int> closestPair;
-    while (i<arrayOne.size() &&j<arrayTwo.size()) {
+    while (i<arrayOne.size() && j<arrayTwo.size()) {
         int currentDiff=std::abs(arrayOne[i]-arrayTwo[j]);
         if (currentDiff==0) {
             return {arrayOne[i],arrayTwo[j]};

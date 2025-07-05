@@ -32,20 +32,7 @@ bool LinkedList::isEmpty()const{
     return head==nullptr;
 }
 
-void LinkedList::insertAtEnd(int value){
-    Node* newNode = new Node(value);
-    if(head==nullptr){
-        head=newNode;
-        return;
-    }
-    // Traverse till end of ll
-    Node* current =head;
-    while (current->next!=nullptr) {
-        current=current->next;
-    }
-    current->next=newNode;
-    
-}
+
 
 void LinkedList::insertAtFront(int value){
     Node* newNode=new Node(value);

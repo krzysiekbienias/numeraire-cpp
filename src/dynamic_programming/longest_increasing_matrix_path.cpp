@@ -1,4 +1,7 @@
-#include "arrays/longest_increasing_matrix_path.hpp"
+
+
+// Implement your longest_increasing_matrix_path logic here.
+#include "dynamic_programming/longest_increasing_matrix_path.hpp"
 #include <vector>
 #include <algorithm>
 #include <functional>

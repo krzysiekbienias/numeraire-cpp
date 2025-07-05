@@ -9,8 +9,7 @@ int firstDuplicateValue(const std::vector<int>& array){
         }
         else{
             seen.insert(num);
-        }
-        
+        }        
     }
     return -1;
     

@@ -7,16 +7,16 @@ int tandemBicycle(std::vector<int> redShirtSpeeds, std::vector<int> blueShirtSpe
     int results=0;
     std::sort(redShirtSpeeds.begin(), redShirtSpeeds.end());
     if(fastest){
-    std::sort(blueShirtSpeeds.begin(), blueShirtSpeeds.end(),std::greater<int>());
-    for (int i=0;i<redShirtSpeeds.size();++i){
+        std::sort(blueShirtSpeeds.begin(), blueShirtSpeeds.end(),std::greater<int>());
+        for (int i=0;i<redShirtSpeeds.size();++i){
             results+=std::max(redShirtSpeeds[i],blueShirtSpeeds[i]);
         }
     }
     else{
         std::sort(blueShirtSpeeds.begin(), blueShirtSpeeds.end());
-    for (int i=0;i<redShirtSpeeds.size();++i){
-                results+=std::max(redShirtSpeeds[i],blueShirtSpeeds[i]);
-            }
+        for (int i=0;i<redShirtSpeeds.size();++i){
+            results+=std::max(redShirtSpeeds[i],blueShirtSpeeds[i]);
+        }
     }
     return results;
 }

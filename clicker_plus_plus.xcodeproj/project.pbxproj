@@ -1,0 +1,1728 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		CC161BB868E8DBF5D053FEF9 /* ZERO_CHECK */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = D90D460A81674EEABF647521 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */;
+			buildPhases = (
+				C6E630910BAF14FF18C19763 /* Generate CMakeFiles/ZERO_CHECK */,
+			);
+			dependencies = (
+			);
+			name = ZERO_CHECK;
+			productName = ZERO_CHECK;
+		};
+		E003A1614F64F001F449681C /* ALL_BUILD */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = B333DEB130B7420588C0AB4B /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
+			buildPhases = (
+				C96DCF141E30926331E18BD5 /* Generate CMakeFiles/ALL_BUILD */,
+			);
+			dependencies = (
+				3D4BAD1F525345EDAE10C5A7 /* PBXTargetDependency */,
+				538F9ACC816540EC8C61D724 /* PBXTargetDependency */,
+				11732603A8D24A35BB463F09 /* PBXTargetDependency */,
+				8848F983C8B9490A9D01FFF0 /* PBXTargetDependency */,
+			);
+			name = ALL_BUILD;
+			productName = ALL_BUILD;
+		};
+		FEA00DB88CD81268840C1C69 /* RUN_TESTS */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 8165EAAFCE18465694EE6F1D /* Build configuration list for PBXAggregateTarget "RUN_TESTS" */;
+			buildPhases = (
+				003C8D08B0008F35F218E126 /* CMake PostBuild Rules */,
+			);
+			dependencies = (
+			);
+			name = RUN_TESTS;
+			productName = RUN_TESTS;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		0908847131A94AC98CAC986B /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/arrays/move_element_to_the_end.hpp */ = {isa = PBXBuildFile; fileRef = 721C30881DD342FDA87724C4 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/arrays/move_element_to_the_end.hpp */; };
+		0AF13112A9CD46FB8C5C30D8 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/recursion/nth_fibbonaci.cpp */ = {isa = PBXBuildFile; fileRef = 2098C7AF657E48878C6D4854 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/recursion/nth_fibbonaci.cpp */; };
+		102215FABB79417181F0811C /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/stack/sort_stack.cpp */ = {isa = PBXBuildFile; fileRef = 44F2F26B4BAC4DDF99053765 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/stack/sort_stack.cpp */; };
+		13377D66D8C44187AD0AF5DB /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/greedy/jump_to_the_end.cpp */ = {isa = PBXBuildFile; fileRef = 0C62524611894F05A0E06400 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/greedy/jump_to_the_end.cpp */; };
+		145B3DBB8E2A411497F46EBF /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/queue/time_to_buy_tickets.hpp */ = {isa = PBXBuildFile; fileRef = B8BE19E5F361483687B22259 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/queue/time_to_buy_tickets.hpp */; };
+		149D422B78C14E6BAAE624A9 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/stack/daily_temperatures.cpp */ = {isa = PBXBuildFile; fileRef = 90C5B75CCBD04883B515B123 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/stack/daily_temperatures.cpp */; };
+		159639F576414A49A091FFE0 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/priority_queue/stones_war.cpp */ = {isa = PBXBuildFile; fileRef = 1E2437E9048B4D0FB69B95B6 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/priority_queue/stones_war.cpp */; };
+		1DACDE9978014208A60EF619 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/arrays/test_sorted_squared.cpp */ = {isa = PBXBuildFile; fileRef = 5F7C12D4999E4D77A56C917B /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/arrays/test_sorted_squared.cpp */; };
+		1E2D329661F54B6DB2A2AAFE /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/math_and_geometry/line_through_points.hpp */ = {isa = PBXBuildFile; fileRef = A794969E7B83406EA1F2107E /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/math_and_geometry/line_through_points.hpp */; };
+		22AE2210F1774096A1715D0D /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/two_number_sum.cpp */ = {isa = PBXBuildFile; fileRef = A64FE6FFEF324C53929424B2 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/two_number_sum.cpp */; };
+		232BA47D45704C82BAF85B82 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = 32EF8565F7B84DDCAE67D77E /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/CMakeLists.txt */; };
+		23A24CA7A0DE428CBDE0316E /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/arrays/sorted_squared.hpp */ = {isa = PBXBuildFile; fileRef = 913AA7830EDD40479E12998D /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/arrays/sorted_squared.hpp */; };
+		2C0AA30D3D2F4BCCB9DB6C33 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/heap/kth_largest_element.hpp */ = {isa = PBXBuildFile; fileRef = B1F7659947F24089B28F54FC /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/heap/kth_largest_element.hpp */; };
+		2FADA496163B496180403A45 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/minimum_loss.cpp */ = {isa = PBXBuildFile; fileRef = 631EFC12DEEA4FBAA03B5237 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/minimum_loss.cpp */; };
+		34603E9F89D84278B8A6A199 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/linked_list/test_single_linked_list.cpp */ = {isa = PBXBuildFile; fileRef = 500892B5619943F79C067290 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/linked_list/test_single_linked_list.cpp */; };
+		35CDE0B4DAF94DCB924E2C67 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/math_and_geometry/line_through_points.cpp */ = {isa = PBXBuildFile; fileRef = 347B1D492B07407AB1E079D7 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/math_and_geometry/line_through_points.cpp */; };
+		3D60BBACDF3642879993DE41 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/smallest_difference.cpp */ = {isa = PBXBuildFile; fileRef = 7C4FD28FCA3940B1B5E5A701 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/smallest_difference.cpp */; };
+		3DA5C8B2154348D082E52B8A /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/heap/kth_largest_element.cpp */ = {isa = PBXBuildFile; fileRef = CE1BE638C126480DA4E532F5 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/heap/kth_largest_element.cpp */; };
+		416BDE34C609416AB91B20A1 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/stack/daily_temperatures.hpp */ = {isa = PBXBuildFile; fileRef = 5723983E7D444E138425D631 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/stack/daily_temperatures.hpp */; };
+		45D924BAAD9D4C288ED9BE41 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/sorted_squared.cpp */ = {isa = PBXBuildFile; fileRef = 8C0F42126FCD4798B75BB09D /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/sorted_squared.cpp */; };
+		4685AA146A6945EB938CAF86 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/stack/sort_stack.hpp */ = {isa = PBXBuildFile; fileRef = 3D70B20501574B58969C371B /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/stack/sort_stack.hpp */; };
+		50056B69DA2E4432B2052B05 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/recursion/test_nth_fibbonaci.cpp */ = {isa = PBXBuildFile; fileRef = 6B348D5B7F7C4714A0E7A87E /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/recursion/test_nth_fibbonaci.cpp */; };
+		578DB66FCAB644338595B902 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/arrays/smallest_difference.hpp */ = {isa = PBXBuildFile; fileRef = C7374754140C4F0DB2E21543 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/arrays/smallest_difference.hpp */; };
+		57AAF04CDC1D492581A48486 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/remove_duplicates_from_sorted_array.cpp */ = {isa = PBXBuildFile; fileRef = BFB318BE5DAE49F4AB93386D /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/remove_duplicates_from_sorted_array.cpp */; };
+		58B41BD8D49A4DA294423F8B /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/queue/students_lunch.hpp */ = {isa = PBXBuildFile; fileRef = E35AD3D4EF024A8BA550CAC8 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/queue/students_lunch.hpp */; };
+		5A4DBD6FFD8440F6A44FBCE5 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/tournament_winner.cpp */ = {isa = PBXBuildFile; fileRef = D9739AF3E96146B8A77CD919 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/tournament_winner.cpp */; };
+		5FCEA43EB473436385F84B54 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/transponse_matrix.cpp */ = {isa = PBXBuildFile; fileRef = C87F2CDDE1334D1BB848407E /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/transponse_matrix.cpp */; };
+		6C7FF1B9AF0C480EB1F05E96 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/arrays/test_tournament_winner.cpp */ = {isa = PBXBuildFile; fileRef = 049CF2A6F9784B448468203F /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/arrays/test_tournament_winner.cpp */; };
+		710C7104980D4F9FA342B069 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/stack/evaluate_expression.hpp */ = {isa = PBXBuildFile; fileRef = 4A266D3BB8474D1899772698 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/stack/evaluate_expression.hpp */; };
+		73BCFB616B8D47C295917384 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/arrays/tournament_winner.hpp */ = {isa = PBXBuildFile; fileRef = 8B4C08E411A0402CB7427E74 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/arrays/tournament_winner.hpp */; };
+		78B48C7FF62C41EDA9AAB2EA /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/arrays/test_smallest_difference.cpp */ = {isa = PBXBuildFile; fileRef = 83723C38584A406D97A998A2 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/arrays/test_smallest_difference.cpp */; };
+		79E5609F434F442B835836FE /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/arrays/first_duplicated_value.hpp */ = {isa = PBXBuildFile; fileRef = 77AA593017204E2EB3DA029D /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/arrays/first_duplicated_value.hpp */; };
+		7B7FAAF664144DD7901B03B5 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/arrays/test_is_valid_sequence.cpp */ = {isa = PBXBuildFile; fileRef = E97EB6DC94D048218AEF267D /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/arrays/test_is_valid_sequence.cpp */; };
+		8A2BFD9B8EF2444B821AE3DC /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/stack/evaluate_expression.cpp */ = {isa = PBXBuildFile; fileRef = 6CE48D02942A47B1A1D35E08 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/stack/evaluate_expression.cpp */; };
+		912BBAB0DD8345A2A49EBB89 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/queue/time_to_buy_tickets.cpp */ = {isa = PBXBuildFile; fileRef = F887F1CAD89D4CB8940387D3 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/queue/time_to_buy_tickets.cpp */; };
+		9273C501FE834474B03DE4E4 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/arrays/test_move_element_to_the_end.cpp */ = {isa = PBXBuildFile; fileRef = 937CFE43F9C741ADA6972EDC /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/arrays/test_move_element_to_the_end.cpp */; };
+		93519462EE994D03BA00BC38 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/recursion/nth_fibbonaci.hpp */ = {isa = PBXBuildFile; fileRef = E2360B496BDD47D2BC72EDE6 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/recursion/nth_fibbonaci.hpp */; };
+		9365FAF8636043CC9661709D /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/arrays/two_number_sum.hpp */ = {isa = PBXBuildFile; fileRef = 211EDD534D7B47C48B201BFB /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/arrays/two_number_sum.hpp */; };
+		965C8CBBA1FA45488B24A725 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/arrays/test_minimum_loss.cpp */ = {isa = PBXBuildFile; fileRef = 1D039FE8FFC34AB2A5E4E8EC /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/arrays/test_minimum_loss.cpp */; };
+		9791D2A60BC5478C9872FEB8 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = 1742D9C7A8A7436F860A7031 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/CMakeLists.txt */; };
+		98923DB2FC3F435089A9218A /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/strings/test_is_permutation.cpp */ = {isa = PBXBuildFile; fileRef = 01D329C709754F749132C3DB /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/strings/test_is_permutation.cpp */; };
+		A0BA55FCEF3E4F68B5789ED1 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/move_element_to_the_end.cpp */ = {isa = PBXBuildFile; fileRef = 9F84444CC5E044799D49015A /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/move_element_to_the_end.cpp */; };
+		A87C471014F34E33BCD1DFFA /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/recursion/sum_of_digits.hpp */ = {isa = PBXBuildFile; fileRef = 420260F735A04E48B166E42C /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/recursion/sum_of_digits.hpp */; };
+		A9476171BB97449BACA04836 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/is_valid_sequence.cpp */ = {isa = PBXBuildFile; fileRef = 6CFE0F2F392646D0A3D1BD42 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/is_valid_sequence.cpp */; };
+		A9875FE18A584BC7920F34E3 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = C1C05FB4F2F74BD3A04CE665 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/CMakeLists.txt */; };
+		AE3FB2A6B4534936874A53F1 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/strings/is_permutation.hpp */ = {isa = PBXBuildFile; fileRef = 717903DD0F724446895B1E60 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/strings/is_permutation.hpp */; };
+		B1AAB1D36D7E42D9B6349EDC /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/recursion/sum_of_digits.cpp */ = {isa = PBXBuildFile; fileRef = 21E5D6C880184F248F8062DA /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/recursion/sum_of_digits.cpp */; };
+		B32D7BA4B0E44F309384E130 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/arrays/test_first_duplicated_value.cpp */ = {isa = PBXBuildFile; fileRef = 0D1AF8D56F3B43B0AB2A546C /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/arrays/test_first_duplicated_value.cpp */; };
+		B47073341A24411F9D17CD44 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/first_duplicated_value.cpp */ = {isa = PBXBuildFile; fileRef = 3312BAB0121E4CB6A2C5313F /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/first_duplicated_value.cpp */; };
+		B5D1AD1A4AD2439A9A657FFD /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/arrays/test_two_number_sum.cpp */ = {isa = PBXBuildFile; fileRef = A42BB964507F4B5E96D3E754 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/arrays/test_two_number_sum.cpp */; };
+		B6301476FA1448C9B0929E11 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/stack/balanced_brackets.cpp */ = {isa = PBXBuildFile; fileRef = E23FFB9213EE4895B15FD863 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/stack/balanced_brackets.cpp */; };
+		BF44B9DC2C90460DBA8B2237 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/recursion/test_sum_of_digits.cpp */ = {isa = PBXBuildFile; fileRef = 7F8136CBDA134C4D868BE1D9 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/recursion/test_sum_of_digits.cpp */; };
+		C0BFC7FA56DC4CE69CF7E80F /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/greedy/jump_to_the_end.hpp */ = {isa = PBXBuildFile; fileRef = BFDA99162F44412CAE697D3D /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/greedy/jump_to_the_end.hpp */; };
+		C84479D991694B7FA1933EB1 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/recursion/test_has_adjacent_cells.cpp */ = {isa = PBXBuildFile; fileRef = D9EF60A070F946C4BFCED649 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/recursion/test_has_adjacent_cells.cpp */; };
+		C9396A62419F4B1E89EE3DD3 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/utils/print_utils.hpp */ = {isa = PBXBuildFile; fileRef = 090FF00E27464407B5302654 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/utils/print_utils.hpp */; };
+		CA80B54F4C364E1D90894CBE /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/main.cpp */ = {isa = PBXBuildFile; fileRef = 4FD8751352F24A10B7C68618 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/main.cpp */; };
+		CD873F9771A34C3D9047DC4C /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/linked_list/single_linked_list.hpp */ = {isa = PBXBuildFile; fileRef = 23B5853576774016B8CAB9B3 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/linked_list/single_linked_list.hpp */; };
+		D6E5EECF387943B58DAFDEB5 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/recursion/has_adjacent_cells.cpp */ = {isa = PBXBuildFile; fileRef = 6C0E7B087230451686709791 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/recursion/has_adjacent_cells.cpp */; };
+		DD90321BA1EC4126AB4174F7 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/priority_queue/stones_war.hpp */ = {isa = PBXBuildFile; fileRef = 9BAF9C842DE240CE81CC5C80 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/priority_queue/stones_war.hpp */; };
+		DF1C9D2994DA45E186258BF2 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/recursion/has_adjacent_cells.hpp */ = {isa = PBXBuildFile; fileRef = 91C34D733D164048A732CC20 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/recursion/has_adjacent_cells.hpp */; };
+		E09ABE5C3FCD40D08EF342BC /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/arrays/remove_duplicates_from_sorted_array.hpp */ = {isa = PBXBuildFile; fileRef = EAC08E8DE36C437EB014D20B /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/arrays/remove_duplicates_from_sorted_array.hpp */; };
+		E62717536AE84253BCC24D97 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/arrays/minimum_loss.hpp */ = {isa = PBXBuildFile; fileRef = EE435A836DDD42C7A836230E /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/arrays/minimum_loss.hpp */; };
+		EF67685FD44B4F48AC3E4780 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/strings/is_permutation.cpp */ = {isa = PBXBuildFile; fileRef = 89CACE9EA7194C2D86225A92 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/strings/is_permutation.cpp */; };
+		F4A1EC681BC747A0A835C76E /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/arrays/transponse_matrix.hpp */ = {isa = PBXBuildFile; fileRef = E84F6DF84E5D48998DF7B423 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/arrays/transponse_matrix.hpp */; };
+		F6C0809ACA4542A2A5CCA638 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/arrays/is_valid_sequence.hpp */ = {isa = PBXBuildFile; fileRef = F2C954A2881443D888B526D5 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/arrays/is_valid_sequence.hpp */; };
+		F9A855FFD99C484E9B53E86F /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/queue/students_lunch.cpp */ = {isa = PBXBuildFile; fileRef = 4BF3F87C791841998AE4FC6B /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/queue/students_lunch.cpp */; };
+		FC6E9ACFE9B74594BEF0291A /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/stack/balanced_brackets.hpp */ = {isa = PBXBuildFile; fileRef = DE9AF622D14C4F8DA5AE00F8 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/stack/balanced_brackets.hpp */; };
+		FD7EAC9EAA5E4D178CC65BEF /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/linked_list/single_linked_list.cpp */ = {isa = PBXBuildFile; fileRef = 95A8FDF4A6D14C54A52CF178 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/linked_list/single_linked_list.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildStyle section */
+		3C095BDC52F04277A7397FE6 /* Release */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Release;
+		};
+		959CB890AB734EFEAC787FB3 /* MinSizeRel */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = MinSizeRel;
+		};
+		AE80333D40B84542A61EB865 /* Debug */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Debug;
+		};
+		FD257743ABCE47598FB65E05 /* RelWithDebInfo */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = RelWithDebInfo;
+		};
+/* End PBXBuildStyle section */
+
+/* Begin PBXContainerItemProxy section */
+		085F13E05A0742649F51FAE1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 35E256EF583C4315B1F3AA24 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A2BD7C3FB2ED69C2239CD77B;
+			remoteInfo = test_environment;
+		};
+		1A735CC7660F487699001E1A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 35E256EF583C4315B1F3AA24 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7AAF6A6D191ED9077AFA3048;
+			remoteInfo = project_lib;
+		};
+		6465DD11174B45A6B49F715F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 35E256EF583C4315B1F3AA24 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E5744A8B2F3AB4130B657DCD;
+			remoteInfo = clicker_plus_plus;
+		};
+		71BEFDCD5DF44DDAAB1FCA17 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 35E256EF583C4315B1F3AA24 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CC161BB868E8DBF5D053FEF9;
+			remoteInfo = ZERO_CHECK;
+		};
+		75F6709F0AD04C149135197A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 35E256EF583C4315B1F3AA24 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CC161BB868E8DBF5D053FEF9;
+			remoteInfo = ZERO_CHECK;
+		};
+		7FD33E70EC9649AF8834D3C5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 35E256EF583C4315B1F3AA24 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7AAF6A6D191ED9077AFA3048;
+			remoteInfo = project_lib;
+		};
+		B3D7E657881E479FA1A31511 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 35E256EF583C4315B1F3AA24 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7AAF6A6D191ED9077AFA3048;
+			remoteInfo = project_lib;
+		};
+		EC20EB0E4C384F8186C8BFDD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 35E256EF583C4315B1F3AA24 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CC161BB868E8DBF5D053FEF9;
+			remoteInfo = ZERO_CHECK;
+		};
+		F4EFA868F58940BDAE39CCD2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 35E256EF583C4315B1F3AA24 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CC161BB868E8DBF5D053FEF9;
+			remoteInfo = ZERO_CHECK;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		01D329C709754F749132C3DB /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/strings/test_is_permutation.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = test_is_permutation.cpp; path = unit_tests/strings/test_is_permutation.cpp; sourceTree = SOURCE_ROOT; };
+		049CF2A6F9784B448468203F /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/arrays/test_tournament_winner.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = test_tournament_winner.cpp; path = unit_tests/arrays/test_tournament_winner.cpp; sourceTree = SOURCE_ROOT; };
+		090FF00E27464407B5302654 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/utils/print_utils.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = print_utils.hpp; path = header/utils/print_utils.hpp; sourceTree = SOURCE_ROOT; };
+		0C62524611894F05A0E06400 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/greedy/jump_to_the_end.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = jump_to_the_end.cpp; path = src/greedy/jump_to_the_end.cpp; sourceTree = SOURCE_ROOT; };
+		0D1AF8D56F3B43B0AB2A546C /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/arrays/test_first_duplicated_value.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = test_first_duplicated_value.cpp; path = unit_tests/arrays/test_first_duplicated_value.cpp; sourceTree = SOURCE_ROOT; };
+		1742D9C7A8A7436F860A7031 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		1D039FE8FFC34AB2A5E4E8EC /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/arrays/test_minimum_loss.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = test_minimum_loss.cpp; path = unit_tests/arrays/test_minimum_loss.cpp; sourceTree = SOURCE_ROOT; };
+		1E2437E9048B4D0FB69B95B6 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/priority_queue/stones_war.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = stones_war.cpp; path = src/priority_queue/stones_war.cpp; sourceTree = SOURCE_ROOT; };
+		2098C7AF657E48878C6D4854 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/recursion/nth_fibbonaci.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = nth_fibbonaci.cpp; path = src/recursion/nth_fibbonaci.cpp; sourceTree = SOURCE_ROOT; };
+		211EDD534D7B47C48B201BFB /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/arrays/two_number_sum.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = two_number_sum.hpp; path = header/arrays/two_number_sum.hpp; sourceTree = SOURCE_ROOT; };
+		21E5D6C880184F248F8062DA /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/recursion/sum_of_digits.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = sum_of_digits.cpp; path = src/recursion/sum_of_digits.cpp; sourceTree = SOURCE_ROOT; };
+		23B5853576774016B8CAB9B3 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/linked_list/single_linked_list.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = single_linked_list.hpp; path = header/linked_list/single_linked_list.hpp; sourceTree = SOURCE_ROOT; };
+		32EF8565F7B84DDCAE67D77E /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		3312BAB0121E4CB6A2C5313F /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/first_duplicated_value.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = first_duplicated_value.cpp; path = src/arrays/first_duplicated_value.cpp; sourceTree = SOURCE_ROOT; };
+		347B1D492B07407AB1E079D7 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/math_and_geometry/line_through_points.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = line_through_points.cpp; path = src/math_and_geometry/line_through_points.cpp; sourceTree = SOURCE_ROOT; };
+		347F5320536E47CBAD684D26 /* project_lib */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libproject_lib.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		38EA2AC5491842BCAB504E6F /* clicker_plus_plus */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = clicker_plus_plus; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D70B20501574B58969C371B /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/stack/sort_stack.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = sort_stack.hpp; path = header/stack/sort_stack.hpp; sourceTree = SOURCE_ROOT; };
+		420260F735A04E48B166E42C /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/recursion/sum_of_digits.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = sum_of_digits.hpp; path = header/recursion/sum_of_digits.hpp; sourceTree = SOURCE_ROOT; };
+		44F2F26B4BAC4DDF99053765 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/stack/sort_stack.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = sort_stack.cpp; path = src/stack/sort_stack.cpp; sourceTree = SOURCE_ROOT; };
+		4A266D3BB8474D1899772698 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/stack/evaluate_expression.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = evaluate_expression.hpp; path = header/stack/evaluate_expression.hpp; sourceTree = SOURCE_ROOT; };
+		4BF3F87C791841998AE4FC6B /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/queue/students_lunch.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = students_lunch.cpp; path = src/queue/students_lunch.cpp; sourceTree = SOURCE_ROOT; };
+		4FD8751352F24A10B7C68618 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/main.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = main.cpp; path = src/main.cpp; sourceTree = SOURCE_ROOT; };
+		500892B5619943F79C067290 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/linked_list/test_single_linked_list.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = test_single_linked_list.cpp; path = unit_tests/linked_list/test_single_linked_list.cpp; sourceTree = SOURCE_ROOT; };
+		5723983E7D444E138425D631 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/stack/daily_temperatures.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = daily_temperatures.hpp; path = header/stack/daily_temperatures.hpp; sourceTree = SOURCE_ROOT; };
+		5F7C12D4999E4D77A56C917B /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/arrays/test_sorted_squared.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = test_sorted_squared.cpp; path = unit_tests/arrays/test_sorted_squared.cpp; sourceTree = SOURCE_ROOT; };
+		631EFC12DEEA4FBAA03B5237 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/minimum_loss.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = minimum_loss.cpp; path = src/arrays/minimum_loss.cpp; sourceTree = SOURCE_ROOT; };
+		6B348D5B7F7C4714A0E7A87E /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/recursion/test_nth_fibbonaci.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = test_nth_fibbonaci.cpp; path = unit_tests/recursion/test_nth_fibbonaci.cpp; sourceTree = SOURCE_ROOT; };
+		6C0E7B087230451686709791 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/recursion/has_adjacent_cells.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = has_adjacent_cells.cpp; path = src/recursion/has_adjacent_cells.cpp; sourceTree = SOURCE_ROOT; };
+		6CE48D02942A47B1A1D35E08 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/stack/evaluate_expression.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = evaluate_expression.cpp; path = src/stack/evaluate_expression.cpp; sourceTree = SOURCE_ROOT; };
+		6CFE0F2F392646D0A3D1BD42 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/is_valid_sequence.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = is_valid_sequence.cpp; path = src/arrays/is_valid_sequence.cpp; sourceTree = SOURCE_ROOT; };
+		717903DD0F724446895B1E60 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/strings/is_permutation.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = is_permutation.hpp; path = header/strings/is_permutation.hpp; sourceTree = SOURCE_ROOT; };
+		721C30881DD342FDA87724C4 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/arrays/move_element_to_the_end.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = move_element_to_the_end.hpp; path = header/arrays/move_element_to_the_end.hpp; sourceTree = SOURCE_ROOT; };
+		77AA593017204E2EB3DA029D /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/arrays/first_duplicated_value.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = first_duplicated_value.hpp; path = header/arrays/first_duplicated_value.hpp; sourceTree = SOURCE_ROOT; };
+		7C4FD28FCA3940B1B5E5A701 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/smallest_difference.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = smallest_difference.cpp; path = src/arrays/smallest_difference.cpp; sourceTree = SOURCE_ROOT; };
+		7F8136CBDA134C4D868BE1D9 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/recursion/test_sum_of_digits.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = test_sum_of_digits.cpp; path = unit_tests/recursion/test_sum_of_digits.cpp; sourceTree = SOURCE_ROOT; };
+		83723C38584A406D97A998A2 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/arrays/test_smallest_difference.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = test_smallest_difference.cpp; path = unit_tests/arrays/test_smallest_difference.cpp; sourceTree = SOURCE_ROOT; };
+		89CACE9EA7194C2D86225A92 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/strings/is_permutation.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = is_permutation.cpp; path = src/strings/is_permutation.cpp; sourceTree = SOURCE_ROOT; };
+		8B4C08E411A0402CB7427E74 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/arrays/tournament_winner.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = tournament_winner.hpp; path = header/arrays/tournament_winner.hpp; sourceTree = SOURCE_ROOT; };
+		8C0F42126FCD4798B75BB09D /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/sorted_squared.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = sorted_squared.cpp; path = src/arrays/sorted_squared.cpp; sourceTree = SOURCE_ROOT; };
+		90C5B75CCBD04883B515B123 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/stack/daily_temperatures.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = daily_temperatures.cpp; path = src/stack/daily_temperatures.cpp; sourceTree = SOURCE_ROOT; };
+		913AA7830EDD40479E12998D /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/arrays/sorted_squared.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = sorted_squared.hpp; path = header/arrays/sorted_squared.hpp; sourceTree = SOURCE_ROOT; };
+		91C34D733D164048A732CC20 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/recursion/has_adjacent_cells.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = has_adjacent_cells.hpp; path = header/recursion/has_adjacent_cells.hpp; sourceTree = SOURCE_ROOT; };
+		937CFE43F9C741ADA6972EDC /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/arrays/test_move_element_to_the_end.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = test_move_element_to_the_end.cpp; path = unit_tests/arrays/test_move_element_to_the_end.cpp; sourceTree = SOURCE_ROOT; };
+		95A8FDF4A6D14C54A52CF178 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/linked_list/single_linked_list.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = single_linked_list.cpp; path = src/linked_list/single_linked_list.cpp; sourceTree = SOURCE_ROOT; };
+		9BAF9C842DE240CE81CC5C80 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/priority_queue/stones_war.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = stones_war.hpp; path = header/priority_queue/stones_war.hpp; sourceTree = SOURCE_ROOT; };
+		9F84444CC5E044799D49015A /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/move_element_to_the_end.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = move_element_to_the_end.cpp; path = src/arrays/move_element_to_the_end.cpp; sourceTree = SOURCE_ROOT; };
+		A42BB964507F4B5E96D3E754 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/arrays/test_two_number_sum.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = test_two_number_sum.cpp; path = unit_tests/arrays/test_two_number_sum.cpp; sourceTree = SOURCE_ROOT; };
+		A64FE6FFEF324C53929424B2 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/two_number_sum.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = two_number_sum.cpp; path = src/arrays/two_number_sum.cpp; sourceTree = SOURCE_ROOT; };
+		A794969E7B83406EA1F2107E /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/math_and_geometry/line_through_points.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = line_through_points.hpp; path = header/math_and_geometry/line_through_points.hpp; sourceTree = SOURCE_ROOT; };
+		B1F7659947F24089B28F54FC /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/heap/kth_largest_element.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = kth_largest_element.hpp; path = header/heap/kth_largest_element.hpp; sourceTree = SOURCE_ROOT; };
+		B8BE19E5F361483687B22259 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/queue/time_to_buy_tickets.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = time_to_buy_tickets.hpp; path = header/queue/time_to_buy_tickets.hpp; sourceTree = SOURCE_ROOT; };
+		BFB318BE5DAE49F4AB93386D /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/remove_duplicates_from_sorted_array.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = remove_duplicates_from_sorted_array.cpp; path = src/arrays/remove_duplicates_from_sorted_array.cpp; sourceTree = SOURCE_ROOT; };
+		BFDA99162F44412CAE697D3D /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/greedy/jump_to_the_end.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = jump_to_the_end.hpp; path = header/greedy/jump_to_the_end.hpp; sourceTree = SOURCE_ROOT; };
+		C1C05FB4F2F74BD3A04CE665 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		C7374754140C4F0DB2E21543 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/arrays/smallest_difference.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = smallest_difference.hpp; path = header/arrays/smallest_difference.hpp; sourceTree = SOURCE_ROOT; };
+		C87F2CDDE1334D1BB848407E /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/transponse_matrix.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = transponse_matrix.cpp; path = src/arrays/transponse_matrix.cpp; sourceTree = SOURCE_ROOT; };
+		CE1BE638C126480DA4E532F5 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/heap/kth_largest_element.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = kth_largest_element.cpp; path = src/heap/kth_largest_element.cpp; sourceTree = SOURCE_ROOT; };
+		D477BFEF8F2E49368744930F /* test_environment */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = test_environment; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9739AF3E96146B8A77CD919 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/tournament_winner.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = tournament_winner.cpp; path = src/arrays/tournament_winner.cpp; sourceTree = SOURCE_ROOT; };
+		D9EF60A070F946C4BFCED649 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/recursion/test_has_adjacent_cells.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = test_has_adjacent_cells.cpp; path = unit_tests/recursion/test_has_adjacent_cells.cpp; sourceTree = SOURCE_ROOT; };
+		DE9AF622D14C4F8DA5AE00F8 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/stack/balanced_brackets.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = balanced_brackets.hpp; path = header/stack/balanced_brackets.hpp; sourceTree = SOURCE_ROOT; };
+		E2360B496BDD47D2BC72EDE6 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/recursion/nth_fibbonaci.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = nth_fibbonaci.hpp; path = header/recursion/nth_fibbonaci.hpp; sourceTree = SOURCE_ROOT; };
+		E23FFB9213EE4895B15FD863 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/stack/balanced_brackets.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = balanced_brackets.cpp; path = src/stack/balanced_brackets.cpp; sourceTree = SOURCE_ROOT; };
+		E35AD3D4EF024A8BA550CAC8 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/queue/students_lunch.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = students_lunch.hpp; path = header/queue/students_lunch.hpp; sourceTree = SOURCE_ROOT; };
+		E6F615C3F4924804B7C19642 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		E84F6DF84E5D48998DF7B423 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/arrays/transponse_matrix.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = transponse_matrix.hpp; path = header/arrays/transponse_matrix.hpp; sourceTree = SOURCE_ROOT; };
+		E97EB6DC94D048218AEF267D /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/arrays/test_is_valid_sequence.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = test_is_valid_sequence.cpp; path = unit_tests/arrays/test_is_valid_sequence.cpp; sourceTree = SOURCE_ROOT; };
+		EAC08E8DE36C437EB014D20B /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/arrays/remove_duplicates_from_sorted_array.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = remove_duplicates_from_sorted_array.hpp; path = header/arrays/remove_duplicates_from_sorted_array.hpp; sourceTree = SOURCE_ROOT; };
+		EE435A836DDD42C7A836230E /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/arrays/minimum_loss.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = minimum_loss.hpp; path = header/arrays/minimum_loss.hpp; sourceTree = SOURCE_ROOT; };
+		F2C954A2881443D888B526D5 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/arrays/is_valid_sequence.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = is_valid_sequence.hpp; path = header/arrays/is_valid_sequence.hpp; sourceTree = SOURCE_ROOT; };
+		F887F1CAD89D4CB8940387D3 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/queue/time_to_buy_tickets.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = time_to_buy_tickets.cpp; path = src/queue/time_to_buy_tickets.cpp; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		129D9E01DE36404C8C0B1BB6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A71D77387F714CC0B0438B32 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BC9A62FD9CA84BB4ACF966D4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		07518B01B5B74EDCA2AC561D /* stack */ = {
+			isa = PBXGroup;
+			children = (
+				E23FFB9213EE4895B15FD863 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/stack/balanced_brackets.cpp */,
+				90C5B75CCBD04883B515B123 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/stack/daily_temperatures.cpp */,
+				6CE48D02942A47B1A1D35E08 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/stack/evaluate_expression.cpp */,
+				44F2F26B4BAC4DDF99053765 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/stack/sort_stack.cpp */,
+			);
+			name = stack;
+			sourceTree = "<group>";
+		};
+		086AA5AED569491F8137DAC1 /* header */ = {
+			isa = PBXGroup;
+			children = (
+				679AC163199A413B8E01908F /* arrays */,
+				BD7722810DBB47E2BBA5B8B5 /* greedy */,
+				41866DE1FF254754BF996C8F /* heap */,
+				08E4CC0FD4404B2FBA93BE2A /* linked_list */,
+				5E79DF3539B344E29756517E /* math_and_geometry */,
+				0DF5EE1681AD4E72BA734806 /* priority_queue */,
+				55B9F33A10E54C5DB776F728 /* queue */,
+				72F257F16B964BE28579F6F0 /* recursion */,
+				A5C24728AADA4A04A598CC0B /* stack */,
+				E02DD8760BFB4F65A7B9065A /* strings */,
+				139BA34BA1E846848EA133F8 /* utils */,
+			);
+			name = header;
+			sourceTree = "<group>";
+		};
+		08E4CC0FD4404B2FBA93BE2A /* linked_list */ = {
+			isa = PBXGroup;
+			children = (
+				23B5853576774016B8CAB9B3 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/linked_list/single_linked_list.hpp */,
+			);
+			name = linked_list;
+			sourceTree = "<group>";
+		};
+		0DF5EE1681AD4E72BA734806 /* priority_queue */ = {
+			isa = PBXGroup;
+			children = (
+				9BAF9C842DE240CE81CC5C80 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/priority_queue/stones_war.hpp */,
+			);
+			name = priority_queue;
+			sourceTree = "<group>";
+		};
+		0F9CBE47A7624501AEF8D506 /* arrays */ = {
+			isa = PBXGroup;
+			children = (
+				3312BAB0121E4CB6A2C5313F /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/first_duplicated_value.cpp */,
+				6CFE0F2F392646D0A3D1BD42 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/is_valid_sequence.cpp */,
+				631EFC12DEEA4FBAA03B5237 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/minimum_loss.cpp */,
+				9F84444CC5E044799D49015A /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/move_element_to_the_end.cpp */,
+				BFB318BE5DAE49F4AB93386D /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/remove_duplicates_from_sorted_array.cpp */,
+				7C4FD28FCA3940B1B5E5A701 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/smallest_difference.cpp */,
+				8C0F42126FCD4798B75BB09D /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/sorted_squared.cpp */,
+				D9739AF3E96146B8A77CD919 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/tournament_winner.cpp */,
+				C87F2CDDE1334D1BB848407E /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/transponse_matrix.cpp */,
+				A64FE6FFEF324C53929424B2 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/two_number_sum.cpp */,
+			);
+			name = arrays;
+			sourceTree = "<group>";
+		};
+		139BA34BA1E846848EA133F8 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				090FF00E27464407B5302654 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/utils/print_utils.hpp */,
+			);
+			name = utils;
+			sourceTree = "<group>";
+		};
+		2781D49DE4654F179EC63254 /* queue */ = {
+			isa = PBXGroup;
+			children = (
+				4BF3F87C791841998AE4FC6B /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/queue/students_lunch.cpp */,
+				F887F1CAD89D4CB8940387D3 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/queue/time_to_buy_tickets.cpp */,
+			);
+			name = queue;
+			sourceTree = "<group>";
+		};
+		2BC383223B5A43E38521C009 /* greedy */ = {
+			isa = PBXGroup;
+			children = (
+				0C62524611894F05A0E06400 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/greedy/jump_to_the_end.cpp */,
+			);
+			name = greedy;
+			sourceTree = "<group>";
+		};
+		3DD5935FAC054ED09DA43766 /* project_lib */ = {
+			isa = PBXGroup;
+			children = (
+				B800E87F0DCA452FB9F720D4 /* src */,
+				086AA5AED569491F8137DAC1 /* header */,
+				1742D9C7A8A7436F860A7031 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/CMakeLists.txt */,
+			);
+			name = project_lib;
+			sourceTree = "<group>";
+		};
+		41866DE1FF254754BF996C8F /* heap */ = {
+			isa = PBXGroup;
+			children = (
+				B1F7659947F24089B28F54FC /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/heap/kth_largest_element.hpp */,
+			);
+			name = heap;
+			sourceTree = "<group>";
+		};
+		46022E7418394FD4A4A51541 /* heap */ = {
+			isa = PBXGroup;
+			children = (
+				CE1BE638C126480DA4E532F5 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/heap/kth_largest_element.cpp */,
+			);
+			name = heap;
+			sourceTree = "<group>";
+		};
+		4E670124029646C791417FC4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		55B9F33A10E54C5DB776F728 /* queue */ = {
+			isa = PBXGroup;
+			children = (
+				E35AD3D4EF024A8BA550CAC8 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/queue/students_lunch.hpp */,
+				B8BE19E5F361483687B22259 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/queue/time_to_buy_tickets.hpp */,
+			);
+			name = queue;
+			sourceTree = "<group>";
+		};
+		59526BC0E22B42CDABCD5244 /* linked_list */ = {
+			isa = PBXGroup;
+			children = (
+				500892B5619943F79C067290 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/linked_list/test_single_linked_list.cpp */,
+			);
+			name = linked_list;
+			sourceTree = "<group>";
+		};
+		5E79DF3539B344E29756517E /* math_and_geometry */ = {
+			isa = PBXGroup;
+			children = (
+				A794969E7B83406EA1F2107E /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/math_and_geometry/line_through_points.hpp */,
+			);
+			name = math_and_geometry;
+			sourceTree = "<group>";
+		};
+		6406063CE9B74EA095F80CA9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				38EA2AC5491842BCAB504E6F /* clicker_plus_plus */,
+				347F5320536E47CBAD684D26 /* project_lib */,
+				D477BFEF8F2E49368744930F /* test_environment */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		679AC163199A413B8E01908F /* arrays */ = {
+			isa = PBXGroup;
+			children = (
+				77AA593017204E2EB3DA029D /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/arrays/first_duplicated_value.hpp */,
+				F2C954A2881443D888B526D5 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/arrays/is_valid_sequence.hpp */,
+				EE435A836DDD42C7A836230E /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/arrays/minimum_loss.hpp */,
+				721C30881DD342FDA87724C4 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/arrays/move_element_to_the_end.hpp */,
+				EAC08E8DE36C437EB014D20B /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/arrays/remove_duplicates_from_sorted_array.hpp */,
+				C7374754140C4F0DB2E21543 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/arrays/smallest_difference.hpp */,
+				913AA7830EDD40479E12998D /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/arrays/sorted_squared.hpp */,
+				8B4C08E411A0402CB7427E74 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/arrays/tournament_winner.hpp */,
+				E84F6DF84E5D48998DF7B423 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/arrays/transponse_matrix.hpp */,
+				211EDD534D7B47C48B201BFB /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/arrays/two_number_sum.hpp */,
+			);
+			name = arrays;
+			sourceTree = "<group>";
+		};
+		6CD2D129453A41A48D36A20B = {
+			isa = PBXGroup;
+			children = (
+				3DD5935FAC054ED09DA43766 /* project_lib */,
+				7CBE7C20498E4EA6B4F61684 /* clicker_plus_plus */,
+				93407BC21122462CA12E19C0 /* test_environment */,
+				86126C04AEFE4DC1B8B23A24 /* ALL_BUILD */,
+				6406063CE9B74EA095F80CA9 /* Products */,
+				8CD5A6D3FE71488BBB1B4BAB /* Frameworks */,
+				4E670124029646C791417FC4 /* Resources */,
+			);
+			sourceTree = "<group>";
+		};
+		72F257F16B964BE28579F6F0 /* recursion */ = {
+			isa = PBXGroup;
+			children = (
+				91C34D733D164048A732CC20 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/recursion/has_adjacent_cells.hpp */,
+				E2360B496BDD47D2BC72EDE6 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/recursion/nth_fibbonaci.hpp */,
+				420260F735A04E48B166E42C /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/recursion/sum_of_digits.hpp */,
+			);
+			name = recursion;
+			sourceTree = "<group>";
+		};
+		76B0E37677C34F9FB33EFED0 /* unit_tests */ = {
+			isa = PBXGroup;
+			children = (
+				DF625BB7B1A149889785155D /* arrays */,
+				59526BC0E22B42CDABCD5244 /* linked_list */,
+				828A957332D54D4C84C19ABF /* recursion */,
+				C96034EECD4648A5A239AC7B /* strings */,
+			);
+			name = unit_tests;
+			sourceTree = "<group>";
+		};
+		7CBE7C20498E4EA6B4F61684 /* clicker_plus_plus */ = {
+			isa = PBXGroup;
+			children = (
+				FD669D3DBFA64095BF38554B /* Source Files */,
+				32EF8565F7B84DDCAE67D77E /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/CMakeLists.txt */,
+			);
+			name = clicker_plus_plus;
+			sourceTree = "<group>";
+		};
+		828A957332D54D4C84C19ABF /* recursion */ = {
+			isa = PBXGroup;
+			children = (
+				D9EF60A070F946C4BFCED649 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/recursion/test_has_adjacent_cells.cpp */,
+				6B348D5B7F7C4714A0E7A87E /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/recursion/test_nth_fibbonaci.cpp */,
+				7F8136CBDA134C4D868BE1D9 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/recursion/test_sum_of_digits.cpp */,
+			);
+			name = recursion;
+			sourceTree = "<group>";
+		};
+		86126C04AEFE4DC1B8B23A24 /* ALL_BUILD */ = {
+			isa = PBXGroup;
+			children = (
+				DF9EE6F4B2674642AD093C7C /* CMake Rules */,
+				E6F615C3F4924804B7C19642 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/CMakeLists.txt */,
+			);
+			name = ALL_BUILD;
+			sourceTree = "<group>";
+		};
+		8733DFCA79C142B0A514B06E /* strings */ = {
+			isa = PBXGroup;
+			children = (
+				89CACE9EA7194C2D86225A92 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/strings/is_permutation.cpp */,
+			);
+			name = strings;
+			sourceTree = "<group>";
+		};
+		8CD5A6D3FE71488BBB1B4BAB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		93407BC21122462CA12E19C0 /* test_environment */ = {
+			isa = PBXGroup;
+			children = (
+				76B0E37677C34F9FB33EFED0 /* unit_tests */,
+				C1C05FB4F2F74BD3A04CE665 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/CMakeLists.txt */,
+			);
+			name = test_environment;
+			sourceTree = "<group>";
+		};
+		A5C24728AADA4A04A598CC0B /* stack */ = {
+			isa = PBXGroup;
+			children = (
+				DE9AF622D14C4F8DA5AE00F8 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/stack/balanced_brackets.hpp */,
+				5723983E7D444E138425D631 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/stack/daily_temperatures.hpp */,
+				4A266D3BB8474D1899772698 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/stack/evaluate_expression.hpp */,
+				3D70B20501574B58969C371B /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/stack/sort_stack.hpp */,
+			);
+			name = stack;
+			sourceTree = "<group>";
+		};
+		B3804EFE5B1543C0980A7779 /* linked_list */ = {
+			isa = PBXGroup;
+			children = (
+				95A8FDF4A6D14C54A52CF178 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/linked_list/single_linked_list.cpp */,
+			);
+			name = linked_list;
+			sourceTree = "<group>";
+		};
+		B800E87F0DCA452FB9F720D4 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				0F9CBE47A7624501AEF8D506 /* arrays */,
+				2BC383223B5A43E38521C009 /* greedy */,
+				46022E7418394FD4A4A51541 /* heap */,
+				B3804EFE5B1543C0980A7779 /* linked_list */,
+				D986AA14DC7240D698E2F141 /* math_and_geometry */,
+				F66FFAE6E05844C3965CC4B4 /* priority_queue */,
+				2781D49DE4654F179EC63254 /* queue */,
+				C18663055D2B4CDF867D3E8F /* recursion */,
+				07518B01B5B74EDCA2AC561D /* stack */,
+				8733DFCA79C142B0A514B06E /* strings */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		BD7722810DBB47E2BBA5B8B5 /* greedy */ = {
+			isa = PBXGroup;
+			children = (
+				BFDA99162F44412CAE697D3D /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/greedy/jump_to_the_end.hpp */,
+			);
+			name = greedy;
+			sourceTree = "<group>";
+		};
+		C18663055D2B4CDF867D3E8F /* recursion */ = {
+			isa = PBXGroup;
+			children = (
+				6C0E7B087230451686709791 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/recursion/has_adjacent_cells.cpp */,
+				2098C7AF657E48878C6D4854 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/recursion/nth_fibbonaci.cpp */,
+				21E5D6C880184F248F8062DA /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/recursion/sum_of_digits.cpp */,
+			);
+			name = recursion;
+			sourceTree = "<group>";
+		};
+		C96034EECD4648A5A239AC7B /* strings */ = {
+			isa = PBXGroup;
+			children = (
+				01D329C709754F749132C3DB /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/strings/test_is_permutation.cpp */,
+			);
+			name = strings;
+			sourceTree = "<group>";
+		};
+		D986AA14DC7240D698E2F141 /* math_and_geometry */ = {
+			isa = PBXGroup;
+			children = (
+				347B1D492B07407AB1E079D7 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/math_and_geometry/line_through_points.cpp */,
+			);
+			name = math_and_geometry;
+			sourceTree = "<group>";
+		};
+		DF625BB7B1A149889785155D /* arrays */ = {
+			isa = PBXGroup;
+			children = (
+				0D1AF8D56F3B43B0AB2A546C /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/arrays/test_first_duplicated_value.cpp */,
+				E97EB6DC94D048218AEF267D /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/arrays/test_is_valid_sequence.cpp */,
+				1D039FE8FFC34AB2A5E4E8EC /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/arrays/test_minimum_loss.cpp */,
+				937CFE43F9C741ADA6972EDC /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/arrays/test_move_element_to_the_end.cpp */,
+				83723C38584A406D97A998A2 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/arrays/test_smallest_difference.cpp */,
+				5F7C12D4999E4D77A56C917B /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/arrays/test_sorted_squared.cpp */,
+				049CF2A6F9784B448468203F /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/arrays/test_tournament_winner.cpp */,
+				A42BB964507F4B5E96D3E754 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/arrays/test_two_number_sum.cpp */,
+			);
+			name = arrays;
+			sourceTree = "<group>";
+		};
+		DF9EE6F4B2674642AD093C7C /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		E02DD8760BFB4F65A7B9065A /* strings */ = {
+			isa = PBXGroup;
+			children = (
+				717903DD0F724446895B1E60 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header/strings/is_permutation.hpp */,
+			);
+			name = strings;
+			sourceTree = "<group>";
+		};
+		F66FFAE6E05844C3965CC4B4 /* priority_queue */ = {
+			isa = PBXGroup;
+			children = (
+				1E2437E9048B4D0FB69B95B6 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/priority_queue/stones_war.cpp */,
+			);
+			name = priority_queue;
+			sourceTree = "<group>";
+		};
+		FD669D3DBFA64095BF38554B /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				4FD8751352F24A10B7C68618 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/main.cpp */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7AAF6A6D191ED9077AFA3048 /* project_lib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F99C4CE810CC43F1834DCF7B /* Build configuration list for PBXNativeTarget "project_lib" */;
+			buildPhases = (
+				D3717183CA3E494C8BB0A0C3 /* Sources */,
+				BC9A62FD9CA84BB4ACF966D4 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6B6E593DE10444668B5CBED6 /* PBXTargetDependency */,
+			);
+			name = project_lib;
+			productName = project_lib;
+			productReference = 347F5320536E47CBAD684D26 /* project_lib */;
+			productType = "com.apple.product-type.library.static";
+		};
+		A2BD7C3FB2ED69C2239CD77B /* test_environment */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 45B6BAED87E74169B018D11C /* Build configuration list for PBXNativeTarget "test_environment" */;
+			buildPhases = (
+				0E23AEEC36914B13BBAA2FDE /* Sources */,
+				129D9E01DE36404C8C0B1BB6 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3C0D410ABBD641F2BF9E3BD1 /* PBXTargetDependency */,
+				528A96C33B8E4FD2B8CF4887 /* PBXTargetDependency */,
+			);
+			name = test_environment;
+			productName = test_environment;
+			productReference = D477BFEF8F2E49368744930F /* test_environment */;
+			productType = "com.apple.product-type.tool";
+		};
+		E5744A8B2F3AB4130B657DCD /* clicker_plus_plus */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B84BF767BE9943C8A4396FB4 /* Build configuration list for PBXNativeTarget "clicker_plus_plus" */;
+			buildPhases = (
+				375F087353AA4650859CB01D /* Sources */,
+				A71D77387F714CC0B0438B32 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CAEFDB19B48549BB82CA38CC /* PBXTargetDependency */,
+				B80FEEC0488448D6A331DD1A /* PBXTargetDependency */,
+			);
+			name = clicker_plus_plus;
+			productName = clicker_plus_plus;
+			productReference = 38EA2AC5491842BCAB504E6F /* clicker_plus_plus */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		35E256EF583C4315B1F3AA24 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1510;
+			};
+			buildConfigurationList = 6A920F4C41BC421F891ACDAA /* Build configuration list for PBXProject "clicker_plus_plus" */;
+			buildSettings = {
+			};
+			buildStyles = (
+				AE80333D40B84542A61EB865 /* Debug */,
+				3C095BDC52F04277A7397FE6 /* Release */,
+				959CB890AB734EFEAC787FB3 /* MinSizeRel */,
+				FD257743ABCE47598FB65E05 /* RelWithDebInfo */,
+			);
+			compatibilityVersion = "Xcode 3.2";
+			hasScannedForEncodings = 0;
+			mainGroup = 6CD2D129453A41A48D36A20B;
+			projectDirPath = .;
+			projectRoot = "";
+			targets = (
+				E003A1614F64F001F449681C /* ALL_BUILD */,
+				E5744A8B2F3AB4130B657DCD /* clicker_plus_plus */,
+				7AAF6A6D191ED9077AFA3048 /* project_lib */,
+				FEA00DB88CD81268840C1C69 /* RUN_TESTS */,
+				A2BD7C3FB2ED69C2239CD77B /* test_environment */,
+				CC161BB868E8DBF5D053FEF9 /* ZERO_CHECK */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		003C8D08B0008F35F218E126 /* CMake PostBuild Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake PostBuild Rules";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus
+  /usr/local/bin/ctest -C $CONFIGURATION$EFFECTIVE_PLATFORM_NAME
+fi
+if test \"$CONFIGURATION\" = \"Release\"; then :
+  cd /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus
+  /usr/local/bin/ctest -C $CONFIGURATION$EFFECTIVE_PLATFORM_NAME
+fi
+if test \"$CONFIGURATION\" = \"MinSizeRel\"; then :
+  cd /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus
+  /usr/local/bin/ctest -C $CONFIGURATION$EFFECTIVE_PLATFORM_NAME
+fi
+if test \"$CONFIGURATION\" = \"RelWithDebInfo\"; then :
+  cd /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus
+  /usr/local/bin/ctest -C $CONFIGURATION$EFFECTIVE_PLATFORM_NAME
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+		3C0110FC8322DE7E50886E21 = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		910A41151295C5F9742C25BD = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		9B50530E35CC49C82C2FACCF = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		C6E630910BAF14FF18C19763 /* Generate CMakeFiles/ZERO_CHECK */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate CMakeFiles/ZERO_CHECK";
+			outputPaths = (
+"/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/CMakeFiles/ZERO_CHECK"			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus
+  make -f /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/CMakeScripts/ReRunCMake.make
+fi
+if test \"$CONFIGURATION\" = \"Release\"; then :
+  cd /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus
+  make -f /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/CMakeScripts/ReRunCMake.make
+fi
+if test \"$CONFIGURATION\" = \"MinSizeRel\"; then :
+  cd /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus
+  make -f /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/CMakeScripts/ReRunCMake.make
+fi
+if test \"$CONFIGURATION\" = \"RelWithDebInfo\"; then :
+  cd /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus
+  make -f /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/CMakeScripts/ReRunCMake.make
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+		C96DCF141E30926331E18BD5 /* Generate CMakeFiles/ALL_BUILD */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate CMakeFiles/ALL_BUILD";
+			outputPaths = (
+"/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/CMakeFiles/ALL_BUILD"			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus
+  echo Build\\ all\\ projects
+fi
+if test \"$CONFIGURATION\" = \"Release\"; then :
+  cd /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus
+  echo Build\\ all\\ projects
+fi
+if test \"$CONFIGURATION\" = \"MinSizeRel\"; then :
+  cd /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus
+  echo Build\\ all\\ projects
+fi
+if test \"$CONFIGURATION\" = \"RelWithDebInfo\"; then :
+  cd /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus
+  echo Build\\ all\\ projects
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0E23AEEC36914B13BBAA2FDE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B32D7BA4B0E44F309384E130 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/arrays/test_first_duplicated_value.cpp */,
+				7B7FAAF664144DD7901B03B5 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/arrays/test_is_valid_sequence.cpp */,
+				965C8CBBA1FA45488B24A725 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/arrays/test_minimum_loss.cpp */,
+				9273C501FE834474B03DE4E4 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/arrays/test_move_element_to_the_end.cpp */,
+				78B48C7FF62C41EDA9AAB2EA /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/arrays/test_smallest_difference.cpp */,
+				1DACDE9978014208A60EF619 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/arrays/test_sorted_squared.cpp */,
+				6C7FF1B9AF0C480EB1F05E96 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/arrays/test_tournament_winner.cpp */,
+				B5D1AD1A4AD2439A9A657FFD /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/arrays/test_two_number_sum.cpp */,
+				34603E9F89D84278B8A6A199 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/linked_list/test_single_linked_list.cpp */,
+				C84479D991694B7FA1933EB1 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/recursion/test_has_adjacent_cells.cpp */,
+				50056B69DA2E4432B2052B05 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/recursion/test_nth_fibbonaci.cpp */,
+				BF44B9DC2C90460DBA8B2237 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/recursion/test_sum_of_digits.cpp */,
+				98923DB2FC3F435089A9218A /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/unit_tests/strings/test_is_permutation.cpp */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		375F087353AA4650859CB01D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA80B54F4C364E1D90894CBE /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/main.cpp */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D3717183CA3E494C8BB0A0C3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B47073341A24411F9D17CD44 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/first_duplicated_value.cpp */,
+				A9476171BB97449BACA04836 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/is_valid_sequence.cpp */,
+				2FADA496163B496180403A45 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/minimum_loss.cpp */,
+				A0BA55FCEF3E4F68B5789ED1 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/move_element_to_the_end.cpp */,
+				57AAF04CDC1D492581A48486 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/remove_duplicates_from_sorted_array.cpp */,
+				3D60BBACDF3642879993DE41 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/smallest_difference.cpp */,
+				45D924BAAD9D4C288ED9BE41 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/sorted_squared.cpp */,
+				5A4DBD6FFD8440F6A44FBCE5 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/tournament_winner.cpp */,
+				5FCEA43EB473436385F84B54 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/transponse_matrix.cpp */,
+				22AE2210F1774096A1715D0D /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/arrays/two_number_sum.cpp */,
+				13377D66D8C44187AD0AF5DB /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/greedy/jump_to_the_end.cpp */,
+				3DA5C8B2154348D082E52B8A /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/heap/kth_largest_element.cpp */,
+				FD7EAC9EAA5E4D178CC65BEF /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/linked_list/single_linked_list.cpp */,
+				35CDE0B4DAF94DCB924E2C67 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/math_and_geometry/line_through_points.cpp */,
+				159639F576414A49A091FFE0 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/priority_queue/stones_war.cpp */,
+				F9A855FFD99C484E9B53E86F /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/queue/students_lunch.cpp */,
+				912BBAB0DD8345A2A49EBB89 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/queue/time_to_buy_tickets.cpp */,
+				D6E5EECF387943B58DAFDEB5 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/recursion/has_adjacent_cells.cpp */,
+				0AF13112A9CD46FB8C5C30D8 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/recursion/nth_fibbonaci.cpp */,
+				B1AAB1D36D7E42D9B6349EDC /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/recursion/sum_of_digits.cpp */,
+				B6301476FA1448C9B0929E11 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/stack/balanced_brackets.cpp */,
+				149D422B78C14E6BAAE624A9 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/stack/daily_temperatures.cpp */,
+				8A2BFD9B8EF2444B821AE3DC /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/stack/evaluate_expression.cpp */,
+				102215FABB79417181F0811C /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/stack/sort_stack.cpp */,
+				EF67685FD44B4F48AC3E4780 /* /Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/src/strings/is_permutation.cpp */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		11732603A8D24A35BB463F09 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A2BD7C3FB2ED69C2239CD77B /* test_environment */;
+			targetProxy = 085F13E05A0742649F51FAE1 /* PBXContainerItemProxy */;
+		};
+		3C0D410ABBD641F2BF9E3BD1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7AAF6A6D191ED9077AFA3048 /* project_lib */;
+			targetProxy = 1A735CC7660F487699001E1A /* PBXContainerItemProxy */;
+		};
+		3D4BAD1F525345EDAE10C5A7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7AAF6A6D191ED9077AFA3048 /* project_lib */;
+			targetProxy = B3D7E657881E479FA1A31511 /* PBXContainerItemProxy */;
+		};
+		528A96C33B8E4FD2B8CF4887 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CC161BB868E8DBF5D053FEF9 /* ZERO_CHECK */;
+			targetProxy = EC20EB0E4C384F8186C8BFDD /* PBXContainerItemProxy */;
+		};
+		538F9ACC816540EC8C61D724 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E5744A8B2F3AB4130B657DCD /* clicker_plus_plus */;
+			targetProxy = 6465DD11174B45A6B49F715F /* PBXContainerItemProxy */;
+		};
+		6B6E593DE10444668B5CBED6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CC161BB868E8DBF5D053FEF9 /* ZERO_CHECK */;
+			targetProxy = 75F6709F0AD04C149135197A /* PBXContainerItemProxy */;
+		};
+		8848F983C8B9490A9D01FFF0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CC161BB868E8DBF5D053FEF9 /* ZERO_CHECK */;
+			targetProxy = 71BEFDCD5DF44DDAAB1FCA17 /* PBXContainerItemProxy */;
+		};
+		B80FEEC0488448D6A331DD1A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CC161BB868E8DBF5D053FEF9 /* ZERO_CHECK */;
+			targetProxy = F4EFA868F58940BDAE39CCD2 /* PBXContainerItemProxy */;
+		};
+		CAEFDB19B48549BB82CA38CC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7AAF6A6D191ED9077AFA3048 /* project_lib */;
+			targetProxy = 7FD33E70EC9649AF8834D3C5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		00C8A95DFD864197B3B067DC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/Debug";
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header","$(inherited)");
+				INSTALL_PATH = "";
+				OTHER_CPLUSPLUSFLAGS = "   '-std=gnu++17' ";
+				OTHER_LDFLAGS = (" -Wl,-search_paths_first -Wl,-headerpad_max_install_names","/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/Debug/libproject_lib.a","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = clicker_plus_plus;
+				SECTORDER_FLAGS = "";
+				TARGET_TEMP_DIR = "/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/build/clicker_plus_plus.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		0CE89BCD1BA54B41A519941E /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = "";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SYMROOT = "/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/build";
+			};
+			name = MinSizeRel;
+		};
+		0E3321C6213041079B828EB9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		0EFC929BBD3D4BD98869E4BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/Debug";
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header","$(inherited)");
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CPLUSPLUSFLAGS = "   '-std=gnu++17' ";
+				OTHER_LIBTOOLFLAGS = ("");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = project_lib;
+				SECTORDER_FLAGS = "";
+				TARGET_TEMP_DIR = "/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/build/project_lib.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		26D23CF143724A21AFA0B264 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/RelWithDebInfo";
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header","$(inherited)");
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CPLUSPLUSFLAGS = "       -DNDEBUG '-std=gnu++17' ";
+				OTHER_LIBTOOLFLAGS = ("");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = project_lib;
+				SECTORDER_FLAGS = "";
+				TARGET_TEMP_DIR = "/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/build/project_lib.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		2CAED3499B0D431C803B8EF8 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/MinSizeRel";
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header","$(inherited)");
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG '-std=gnu++17' ";
+				OTHER_LIBTOOLFLAGS = ("");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = project_lib;
+				SECTORDER_FLAGS = "";
+				TARGET_TEMP_DIR = "/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/build/project_lib.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		31FA580D72964A308A21C5AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		3857B69FE77E44069D8BBC03 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		3C1DC96A58524ED686ED0C5D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/Release";
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header","$(inherited)");
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG '-std=gnu++17' ";
+				OTHER_LIBTOOLFLAGS = ("");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = project_lib;
+				SECTORDER_FLAGS = "";
+				TARGET_TEMP_DIR = "/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/build/project_lib.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		3E224F58FC9B407D905F2FCA /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		43259C7478C149D0887BE19C /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = RUN_TESTS;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		4FC2EC20D9F741FB9F9ACEEB /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/RelWithDebInfo";
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header","$(inherited)");
+				INSTALL_PATH = "";
+				OTHER_CPLUSPLUSFLAGS = "       -DNDEBUG '-std=gnu++17' ";
+				OTHER_LDFLAGS = (" -Wl,-search_paths_first -Wl,-headerpad_max_install_names","/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/RelWithDebInfo/libproject_lib.a","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = clicker_plus_plus;
+				SECTORDER_FLAGS = "";
+				TARGET_TEMP_DIR = "/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/build/clicker_plus_plus.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		53DB507893C64E7EB1FBD412 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/RelWithDebInfo";
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header","$(inherited)");
+				INSTALL_PATH = "";
+				OTHER_CPLUSPLUSFLAGS = "       -DNDEBUG '-std=gnu++17' ";
+				OTHER_LDFLAGS = (" -Wl,-search_paths_first -Wl,-headerpad_max_install_names","/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/RelWithDebInfo/libproject_lib.a",/usr/local/lib/libgtest_main.a,/usr/local/lib/libgtest.a,"$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = test_environment;
+				SECTORDER_FLAGS = "";
+				SYSTEM_HEADER_SEARCH_PATHS = (/usr/local/include,"$(inherited)");
+				TARGET_TEMP_DIR = "/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/build/test_environment.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		5864BD08CDF946B6BE28748B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = RUN_TESTS;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		671FC0540D014AD48EFB7AC4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = "";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SYMROOT = "/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/build";
+			};
+			name = Release;
+		};
+		7C5CB05C354E4C2E91D375B4 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = "";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SYMROOT = "/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/build";
+			};
+			name = RelWithDebInfo;
+		};
+		7FCA33A241E04940A8E2D8EC /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		853D72968E784665BD7CDF9A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/Release";
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header","$(inherited)");
+				INSTALL_PATH = "";
+				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG '-std=gnu++17' ";
+				OTHER_LDFLAGS = (" -Wl,-search_paths_first -Wl,-headerpad_max_install_names","/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/Release/libproject_lib.a","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = clicker_plus_plus;
+				SECTORDER_FLAGS = "";
+				TARGET_TEMP_DIR = "/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/build/clicker_plus_plus.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		95E4CB2E3F384338A5F3433F /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		9E9886FB29A7418680613825 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/MinSizeRel";
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header","$(inherited)");
+				INSTALL_PATH = "";
+				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG '-std=gnu++17' ";
+				OTHER_LDFLAGS = (" -Wl,-search_paths_first -Wl,-headerpad_max_install_names","/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/MinSizeRel/libproject_lib.a","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = clicker_plus_plus;
+				SECTORDER_FLAGS = "";
+				TARGET_TEMP_DIR = "/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/build/clicker_plus_plus.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		AA08CDD753D547779521AD3E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		C4BB889658934933BD3069F4 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		C5F9AE252FF14C78BB3E897D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/Debug";
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header","$(inherited)");
+				INSTALL_PATH = "";
+				OTHER_CPLUSPLUSFLAGS = "   '-std=gnu++17' ";
+				OTHER_LDFLAGS = (" -Wl,-search_paths_first -Wl,-headerpad_max_install_names","/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/Debug/libproject_lib.a",/usr/local/lib/libgtest_main.a,/usr/local/lib/libgtest.a,"$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = test_environment;
+				SECTORDER_FLAGS = "";
+				SYSTEM_HEADER_SEARCH_PATHS = (/usr/local/include,"$(inherited)");
+				TARGET_TEMP_DIR = "/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/build/test_environment.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		CBFE3E3CEC0B45128BBA283B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = RUN_TESTS;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		DF0F91C966564173B2446357 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = "";
+				SYMROOT = "/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/build";
+			};
+			name = Debug;
+		};
+		EA934C2712424723AD320201 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = RUN_TESTS;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		F2E00E06B851429AA1B012A0 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/MinSizeRel";
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header","$(inherited)");
+				INSTALL_PATH = "";
+				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG '-std=gnu++17' ";
+				OTHER_LDFLAGS = (" -Wl,-search_paths_first -Wl,-headerpad_max_install_names","/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/MinSizeRel/libproject_lib.a",/usr/local/lib/libgtest_main.a,/usr/local/lib/libgtest.a,"$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = test_environment;
+				SECTORDER_FLAGS = "";
+				SYSTEM_HEADER_SEARCH_PATHS = (/usr/local/include,"$(inherited)");
+				TARGET_TEMP_DIR = "/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/build/test_environment.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		FD47D5AEEE69433F9446BB35 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/Release";
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/header","$(inherited)");
+				INSTALL_PATH = "";
+				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG '-std=gnu++17' ";
+				OTHER_LDFLAGS = (" -Wl,-search_paths_first -Wl,-headerpad_max_install_names","/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/Release/libproject_lib.a",/usr/local/lib/libgtest_main.a,/usr/local/lib/libgtest.a,"$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = test_environment;
+				SECTORDER_FLAGS = "";
+				SYSTEM_HEADER_SEARCH_PATHS = (/usr/local/include,"$(inherited)");
+				TARGET_TEMP_DIR = "/Users/krzysiekbienias/Dev/cpp/clicker-plus-plus/build/test_environment.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		45B6BAED87E74169B018D11C /* Build configuration list for PBXNativeTarget "test_environment" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C5F9AE252FF14C78BB3E897D /* Debug */,
+				FD47D5AEEE69433F9446BB35 /* Release */,
+				F2E00E06B851429AA1B012A0 /* MinSizeRel */,
+				53DB507893C64E7EB1FBD412 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		6A920F4C41BC421F891ACDAA /* Build configuration list for PBXProject "clicker_plus_plus" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DF0F91C966564173B2446357 /* Debug */,
+				671FC0540D014AD48EFB7AC4 /* Release */,
+				0CE89BCD1BA54B41A519941E /* MinSizeRel */,
+				7C5CB05C354E4C2E91D375B4 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		8165EAAFCE18465694EE6F1D /* Build configuration list for PBXAggregateTarget "RUN_TESTS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CBFE3E3CEC0B45128BBA283B /* Debug */,
+				5864BD08CDF946B6BE28748B /* Release */,
+				EA934C2712424723AD320201 /* MinSizeRel */,
+				43259C7478C149D0887BE19C /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		B333DEB130B7420588C0AB4B /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA08CDD753D547779521AD3E /* Debug */,
+				31FA580D72964A308A21C5AB /* Release */,
+				95E4CB2E3F384338A5F3433F /* MinSizeRel */,
+				C4BB889658934933BD3069F4 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		B84BF767BE9943C8A4396FB4 /* Build configuration list for PBXNativeTarget "clicker_plus_plus" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				00C8A95DFD864197B3B067DC /* Debug */,
+				853D72968E784665BD7CDF9A /* Release */,
+				9E9886FB29A7418680613825 /* MinSizeRel */,
+				4FC2EC20D9F741FB9F9ACEEB /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D90D460A81674EEABF647521 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3857B69FE77E44069D8BBC03 /* Debug */,
+				0E3321C6213041079B828EB9 /* Release */,
+				3E224F58FC9B407D905F2FCA /* MinSizeRel */,
+				7FCA33A241E04940A8E2D8EC /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		F99C4CE810CC43F1834DCF7B /* Build configuration list for PBXNativeTarget "project_lib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0EFC929BBD3D4BD98869E4BC /* Debug */,
+				3C1DC96A58524ED686ED0C5D /* Release */,
+				2CAED3499B0D431C803B8EF8 /* MinSizeRel */,
+				26D23CF143724A21AFA0B264 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 35E256EF583C4315B1F3AA24 /* Project object */;
+}
