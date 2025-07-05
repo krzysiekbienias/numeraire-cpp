@@ -71,5 +71,8 @@ Thumbs.db
 # === Backup & temp files ===
 *~
 *.swp
-*.swo
+*.soo
 *.tmp
+
+# ==== CMake
+CMakeLists.txt

@@ -18,6 +18,6 @@
                 rewards[j]=rewards[j+1]+1;
             }
         }
-        print_utils::printVector(rewards);
-        return std::accumulate(rewards.begin(),rewards.end(),0);
+//        print_utils::printVector(rewards);
+//        return std::accumulate(rewards.begin(),rewards.end(),0);
 }

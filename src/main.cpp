@@ -15,8 +15,6 @@
 #include "dynamic_programming/gold_mine.hpp"
 #include "dynamic_programming/lis_len.hpp"
 #include "arrays/min_reward.hpp"
-
-#include "arrays/longest_increasing_matrix_path.hpp"
 #include "greedy/jump_to_the_end.hpp"
 #include "linked_list/single_linked_list.hpp"
 #include "math_and_geometry/line_through_points.hpp"
