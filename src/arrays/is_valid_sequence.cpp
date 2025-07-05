@@ -9,11 +9,8 @@ bool isValidSequence(const std::vector<int>& array, const std::vector<int>& sequ
             array_index++;
             sequence_index++;
         }
-        
         else
         {array_index++;}
-        
-        
     }
     return sequence_index==sequence.size();
 }

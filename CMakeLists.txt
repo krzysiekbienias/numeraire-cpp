@@ -4,9 +4,18 @@ project(clicker_plus_plus)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Debug flags
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0 -g -fno-inline -DDEBUG")
+set(CMAKE_INTERPROCEDURAL_OPTIMIZATION OFF)
+
+# Xcode-specific settings
 set(CMAKE_XCODE_GENERATE_SCHEME TRUE)
+set(CMAKE_XCODE_ATTRIBUTE_DEBUG_INFORMATION_FORMAT "dwarf-with-dsym")
+set(CMAKE_XCODE_ATTRIBUTE_GCC_OPTIMIZATION_LEVEL "0")
 set(CMAKE_OSX_ARCHITECTURES arm64)
 set(CMAKE_OSX_DEPLOYMENT_TARGET "15.3.2")
+
+
 
 set(CMAKE_CONFIGURE_DEPENDS_NEW OFF CACHE INTERNAL "" FORCE)
 
@@ -45,6 +54,7 @@ endforeach()
 # === Shared Library ===
 add_library(project_lib ${SRC_FILES} ${HEADER_FILES})
 target_include_directories(project_lib PUBLIC header)
+
 
 # === Optional Main App ===
 if(EXISTS "${CMAKE_SOURCE_DIR}/src/main.cpp")

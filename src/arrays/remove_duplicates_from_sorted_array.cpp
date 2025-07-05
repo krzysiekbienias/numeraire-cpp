@@ -1,4 +1,3 @@
-# pragma once
 #include<vector>
 
 // Implement your remove_duplicates_from_sorted_array logic here.

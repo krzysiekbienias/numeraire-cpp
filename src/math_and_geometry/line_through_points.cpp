@@ -30,7 +30,7 @@ int lineThroughPoints(const std::vector<std::vector<int>>& points){
             if (i==j) continue; //focal will produce 0/0 slope that is undefined. we add focal as an extra point that is in line with the rest we find
             int yDistance=pointsType[j].y-focal.y;
             int xDistance=pointsType[j].x-focal.x;
-            int gcd = std::gcd(yDistance, xDistance); //to avoid
+            int gcd = std::gcd(yDistance, xDistance); //to avoid floating-point error
             //slope will be store as normalised rational number to avoid comparing doubles
             yDistance/=gcd;
             xDistance/=gcd;

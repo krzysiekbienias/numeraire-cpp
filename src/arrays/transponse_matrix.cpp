@@ -10,8 +10,7 @@ void transponseSquareMatrix(std::vector<std::vector<int>>& matrix){
             for (int j=i+1;j<c;++j){
                 std::swap(matrix[i][j],matrix[j][i]);
             }
-        }
-        
+        } 
     }
     
 }
