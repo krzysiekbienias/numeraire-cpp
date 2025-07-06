@@ -1,6 +1,7 @@
 #include "matrix/row_by_row.hpp"
 #include<vector>
 #include<iostream>
+#include<iomanip> //required for std::setw
 // Implement your row_by_row logic here.
 
 std::vector<int> rowByRow (const std::vector <std::vector<int>>& matrix){
@@ -23,7 +24,7 @@ void rowByRowPrint (const std::vector<std::vector<int>>& matrix){
     
     for (int i=0; i<rows; ++i) {
         for (int j=0; j<cols; ++j) {
-            std::cout<<matrix[i][j]<<" ";
+            std::cout<<std::setw(2)<<matrix[i][j]<<" ";
         }
         std::cout<<std::endl;
     }
