@@ -22,6 +22,8 @@ public:
     
     // Schedule and time
     QuantLib::Schedule buildSchedule() const override;
+    
+    std::vector<std::string> getScheduleDateStrings() const;
     // Single time step with frequency = 'Once'
     double computeYearFraction() const override;
     //vector of year fractions for another

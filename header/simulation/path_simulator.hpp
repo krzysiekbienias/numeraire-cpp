@@ -7,14 +7,19 @@ public:
     SimulationEngine(
         size_t numPaths,
         const std::vector<double>& dt,
+                        
         double spot,
         double drift,
         double volatility,
-        std::shared_ptr<IDiscretizationScheme> scheme
+        std::shared_ptr<IDiscretizationScheme> scheme,
+        std::vector<std::string> dates
+                     
     );
 
     void run();
     const std::vector<double>& getPaths() const;
+    
+    void setDates(const std::vector<std::string> & dates);
     void setTimeSteps(const std::vector<double>& dt); // jeśli chcesz zostawić
     void exportToCSV(const std::string& filepath) const;
     void exportToJson(const std::string& filepath) const;
@@ -29,4 +34,5 @@ private:
     std::vector<double> m_paths1D;
 
     std::vector<double> m_dts;  // ⬅️ tutaj dodaj
+    std::vector<std::string> m_dates;
 };

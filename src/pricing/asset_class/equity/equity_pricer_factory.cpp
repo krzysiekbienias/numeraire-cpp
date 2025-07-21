@@ -78,6 +78,16 @@ QuantLib::Schedule EquityPricerFactory::buildSchedule() const {
 }
 
 
+std::vector<std::string> EquityPricerFactory::getScheduleDateStrings() const {
+    QuantLib::Schedule schedule = buildSchedule();
+
+    std::vector<std::string> dateStrings;
+    for (const auto& qlDate : schedule) {
+        dateStrings.push_back(date_utils::toStringYYYYMMDD(qlDate));
+    }
+    return dateStrings;
+}
+
 double EquityPricerFactory::computeYearFraction() const {
     if (!m_trade.has_value()) {
         Logger::get()->error("❌ Cannot compute year fraction: trade not set.");

@@ -63,6 +63,7 @@ int main(int argc, char** argv) {
             EquityPricerFactory pf(valuationDate, projectPath + mainConfigMap.at("SCHEDULE_CONFIG_MC"));
             pf.setTrade(trade);
             pf.buildSchedule();
+            std::vector<std::string> dates=pf.getScheduleDateStrings();
             
             auto freq = pf.getScheduleConfig().getFrequency();
 
@@ -104,10 +105,12 @@ int main(int argc, char** argv) {
             SimulationEngine engine(
                 config::DEFAULT_NUM_PATHS,
                 dtVec,
+                                    
                 spot,
                 drift,
                 vol,
-                scheme
+                scheme,
+                dates
             );
 
             engine.run();

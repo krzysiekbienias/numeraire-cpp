@@ -10,7 +10,8 @@ SimulationEngine::SimulationEngine(
     double spot,
     double drift,
     double volatility,
-    std::shared_ptr<IDiscretizationScheme> scheme
+    std::shared_ptr<IDiscretizationScheme> scheme,
+    std::vector<std::string> dates
 )
     : m_numPaths(numPaths),
       m_numSteps(dt.size()),
@@ -18,10 +19,19 @@ SimulationEngine::SimulationEngine(
       m_rate(drift),
       m_vol(volatility),
       m_scheme(std::move(scheme)),
-      m_paths1D(numPaths * dt.size(), 0.0)
-{
-    m_dts=dt;
+      m_paths1D(numPaths * dt.size(), 0.0),
+      m_dts(dt),          // 👈 tutaj!
+      m_dates(std::move(dates))  // 👈 również tutaj, jeśli chcesz
+{}
+
+void SimulationEngine::setDates(const std::vector<std::string>& dates) {
+    //we need to add one becasue number of dates is always smaller than one that number of dates.
+    if (dates.size() != m_numSteps+1) {
+        throw std::runtime_error("❌ Dates size does not match number of time steps.");
+    }
+    m_dates = dates;
 }
+
 
 void SimulationEngine::run() {
     size_t stepsPlusOne = m_numSteps + 1;
@@ -53,9 +63,13 @@ void SimulationEngine::exportToCSV(const std::string& filepath) const {
 
     // 🔠 Nagłówek: t0, t1, ..., tN
     for (size_t j = 0; j < m_numSteps; ++j) {
-        out << "t" << j;
-        if (j < m_numSteps - 1) out << ",";
-    }
+            if (!m_dates.empty()) {
+                out << m_dates[j];
+            } else {
+                out << "t" << j;
+            }
+            if (j < m_numSteps - 1) out << ",";
+        }
     out << "\n";
 
     // 🧪 Każda ścieżka
