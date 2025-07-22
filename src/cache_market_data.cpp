@@ -105,6 +105,10 @@ int main(int argc, char** argv) {
             continue;
         }
         env.setHistoricalPrices(*histPricesOpt);
+        // --- Volatility ---
+        env.setVolatility(config::DEFAULT_VOLATILITY);
+        // --- Risk Free Rate ---
+        env.setRiskFreeRate(config::DEFAULT_RISK_FREE_RATE);
 
         // --- Save to cache ---
         cache.insertEnv(ticker, env);

@@ -42,15 +42,22 @@ void MarketEnvCache::saveToFile(const std::string& path) const {
     json tickers;
     for (const auto& [ticker, env] : m_envs) {
         json envData;
-
+        //📌 Spot Price
         if (env.getUnderlyingPrice().has_value()) {
             envData["spot"] = env.getUnderlyingPrice().value();
         }
-
+        // Historical prices
         const auto& hist = env.getHistoricalPrices();
         if (!hist.empty()) {
             envData["historical_prices"] = hist;
         }
+        
+        // 🏦 Risk-free rate
+        envData["risk_free_rate"] = env.getRiskFreeRate();
+        
+       
+        envData["volatility"] = env.getVolatility();
+                
 
         tickers[ticker] = envData;
     }
