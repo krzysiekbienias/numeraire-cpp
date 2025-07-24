@@ -3,7 +3,7 @@
 #include <fstream>
 #include <stdexcept>
 
-void JsonLoader::load(const std::string&  jsonIdentifier,const std::string& path) {
+void JsonUtils::load(const std::string&  jsonIdentifier,const std::string& path) {
     std::ifstream file(path); //opens the file stream
     if (!file) {
         Logger::get()->error("JSON file not found: {}", path);
@@ -22,7 +22,7 @@ void JsonLoader::load(const std::string&  jsonIdentifier,const std::string& path
 }
 
 
-const nlohmann::json& JsonLoader::getJson(const std::string& jsonIdentifier) {
+const nlohmann::json& JsonUtils::getJson(const std::string& jsonIdentifier) {
     if (!loadedJsons.contains(jsonIdentifier)) {
             Logger::get()->error("JSON with identifier '{}' not loaded.", jsonIdentifier);
             throw std::runtime_error("JSON not loaded: " + jsonIdentifier);
@@ -32,7 +32,7 @@ const nlohmann::json& JsonLoader::getJson(const std::string& jsonIdentifier) {
 
 
 
-bool JsonLoader::isFlatObject(const std::string& jsonIdentifier) {
+bool JsonUtils::isFlatObject(const std::string& jsonIdentifier) {
     const auto& json = getJson(jsonIdentifier);
     if (!json.is_object()) return false;
 
@@ -44,7 +44,7 @@ bool JsonLoader::isFlatObject(const std::string& jsonIdentifier) {
     return true;
 }
 
-std::unordered_map<std::string, std::string> JsonLoader::toStringMap(const std::string& jsonIdentifier) {
+std::unordered_map<std::string, std::string> JsonUtils::toStringMap(const std::string& jsonIdentifier) {
     if (!isFlatObject(jsonIdentifier)) {
         Logger::get()->warn("❗ Cannot convert '{}' to map — JSON is not flat.", jsonIdentifier);
         throw std::runtime_error("Attempted to convert nested JSON to flat map.");
@@ -56,4 +56,12 @@ std::unordered_map<std::string, std::string> JsonLoader::toStringMap(const std::
         map[key] = value.get<std::string>();
     }
     return map;
+}
+
+nlohmann::json parseFromString(const std::string& rawJson) {
+    try {
+        return nlohmann::json::parse(rawJson);
+    } catch (const nlohmann::json::parse_error& e) {
+        throw std::runtime_error("Failed to parse JSON string: " + std::string(e.what()));
+    }
 }

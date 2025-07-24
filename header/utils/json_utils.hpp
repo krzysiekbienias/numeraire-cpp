@@ -8,10 +8,10 @@
 
 
 /**
- * @class JsonLoader
+ * @class JsonUtils
  * @brief Static utility class to manage loading and retrieving JSON files using unique identifiers.
  *
- * The JsonLoader class provides a centralized way to load JSON files from disk once and
+ * The JsonUtils class provides a centralized way to load JSON files from disk once and
  * retrieve values by tag, using an identifier-based lookup system. It uses a static map to
  * cache loaded JSON objects and avoid redundant I/O.
  *
@@ -27,7 +27,7 @@
  * @note All methods are static or behave as such; the class does not require instantiation.
  */
 
-class JsonLoader {
+class JsonUtils {
     
 private:
     static inline std::unordered_map<std::string,nlohmann::json> loadedJsons; //to handle with multidimensional json without additional helpers
@@ -50,22 +50,11 @@ public:
     
     static bool isFlatObject(const std::string& jsonIdentifier);
     static std::unordered_map<std::string, std::string> toStringMap(const std::string& jsonIdentifier);
+    static nlohmann::json parseFromString(const std::string & rawJson);
     
 
 
 };
-
-namespace json_utils {
-
-    inline nlohmann::json parseFromString(const std::string& rawJson) {
-        try {
-            return nlohmann::json::parse(rawJson);
-        } catch (const nlohmann::json::parse_error& e) {
-            throw std::runtime_error("Failed to parse JSON string: " + std::string(e.what()));
-        }
-    }
-
-}
 
 
 
