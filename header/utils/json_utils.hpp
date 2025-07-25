@@ -37,7 +37,7 @@ public:
     static void load(const std::string&  jsonIdentifier,const std::string& path);
     
     template<typename T>
-    T getValue(const std::string& jsonIdentifier, const std::string& tag) {
+    static T getValue(const std::string& jsonIdentifier, const std::string& tag) {
         const auto& j = getJson(jsonIdentifier);
         if (!j.contains(tag)) {
             Logger::get()->warn("Key '{}' not found in JSON '{}'", tag, jsonIdentifier);
@@ -51,6 +51,7 @@ public:
     static bool isFlatObject(const std::string& jsonIdentifier);
     static std::unordered_map<std::string, std::string> toStringMap(const std::string& jsonIdentifier);
     static nlohmann::json parseFromString(const std::string & rawJson);
+    static void saveToFile(const nlohmann::json& j, const std::string& path);
     
 
 

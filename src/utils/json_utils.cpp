@@ -58,10 +58,24 @@ std::unordered_map<std::string, std::string> JsonUtils::toStringMap(const std::s
     return map;
 }
 
-nlohmann::json parseFromString(const std::string& rawJson) {
+nlohmann::json JsonUtils::parseFromString(const std::string& rawJson) {
     try {
         return nlohmann::json::parse(rawJson);
     } catch (const nlohmann::json::parse_error& e) {
         throw std::runtime_error("Failed to parse JSON string: " + std::string(e.what()));
     }
+}
+
+void JsonUtils::saveToFile(const nlohmann::json& j, const std::string& path) {
+    if (std::filesystem::exists(path)) {
+        Logger::get()->warn("⚠️ Overwriting existing JSON file: {}", path);
+    }
+
+    std::ofstream out(path);
+    if (!out.is_open()) {
+        throw std::runtime_error("❌ Could not write to JSON file: " + path);
+    }
+
+    out << j.dump(4);
+    Logger::get()->info("💾 JSON successfully saved to: {}", path);
 }
