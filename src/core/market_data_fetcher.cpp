@@ -104,3 +104,27 @@ std::optional<std::vector<double>> MarketDataFetcher::queryPolygonHistoricalTime
     return closes;
 }
 
+
+std::optional<nlohmann::json> MarketDataFetcher::queryPolygonOptionsSnapshot(const std::string& underlyingTicker) const {
+    std::string url = "https://api.polygon.io/v3/snapshot/options/" + underlyingTicker + "?apiKey=" + m_apiKey;
+    std::cout << "🔍 [queryPolygonOptionsSnapshot] URL: " << url << "\n";
+
+    auto response = cpr::Get(cpr::Url{url});
+    if (response.status_code != 200) {
+        std::cerr << "❌ HTTP error: " << response.status_code << "\n";
+        return std::nullopt;
+    }
+
+    try {
+        auto json = nlohmann::json::parse(response.text);
+        if (json.contains("results")) {
+            return json["results"];
+        } else {
+            std::cerr << "❌ 'results' field missing in Polygon option snapshot." << std::endl;
+            return std::nullopt;
+        }
+    } catch (const std::exception& e) {
+        std::cerr << "❌ JSON parse error: " << e.what() << std::endl;
+        return std::nullopt;
+    }
+}

@@ -2,6 +2,7 @@
 #include "market_environment.hpp"
 #include <string>
 #include "../configs/constants.hpp"
+#include <nlohmann/json.hpp>
 
 class MarketDataFetcher {
 public:
@@ -21,6 +22,9 @@ public:
         const std::string& ticker,
         const std::string& startDate,
         const std::string& endDate) const;
+    
+    // 📡 Fetch option json.
+    std::optional<nlohmann::json> queryPolygonOptionsSnapshot(const std::string& underlyingTicker) const;
 
 private:
     std::string m_valuationDate;
