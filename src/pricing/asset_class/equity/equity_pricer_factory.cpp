@@ -16,8 +16,8 @@ EquityPricerFactory::EquityPricerFactory(const std::string& valuationDate,
                                const std::string& scheduleConfigPath)
     : m_valuationDate(valuationDate) {
     
-    JsonLoader::load("schedule config",scheduleConfigPath);
-        auto schedCfg=JsonLoader::toStringMap("schedule config");
+    JsonUtils::load("schedule config",scheduleConfigPath);
+        auto schedCfg=JsonUtils::toStringMap("schedule config");
     m_scheduleGen.configureFromMap(schedCfg);
 }
 
@@ -249,7 +249,7 @@ double EquityPricerFactory::getCashPayoff() const {
         throw std::runtime_error("❌ Missing structured_params.");
     }
     
-    auto json = json_utils::parseFromString(equityData.structured_params.value());
+    auto json = JsonUtils::parseFromString(equityData.structured_params.value());
     
     if (!json.contains("cash_payout")) {
         throw std::runtime_error("❌ 'cash_payout' not found in structured_params.");
