@@ -60,9 +60,9 @@ file(GLOB_RECURSE ENUMS_HEADERS header/enums/*.hpp)
 file(GLOB_RECURSE DATABASE_HEADERS header/database/*.hpp)
 file(GLOB_RECURSE SIMULATION_HEADERS header/simulation/*.hpp)
 
-set(CACHE_MARKET_SRC ${CMAKE_SOURCE_DIR}/src/cache_market_data.cpp)
-set(PRICE_PORTFOLIO_SRC ${CMAKE_SOURCE_DIR}/src/price_portfolio.cpp)
-set(SIMULATE_PATHS_SRC ${CMAKE_SOURCE_DIR}/src/simulate_paths.cpp)
+set(CACHE_MARKET_SRC ${CMAKE_SOURCE_DIR}/src/main_cache_market_data.cpp)
+set(PRICE_PORTFOLIO_SRC ${CMAKE_SOURCE_DIR}/src/main_price_portfolio.cpp)
+set(SIMULATE_PATHS_SRC ${CMAKE_SOURCE_DIR}/src/main_simulate_paths.cpp)
 
 # === Library Target ===
 add_library(project_lib)
