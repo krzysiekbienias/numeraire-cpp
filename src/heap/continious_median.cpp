@@ -48,6 +48,9 @@ int ContinousMedianHandler::getMinHeapTop(){
 
 double ContinousMedianHandler::getMedian(){
     int streamLenght =m_maxHeap.size()+m_minHeap.size();
+    if (streamLenght==0){
+        throw std::runtime_error("Cannot get median from an empty stream.");
+    }
     if (streamLenght%2==0){
         return (m_maxHeap.top()+m_minHeap.top())/2.0;
     }
