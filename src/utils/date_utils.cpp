@@ -28,12 +28,47 @@ QuantLib::Date toQLDateDDMMYYYY (const std::string& dateStr){
     return QuantLib::Date(d, QuantLib::Month(m), y);
 }
 
+
+QuantLib::Date toQLDateYYYYMMDD(const std::string& dateStr) {
+    int y, m, d;
+    char sep1, sep2;
+
+    std::istringstream iss(dateStr);
+    if (!(iss >> y >> sep1 >> m >> sep2 >> d) || sep1 != '-' || sep2 != '-') {
+        Logger::get()->error("❌ Invalid date format. Expected format: yyyy-mm-dd → Got: " + dateStr);
+        throw std::invalid_argument("Invalid date format: " + dateStr);
+    }
+
+    if (d < 1 || d > 31 || m < 1 || m > 12 || y < 1900 || y > 2100) {
+        Logger::get()->error("❌ Date components out of range (yyyy-mm-dd): " + dateStr);
+        throw std::invalid_argument("Date components out of range: " + dateStr);
+    }
+
+    return QuantLib::Date(d, QuantLib::Month(m), y);
+}
+
+
 std::string toStringYYYYMMDD(const QuantLib::Date& date) {
     std::ostringstream oss;
     oss << date.year() << "-";
     oss << std::setw(2) << std::setfill('0') << static_cast<int>(date.month()) << "-";
     oss << std::setw(2) << std::setfill('0') << date.dayOfMonth();
     return oss.str();
+}
+
+
+std::string toStringYYMMDD(const QuantLib::Date& date) {
+    std::ostringstream oss;
+
+    int yearYY = date.year() % 100;  // last two digits
+    int month = static_cast<int>(date.month());
+    int day = date.dayOfMonth();
+
+    oss << std::setw(2) << std::setfill('0') << yearYY
+        << std::setw(2) << std::setfill('0') << month
+        << std::setw(2) << std::setfill('0') << day;
+
+    return oss.str();  // e.g., "250417"
 }
 
 }
