@@ -3,6 +3,17 @@
 #include <string>
 #include "../configs/constants.hpp"
 #include <nlohmann/json.hpp>
+#include<ql/time/date.hpp>
+#include <set>
+
+struct OptionContract {
+    std::string ticker;
+    std::string contractType;
+    std::string exerciseStyle;
+    std::string expirationDate;
+    double strikePrice;
+};
+
 
 class MarketDataFetcher {
 public:
@@ -23,8 +34,23 @@ public:
         const std::string& startDate,
         const std::string& endDate) const;
     
-    // 📡 Fetch option json.
-    std::optional<nlohmann::json> queryPolygonOptionsSnapshot(const std::string& underlyingTicker) const;
+    
+    // 📡 Fetch option price.
+    std::optional<nlohmann::json> queryPolygonOptionPrice(const std::string& optionSymbol) const;
+    
+    std::string buildPolygonOptionSymbol(const std::string& ticker,
+                                                            const std::string& expiry,  // format: DD-MM-YYYY
+                                                            const std::string& optionType,  // "call" or "put"
+                                         double strike);
+    
+    void fetchOptionMarketDataForTicker(
+        const std::string& ticker,
+        const std::string& expiry,
+        double spotPrice,
+        const std::string& outputDir);
+
+    
+
 
 private:
     std::string m_valuationDate;
