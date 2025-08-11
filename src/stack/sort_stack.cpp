@@ -2,13 +2,14 @@
 #include <vector>
 
 // Implement your sort_stack logic here.
-void sortStack(std::vector<int> &stack) {
-  if (stack.size() == 0)
-    return;
+std::vector<int> sortStack(std::vector<int> &stack) {
+  if (stack.empty())
+    return stack;
   int top = stack.back();
   stack.pop_back();
   sortStack(stack);
   insertInSortedOrder(stack, top);
+    return stack;
 }
 
 void insertInSortedOrder(std::vector<int> &stack, int value) {
