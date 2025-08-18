@@ -3,6 +3,7 @@
 #include"utils/logger.hpp"
 #include <iomanip>
 #include <sstream>
+#include <set>
 
 
 namespace date_utils {
@@ -71,9 +72,36 @@ std::string toStringYYMMDD(const QuantLib::Date& date) {
     return oss.str();  // e.g., "250417"
 }
 
+
+std::string toStringDDMMYYYY(const QuantLib::Date& date) {
+    std::ostringstream oss;
+    oss << std::setw(2) << std::setfill('0') << date.dayOfMonth()
+        << "-" << std::setw(2) << std::setfill('0') << static_cast<int>(date.month())
+        << "-" << date.year();
+    return oss.str();
 }
 
+}
 
+// it also makes adjustment if third holiday is a bank holiday.
+QuantLib::Date getThirdFriday(int year, QuantLib::Month month, const std::set<QuantLib::Date>& holidays) {
+        using namespace QuantLib;
+        Date date(1, month, year);
+
+        int fridayCount = 0;
+        while (true) {
+            if (date.weekday() == Friday) {
+                fridayCount++;
+                if (fridayCount == 3) {
+                    while (holidays.count(date)) {
+                        date = date - 1;
+                    }
+                    return date;
+                }
+            }
+            date = date + 1;
+        }
+    }
 
 
 
