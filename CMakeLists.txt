@@ -48,6 +48,7 @@ file(GLOB_RECURSE ASSET_FX_SRC src/asset_class/fx/*.cpp)
 file(GLOB_RECURSE ASSET_RATES_SRC src/asset_class/rates/*.cpp)
 file(GLOB_RECURSE DATABASE_SRC src/database/*.cpp)
 file(GLOB_RECURSE SIMULATION_SRC src/simulation/*.cpp)
+file(GLOB_RECURSE MARKET_STORE_SRC src/market_store/*.cpp)
 
 
 file(GLOB_RECURSE CORE_HEADERS header/core/*.hpp)
@@ -59,6 +60,7 @@ file(GLOB_RECURSE ASSET_RATES_HEADERS header/asset_class/rates/*.hpp)
 file(GLOB_RECURSE ENUMS_HEADERS header/enums/*.hpp)
 file(GLOB_RECURSE DATABASE_HEADERS header/database/*.hpp)
 file(GLOB_RECURSE SIMULATION_HEADERS header/simulation/*.hpp)
+file(GLOB_RECURSE MARKET_STORE_HEADERS header/market_store/*.hpp)
 
 set(CACHE_MARKET_SRC ${CMAKE_SOURCE_DIR}/src/main_cache_market_data.cpp)
 set(PRICE_PORTFOLIO_SRC ${CMAKE_SOURCE_DIR}/src/main_price_portfolio.cpp)
@@ -76,6 +78,7 @@ target_sources(project_lib PRIVATE
     ${ASSET_RATES_SRC}
     ${DATABASE_SRC}
     ${SIMULATION_SRC}
+    ${MARKET_STORE_SRC}
 
     ${CORE_HEADERS}	
     ${UTILS_HEADERS}
@@ -86,6 +89,7 @@ target_sources(project_lib PRIVATE
     ${ENUMS_HEADERS}
     ${DATABASE_HEADERS}
     ${SIMULATION_HEADERS}
+    ${MARKET_STORE_HEADERS}
 )
 
 target_include_directories(project_lib PUBLIC
@@ -100,6 +104,7 @@ target_include_directories(project_lib PUBLIC
     header/asset_class/rates
     header/database
     header/simulation
+    header/market_store
     /opt/homebrew/include
 )
 
@@ -117,9 +122,9 @@ target_link_libraries(project_lib PUBLIC
 
 # === Market Caching Executable ===
 if(EXISTS ${CACHE_MARKET_SRC})
-    add_executable(cache_market_data ${CACHE_MARKET_SRC})
-    target_link_libraries(cache_market_data PRIVATE project_lib)
-    target_include_directories(cache_market_data PRIVATE
+    add_executable(main_cache_market_data ${CACHE_MARKET_SRC})
+    target_link_libraries(main_cache_market_data PRIVATE project_lib)
+    target_include_directories(main_cache_market_data PRIVATE
         ${CMAKE_SOURCE_DIR}/header
         ${CMAKE_SOURCE_DIR}/header/core
         ${CMAKE_SOURCE_DIR}/header/utils
@@ -129,6 +134,7 @@ if(EXISTS ${CACHE_MARKET_SRC})
         ${CMAKE_SOURCE_DIR}/header/asset_class/fx
         ${CMAKE_SOURCE_DIR}/header/asset_class/rates
         ${CMAKE_SOURCE_DIR}/header/simulation
+        ${CMAKE_SOURCE_DIR}/header/market_store
     )
 endif()
 
@@ -146,6 +152,7 @@ if(EXISTS ${PRICE_PORTFOLIO_SRC})
         ${CMAKE_SOURCE_DIR}/header/asset_class/fx
         ${CMAKE_SOURCE_DIR}/header/asset_class/rates
         ${CMAKE_SOURCE_DIR}/header/simulation
+        ${CMAKE_SOURCE_DIR}/header/market_store
     )
 endif()
 
@@ -161,6 +168,7 @@ if(EXISTS ${SIMULATE_PATHS_SRC})
         ${CMAKE_SOURCE_DIR}/header/database
         ${CMAKE_SOURCE_DIR}/header/asset_class
         ${CMAKE_SOURCE_DIR}/header/simulation
+        ${CMAKE_SOURCE_DIR}/header/market_store
     )
 endif()
 
@@ -190,10 +198,11 @@ add_test(NAME AllTests COMMAND test_environment)
 # === Xcode Source Grouping ===
 source_group(TREE ${CMAKE_SOURCE_DIR}/src PREFIX "src" FILES 
     ${CORE_SRC} ${UTILS_SRC} ${PRICING_SRC} 
-    ${ASSET_EQUITY_SRC} ${ASSET_FX_SRC} ${ASSET_RATES_SRC} ${MAIN_SRC} ${DATABASE_SRC} ${SIMULATION_SRC})
+    ${ASSET_EQUITY_SRC} ${ASSET_FX_SRC} ${ASSET_RATES_SRC} ${MAIN_SRC} ${DATABASE_SRC} ${SIMULATION_SRC} ${MARKET_STORE_SRC})
 source_group(TREE ${CMAKE_SOURCE_DIR}/header PREFIX "header" FILES
     ${CORE_HEADERS} ${UTILS_HEADERS} ${PRICING_HEADERS} 
-    ${ASSET_EQUITY_HEADERS} ${ASSET_FX_HEADERS} ${ASSET_RATES_HEADERS} ${ENUMS_HEADERS} ${DATABASE_HEADERS} ${SIMULATION_HEADERS})
+    ${ASSET_EQUITY_HEADERS} ${ASSET_FX_HEADERS} ${ASSET_RATES_HEADERS} ${ENUMS_HEADERS} ${DATABASE_HEADERS}
+    ${SIMULATION_HEADERS} ${MARKET_STORE_HEADERS})
 source_group(TREE ${CMAKE_SOURCE_DIR}/unit_tests PREFIX "unit_tests" FILES ${TEST_SRC})
 
 # === Source Groups for Xcode/VisualStudio ===
