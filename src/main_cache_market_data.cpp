@@ -16,56 +16,141 @@
 #include "database/trade_store.hpp"
 #include "core/market_data_fetcher.hpp"
 #include "utils/report_utils.hpp"
+#include "market_store/live_equity_otion_contracts.hpp"
+
+
+#if !defined(NDEBUG)
+constexpr const std::string_view DEV_DEFAULT_VALUATION_DATE = "2025-08-12";  // <— DEV testing date
+#else
+constexpr const std::string_view DEV_DEFAULT_VALUATION_DATE = "";
+#endif
+
+
+
+namespace cli {
+
+// ---- argumenty CLI ---------------------------------------------------------
+struct Args {
+    std::string dateISO;            // --date YYYY-MM-DD
+    std::string startISO, endISO;   // --start/--end YYYY-MM-DD
+    std::string holidaysCsv;        // --holidays path.csv
+
+    // Fazy (wynik parsowania --phase)
+    bool doSpot = false;
+    bool doOptSymbols = false;
+    bool doOptValues  = false;
+};
+
+static void print_help() {
+    std::cout <<
+R"(Usage:
+  main_cache_market_data --date YYYY-MM-DD [--phase spot|options|both|option-symbols|option-values|all] [--holidays path.csv]
+  main_cache_market_data --start YYYY-MM-DD --end YYYY-MM-DD [--phase ...] [--holidays path.csv]
+
+Notes:
+  - Dates must be ISO (YYYY-MM-DD).
+  - You can pass multiple --phase flags or a comma-separated list, e.g.:
+      --phase spot --phase option-values
+      --phase option-symbols,option-values
+  - Backward compatibility:
+      --phase options == option-symbols + option-values
+      --phase both    == option-symbols + option-values
+  - If no --phase is provided, default is: spot
+  - Holidays CSV: one ISO date per line; lines starting with '#' are ignored.
+)";
+}
+
+static void apply_phase_token(Args& out, const std::string& tok, std::string& err) {
+    if      (tok == "spot")            out.doSpot = true;
+    else if (tok == "option-symbols" || tok == "opt-symbols") out.doOptSymbols = true;
+    else if (tok == "option-values"  || tok == "opt-values")  out.doOptValues  = true;
+    else if (tok == "options" || tok == "both") { // kompatybilność
+        out.doOptSymbols = true; out.doOptValues = true;
+    }
+    else if (tok == "all") {
+        out.doSpot = out.doOptSymbols = out.doOptValues = true;
+    }
+    else {
+        err = "unknown phase: " + tok;
+    }
+}
+
+static bool parse(int argc, char** argv, Args& out, std::string& err) {
+    for (int i = 1; i < argc; ++i) {
+        std::string k = argv[i];
+        auto need = [&](const char* name)->const char* {
+            if (i+1 >= argc) { err = std::string("missing value for ") + name; return nullptr; }
+            return argv[++i];
+        };
+
+        if      (k == "--date")      { if (auto v = need("--date"))      out.dateISO = v; else return false; }
+        else if (k == "--start")     { if (auto v = need("--start"))     out.startISO = v; else return false; }
+        else if (k == "--end")       { if (auto v = need("--end"))       out.endISO = v; else return false; }
+        else if (k == "--holidays")  { if (auto v = need("--holidays"))  out.holidaysCsv = v; else return false; }
+        else if (k == "--phase") {
+            if (const char* v = need("--phase")) {
+                std::string phases = v;
+                size_t pos = 0;
+                while (pos != std::string::npos) {
+                    size_t comma = phases.find(',', pos);
+                    std::string tok = phases.substr(pos, comma == std::string::npos ? phases.size()-pos : comma-pos);
+                    if (!tok.empty()) {
+                        std::string e;
+                        apply_phase_token(out, tok, e);
+                        if (!e.empty()) { err = e; return false; }
+                    }
+                    if (comma == std::string::npos) break;
+                    pos = comma + 1;
+                }
+            } else return false;
+        }
+        else if (k == "--help" || k == "-h") { err.clear(); return false; }
+        else { err = "unknown flag: " + k; return false; }
+    }
+
+    // fallback: ENV single-date, potem DEV default (tylko jeśli nie podano żadnej daty)
+    if (out.dateISO.empty() && out.startISO.empty() && out.endISO.empty()) {
+        if (const char* env = std::getenv("VALUATION_DATE")) {
+            out.dateISO = env;
+        } else if (!DEV_DEFAULT_VALUATION_DATE.empty()) {
+            out.dateISO = std::string(DEV_DEFAULT_VALUATION_DATE);
+            std::cerr << "ℹ️ Using DEV default --date=" << out.dateISO << "\n";
+        }
+    }
+
+    const bool single = !out.dateISO.empty();
+    const bool ranged = !out.startISO.empty() || !out.endISO.empty();
+    if (single && ranged) { err = "use either --date OR --start/--end"; return false; }
+    if (!single && !ranged) { err = "provide --date YYYY-MM-DD or --start/--end"; return false; }
+    if (ranged && (out.startISO.empty() || out.endISO.empty())) {
+        err = "both --start and --end must be provided (YYYY-MM-DD)";
+        return false;
+    }
+
+    // default: jeśli nie wskazano faz → spot
+    if (!out.doSpot && !out.doOptSymbols && !out.doOptValues) {
+        out.doSpot = true;
+    }
+    return true;
+}
+
+} // namespace cli
+
+
+
 
 int main(int argc, char** argv) {
     std::cout << "🧠 Welcome to Numeraire++ Market Data Collector!\n";
-    // 📅 Step 1a: Determine valuation date
-    std::string valuationDate;
-    if (argc > 1) {
-        valuationDate = argv[1];
-    } else {
-        const char* envValDate = std::getenv("VALUATION_DATE");
-        if (envValDate) {
-            valuationDate = std::string(envValDate);
-        } else {
-            std::cerr << "❌ Valuation date not provided.\n";
-            return 1;
-        }
-    }
-    
-    // 📅 Step 1b: Determine which phase(s) to run
-    std::string phase = (argc > 2) ? std::string(argv[2]) : "both";
+    std::string projectPath, configPath;
 
-    // to-lower
-    auto to_lower = [](std::string s) {
-        std::transform(s.begin(), s.end(), s.begin(),
-                       [](unsigned char c){ return static_cast<char>(std::tolower(c)); });
-        return s;
-    };
-    phase = to_lower(phase);
-
-    bool runSpot = false, runOptions = false;
-    if (phase == "spot" || phase == "--spot" || phase == "-s") {
-        runSpot = true;
-    } else if (phase == "options" || phase == "option" || phase == "--options" || phase == "-o") {
-        runOptions = true;
-    } else if (phase == "both" || phase == "all" || phase == "--both" || phase == "-b") {
-        runSpot = runOptions = true;
+    if (argc > 0 && argv && argv[0]) {
+        projectPath = resolveProjectPath(argv[0]);
+        configPath  = resolveMainConfigPath(argv[0]);
     } else {
-        std::cerr << "❌ Unknown phase '" << phase << "'. Use: spot | options | both\n";
+        std::cerr << "❌ argv[0] unavailable — cannot resolve paths.\n";
         return 1;
     }
-
-    Logger::get()->info("🚦 Selected phase: {}", phase);
     
-    
-
-    // 📂 Step 2: Resolve paths and config
-    std::string projectPath = resolveProjectPath(argv[0]);
-    std::string configPath = resolveMainConfigPath(argv[0]);
-    
-    
-
     JsonUtils::load("main", configPath);
     auto mainMap = JsonUtils::toStringMap("main");
 
@@ -73,150 +158,28 @@ int main(int argc, char** argv) {
     auto secretsMap = JsonUtils::toStringMap("secrets");
 
     std::string dbPath = projectPath + mainMap.at("DB_PATH");
-    TradesStore store(dbPath);
-    auto trades = store.getAllTrades();
-
-    MarketDataFetcher fetcher(valuationDate, secretsMap.at("POLYGON_IO_API_KEY"));
     
-    // Step 3: Load holiday list
-    std::string holidayPath=projectPath+"/"+"holidays.csv";
-    auto holidays=loadHolidaysFromCsv(holidayPath);
+    cli::Args args;
+    std::string err; //<------ error comming from parser
     
-    Logger::get()->info("🍹 List of Bank Holidays loaded.");
-
-    // === Spot Prices Phase ===
-    if (runSpot){
-        print_utils::printBoxedLabel("💡 Phase 1: Spot Prices");
-
-        const std::string spotDir  = projectPath + "/" + mainMap.at("MARKET_CACHE_DIR") + "/spot_price";
-        std::filesystem::create_directories(spotDir);
-
-        std::string spotPath = spotDir + "/spot_snapshot_" + valuationDate + ".json";
-        Logger::get()->info("🗂️ spotDir  = {}", spotDir);
-        Logger::get()->info("📝 spotPath = {}", spotPath);
-
-        nlohmann::json spotJson;
-        std::string spotId = "spot_snapshot" + valuationDate;
-
-        if (std::filesystem::exists(spotPath)) {
-            Logger::get()->info("📦 Spot prices JSON already exists → skipping fetch. ({})", spotPath);
-            JsonUtils::load(spotId, spotPath);
-            spotJson = JsonUtils::getJson(spotId);
-        } else {
-            int apiCallCount = 0;
-            int processed = 0;
-            const int tradeLimit = 1000;
-
-            std::set<std::string> tickers; // (opcjonalnie) deduplikacja
-            for (const auto& t : trades) {
-                if (!std::holds_alternative<EquityTradeData>(t.assetData)) continue;
-                const auto& eq = std::get<EquityTradeData>(t.assetData);
-                if (!eq.underlying_ticker.empty()) tickers.insert(eq.underlying_ticker);
-            }
-
-            for (const auto& ticker : tickers) {
-                auto spotOpt = fetcher.queryPolygonPrice(ticker, valuationDate);
-                apiCallCount++;
-
-                if (spotOpt.has_value()) {
-                    spotJson[ticker] = { {"spot", *spotOpt} };
-                    Logger::get()->info("✅ Spot fetched for {}", ticker);
-                } else {
-                    Logger::get()->warn("⚠️ No spot for ticker: {}", ticker);
-                }
-
-                if (apiCallCount >= 4) {
-                    std::cout << "⏳ API cooldown...\n";
-                    std::this_thread::sleep_for(std::chrono::seconds(70));
-                    apiCallCount = 0;
-                }
-            }
-
-            // ⬇️ Zapis RAZ po pętli, więc brak „Overwriting…”
-            JsonUtils::saveToFile(spotJson, spotPath);
-            Logger::get()->info("✅ Spot snapshot saved to: {}", spotPath);
-        }
-    } else {
-        Logger::get()->info("⏭️ Spot phase skipped.");
+    
+    // if cli::parse(...)==false GAME OVER just print helper/error and stop the program
+    if (!cli::parse(argc, argv, args, err)) {
+        if (!err.empty()) std::cerr << "❌ " << err << "\n\n";
+        cli::print_help();
+        return err.empty() ? 0 : 1;
     }
-
     
-    
-    
-    // === Option Prices Phase ===
-    if (runOptions){
-        print_utils::printBoxedLabel("💡 Phase 2: Options Data");
-        
-        {
-            namespace fs = std::filesystem;
-            
-            // mini quoting do sh (żeby np. spacje w ścieżce nie rozwaliły cmd)
-            auto sh_quote = [](const std::string& s) {
-                std::string out; out.reserve(s.size() + 2);
-                out.push_back('\'');
-                for (char c : s) {
-                    if (c == '\'') out += "'\\''";
-                    else out.push_back(c);
-                }
-                out.push_back('\'');
-                return out;
-            };
-            
-            // ── Option paths
-            const std::string marketCacheDir = mainMap.at("MARKET_CACHE_DIR");
-            const std::string scriptPath     = projectPath + "/live_options.sh";
-            
-            // ── Target Directory: .../options_data_<VAL_DATE>
-            const std::string optionsRoot = projectPath + "/" + marketCacheDir + "/live_options";
-            fs::create_directories(optionsRoot);
-            const std::string outDirForDate = optionsRoot + "/" + valuationDate;
-            fs::create_directories(outDirForDate);
-            
-            
-            // ── Unikalne tickery equity z DB
-            std::set<std::string> tickers;
-            for (const auto& t : trades) {
-                if (!std::holds_alternative<EquityTradeData>(t.assetData)) continue;
-                const auto& eq = std::get<EquityTradeData>(t.assetData);
-                if (!eq.underlying_ticker.empty()) tickers.insert(eq.underlying_ticker);
-            }
-            
-            if (tickers.empty()) {
-                Logger::get()->warn("⚠️ No equity tickers found — skipping options phase.");
-            } else {
-                std::cout << "🔧 Option tickers:";
-                for (const auto& tk : tickers) std::cout << " " << tk;
-                std::cout << "\n";
-                for (const auto& tk : tickers) {
-                    // wywołanie skryptu tylko z argumentami:
-                    // $1 = ticker, $2 = valuationDate, $3 = outputRoot
-                    const std::string expectedFile = outDirForDate + "/" + tk + "_" + valuationDate + ".json";
-                    if (fs::exists(expectedFile)){
-                        Logger::get()->info("⏭️  Exists, skipping: {}", expectedFile);
-                        continue;
-                    }
-                    const std::string cmd =
-                    sh_quote(scriptPath) + " " +
-                    sh_quote(tk) + " " +
-                    sh_quote(valuationDate) + " " +
-                    sh_quote(optionsRoot);
-                    
-                    std::cout << "▶️  " << cmd << "\n";
-                    int rc = std::system(cmd.c_str());
-                    if (rc != 0) {
-                        Logger::get()->error("❌ Options script failed for {} (rc={})", tk, rc);
-                    } else {
-                        Logger::get()->info("✅ Options fetched for {}", tk);
-                    }
-                }
-                
-                Logger::get()->info("📦 Options data stored under: {}", optionsRoot);
-            }
+    // --- Validate dates ---
+    auto check_iso = [&](const std::string& iso, const char* name)->bool{
+        if (!date_utils::isValidYYYYMMDD(iso)) {
+            std::cerr << "❌ Invalid " << name << " (expected YYYY-MM-DD): " << iso << "\n";
+            return false;
         }
-    }else{
-        Logger::get()->info("⏭️ Options phase skipped.");
-    }
-
+        return true;
+    };
+    
+    
     
     return 0;
 }
