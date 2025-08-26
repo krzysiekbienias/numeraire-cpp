@@ -1,6 +1,6 @@
 #pragma once
 #include "pricing/asset_class/equity/equity_pricer_factory.hpp"
-#include "option_pricer.hpp"
+#include "pricing/option_pricer.hpp"
 #include "pricing/models/black_scholes_model.hpp"
 
 

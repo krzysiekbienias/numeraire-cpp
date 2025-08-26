@@ -1,4 +1,4 @@
-#include "euler_scheme.hpp"
+#include "simulation/euler_scheme.hpp"
 #include <cmath>
 #include <random>
 

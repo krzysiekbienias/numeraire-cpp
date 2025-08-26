@@ -5,7 +5,7 @@
 #include "utils/logger.hpp"
 #include "utils/print_utils.hpp"
 #include "utils/path_utils.hpp"
-#include "database/trade_store.hpp"
+#include "database/trade_dao.hpp"
 #include "utils/json_utils.hpp"
 #include "core/market_env_cache.hpp"
 #include "core/market_data_fetcher.hpp"
@@ -30,7 +30,7 @@ int main(int argc, char** argv) {
     std::string valuationDate = "17-01-2025";
     
     // === Step 1: Load Trades from DB ===
-    TradesStore store(projectPath + mainConfigMap.at("DB_PATH"));
+    TradeDao store(projectPath + mainConfigMap.at("DB_PATH"));
     auto allTrades = store.getAllTrades();
 
     // === Step 2: Load cached market data or fall back ===

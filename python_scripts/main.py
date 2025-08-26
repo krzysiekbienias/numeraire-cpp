@@ -3,7 +3,9 @@ import os
 from plotting.underlier_paths import plot_paths_from_file
 from generate_ir_curve_json import prepare_ir_curve_json
 if __name__ == '__main__':
-    pass
+    print("Hello motherfucker")
+    x=2
+    print("The end")
 
 
     # plot_paths_from_file(filename_stem="tradeId_1_17-01-2025_Euler_paths")

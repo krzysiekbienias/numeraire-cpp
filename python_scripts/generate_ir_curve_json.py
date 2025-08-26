@@ -50,5 +50,5 @@ def prepare_ir_curve_json(date: datetime.date, api_key: str, output_dir: str = "
 # === PRZYKŁADOWE UŻYCIE ===
 if __name__ == "__main__":
     fred_api_key = "1e762f897c6154c9c4285238f972033e"
-    my_date = datetime.date(2025, 1, 2)  
+    my_date = datetime.date(2025, 1, 2)
     prepare_ir_curve_json(my_date, fred_api_key)
