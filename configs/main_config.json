@@ -3,5 +3,9 @@
   "SCHEDULE_CONFIG_MC":"/configs/schedule_config_mc.json",
   "SECRETS_CONFIG": "/configs/secrets.json",
   "DB_PATH":"/db.sqlite3",
-  "MARKET_CACHE_DIR":"cached_market_data"
+  "MARKET_CACHE_DIR":"/cached_market_data",
+  "SPOT_PRICE_TARGET_DIR":"/spot_price",
+  "OPTION_SYMBOLS_TARGET_DIR":"/live_option",
+  "OPTION_PRICES_TARGET_DIR": "/price_options",
+  "HOLIDAYS_FILE":"holidays.csv"
 }
