@@ -4,7 +4,7 @@
 #include "core/market_environment.hpp"
 #include "core/schedule_generator.hpp"
 #include "pricing_factory_interface.hpp"
-#include "../pricing/option_pricer.hpp"
+#include "pricing/option_pricer.hpp"
 
 class EquityPricerFactory :public IPricerFactory {
 public:

@@ -1,7 +1,7 @@
-#include "json_utils.hpp"
-#include "logger.hpp"
+#include "utils/json_utils.hpp"
 #include <fstream>
 #include <stdexcept>
+#include "utils/logger.hpp"
 
 void JsonUtils::load(const std::string&  jsonIdentifier,const std::string& path) {
     std::ifstream file(path); //opens the file stream
