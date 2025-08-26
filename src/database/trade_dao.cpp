@@ -1,74 +1,16 @@
-#include"database/trade_store.hpp"
+#include"database/trade_dao.hpp"
 #include<iostream>
 #include <unistd.h>
 #include"core/trade.hpp"
 #include"utils/logger.hpp"
 #include"utils/sqlite_utils.hpp"
 #include"core/trade_factory.hpp"
+#include "database/db_connection.hpp"
+
+TradeDao::TradeDao(DbConnection &dbc) : m_db(dbc) {}
 
 
-TradesStore::TradesStore(const std::string& db_path) {
-    db = sqlite_utils::openDatabase(db_path);
-
-    if (!db) {
-        Logger::get()->error("❌ TradesStore failed to initialize DB connection.");
-        // you could even throw here if needed
-    }
-}
-
-TradesStore::~TradesStore() {
-    sqlite_utils::closeDatabase(db);
-}
-
-
-
-bool TradesStore::open(const std::string& db_path) {
-    if (sqlite3_open(db_path.c_str(), &db) != SQLITE_OK) {
-        Logger::get()->error("❌ Could not open DB: {}", sqlite3_errmsg(db));
-        return false;
-    }
-    Logger::get()->info("✅ Connected to DB at: {}", db_path);
-    return true;
-}
-
-bool TradesStore::openDebugMode(const std::string& db_path) {
-    char cwd[1024];
-    getcwd(cwd, sizeof(cwd));
-    std::cout << "[DEBUG] CWD: " << cwd << "\n";
-    std::cout << "[DEBUG] Trying to open: " << db_path << "\n";
-
-    if (sqlite3_open(db_path.c_str(), &db) != SQLITE_OK) {
-        std::cerr << "Could not open DB: " << sqlite3_errmsg(db) << "\n";
-        return false;
-    }
-
-    std::cout << "[DEBUG] DB opened successfully.\n";
-
-    // List tables for verification
-    const char* sql = "SELECT name FROM sqlite_master WHERE type='table';";
-    sqlite3_stmt* stmt;
-    if (sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr) == SQLITE_OK) {
-        std::cout << "[DEBUG] Tables in DB:\n";
-        while (sqlite3_step(stmt) == SQLITE_ROW) {
-            std::cout << "  - " << sqlite3_column_text(stmt, 0) << "\n";
-        }
-        sqlite3_finalize(stmt);
-    } else {
-        std::cerr << "Failed to list tables: " << sqlite3_errmsg(db) << "\n";
-    }
-
-    return true;
-}
-
-void TradesStore::close() {
-    if (db) {
-        sqlite3_close(db);
-        db = nullptr;
-    }
-}
-
-
-std::optional<Trade> TradesStore::getTradeById(int trade_id) {
+std::optional<Trade> TradeDao::getTradeById(int trade_id) {
     const std::string sql = R"(
         SELECT trade_id, asset_class, underlying_ticker, product_type, payoff, trade_date,
                trade_maturity, dividend, option_style, structured_params,
@@ -77,8 +19,9 @@ std::optional<Trade> TradesStore::getTradeById(int trade_id) {
         WHERE trade_id = ?;
     )";
 
-    auto stmtOpt = sqlite_utils::prepareStatement(db, sql);
+    auto stmtOpt = sqlite_utils::prepareStatement(m_db.get(), sql);
     if (!stmtOpt) return std::nullopt;
+
 
     sqlite3_stmt* stmt = *stmtOpt;
     sqlite_utils::bindInt(stmt, 1, trade_id);
@@ -94,7 +37,7 @@ std::optional<Trade> TradesStore::getTradeById(int trade_id) {
 }
 
 
-std::vector<Trade> TradesStore::getAllTrades() {
+std::vector<Trade> TradeDao::getAllTrades() {
     const char* sql = R"(
         SELECT trade_id, asset_class, underlying_ticker, product_type, payoff, trade_date,
                trade_maturity, dividend, option_style, structured_params,
@@ -105,8 +48,8 @@ std::vector<Trade> TradesStore::getAllTrades() {
     sqlite3_stmt* stmt;
     std::vector<Trade> trades;
 
-    if (sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr) != SQLITE_OK) {
-        Logger::get()->error("❌ Failed to prepare query for all trades: {}", sqlite3_errmsg(db));
+    if (sqlite3_prepare_v2(m_db.get(), sql, -1, &stmt, nullptr) != SQLITE_OK) {
+        Logger::get()->error("❌ Failed to prepare query for all trades: {}", sqlite3_errmsg(m_db.get()));
         return trades;
     }
 
