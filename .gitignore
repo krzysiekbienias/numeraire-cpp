@@ -83,3 +83,14 @@ Thumbs.db
 
 # python
 /env
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+
+# IDE specific
+cmake-build-*/
+.idea/
+*.xcodeproj/
+build/
