@@ -76,3 +76,6 @@ Thumbs.db
 
 # ==== CMake
 CMakeLists.txt
+
+# ===== Custom Files
+inkdrop_template.md

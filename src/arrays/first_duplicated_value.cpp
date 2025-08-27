@@ -12,5 +12,4 @@ int firstDuplicateValue(const std::vector<int>& array){
         }        
     }
     return -1;
-    
 }

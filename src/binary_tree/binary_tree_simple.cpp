@@ -2,7 +2,7 @@
 
 // Implement your binary_tree_simple logic here.
 #include "binary_tree/binary_tree_simple.hpp"
-namespace clicker{
+
 
 BinaryTree::BinaryTree(int val) : value(val), left(nullptr), right(nullptr) {}
 
@@ -28,4 +28,4 @@ void BinaryTree::branchSumHelper(const BinaryTree* node, int runningSum, std::ve
     branchSumHelper(node->left,newSum,sums);
     branchSumHelper(node->right,newSum,sums);
 }
-}
+

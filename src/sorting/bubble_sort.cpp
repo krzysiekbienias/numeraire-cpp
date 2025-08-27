@@ -18,13 +18,13 @@ std::vector<int> bubbleSort(std::vector<int>& array){
         }
         if(isSorted){
             savedPasses=j;
-            std::cout<<"[Optimized] Early exit after"<<totalPasses<<" passes. Saved "<<savedPasses<<" unnecessary passes.\n";
+            std::cout<<"[Optimized] Early exit after"<<totalPasses<<" passes. Saved "<<savedPasses<<" unnecessary passes.\n";//DEBUG
             break;
             
         }
     }
     if(savedPasses==0){
-        std::cout << "[Full Run] No early exit. Completed " << totalPasses << " passes.\n";
+        std::cout << "[Full Run] No early exit. Completed " << totalPasses << " passes.\n";// DEBUG
     }
     return array;
 }

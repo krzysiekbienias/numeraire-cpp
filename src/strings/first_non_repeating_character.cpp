@@ -8,7 +8,7 @@ int firstNonRepeatingCharacter(std::string str){
     for (char ch:str){
         letterFrequency[ch]++;
     }
-    print_utils::printUnorderedMap(letterFrequency);
+    
     for (int i=0;i<str.size();++i){
         std::cout<<str[i]<<'\n';
         if(letterFrequency[str[i]]==1){

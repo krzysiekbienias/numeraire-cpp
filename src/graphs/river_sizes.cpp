@@ -17,8 +17,6 @@ std::vector<int> riverSizes(std::vector<std::vector<int>>& matrix){
     return results;
 }
 
-
-
 int dfsRiverHelper(int r, int c, std::vector<std::vector<int>>& matrix){
     int riverSize=1;
     matrix[r][c]=-1;//visited

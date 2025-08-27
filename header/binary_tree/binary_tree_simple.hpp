@@ -2,9 +2,7 @@
 #include <vector>
 
 // Declare your binary_tree_simple interface here.
-namespace clicker {
-            
-    class BinaryTree {
+class BinaryTree {
     public:
         int value;
         BinaryTree* left;
@@ -19,5 +17,5 @@ namespace clicker {
         
         
     };
-}
+
 
