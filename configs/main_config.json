@@ -5,7 +5,7 @@
   "DB_PATH":"/db.sqlite3",
   "MARKET_CACHE_DIR":"/cached_market_data",
   "SPOT_PRICE_TARGET_DIR":"/spot_price",
-  "OPTION_SYMBOLS_TARGET_DIR":"/live_option",
+  "OPTION_SYMBOLS_TARGET_DIR":"/live_options",
   "OPTION_PRICES_TARGET_DIR": "/price_options",
   "HOLIDAYS_FILE":"holidays.csv"
 }
