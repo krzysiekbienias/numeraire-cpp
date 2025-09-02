@@ -14,6 +14,10 @@ public:
     getSpotCloseForDate(const std::string& ticker,
                         const std::string& valuationDateISO) const; // YYYY-MM-DD
 
+    std::optional<std::vector<std::string>>
+    getOptionSymbolsForDate(const std::string& underlyingTicker,
+                            const std::string& asOfISO) const;
+
     // ---- Historical (pure HTTP)
     std::optional<std::vector<double>>
     getHistoricalCloses(const std::string& ticker,
