@@ -42,7 +42,7 @@ int main(int argc, char **argv) {
 
     JsonUtils::load("secrets", projectPath + cfg.at("SECRETS_CONFIG"));
     auto secretsMap = JsonUtils::toStringMap("secrets");
-    // Open database connection
+    // Open a database connection
     Logger::get()->info("Set up DB Connection...");
     std::string dbPath = projectPath + cfg.at("DB_PATH");
 
@@ -87,7 +87,7 @@ int main(int argc, char **argv) {
     const bool single = !args.dateISO.empty();
     const bool ranged = !args.startISO.empty() || !args.endISO.empty();
 
-    // Initialize API fetcher (Polygon.io) with key from secrets
+    // Initialize API fetcher (Polygon.io) with a key from secrets
     MarketDataFetcher fetcher(secretsMap.at("POLYGON_IO_API_KEY"));
 
 
@@ -145,8 +145,35 @@ int main(int argc, char **argv) {
             const std::string dateOptionSymbols =
             projectPath + "/" + cfg.at("MARKET_CACHE_DIR") + "/" + cfg.at("OPTION_SYMBOLS_TARGET_DIR") + "/" + isoDate;
             std::filesystem::create_directories(dateOptionSymbols);
+            for (const auto& ticker : tickers) {
+                const std::string outPath = dateOptionSymbols + "/" + ticker + "_" + isoDate + ".json";
 
-            //fetching tickers
+                if (std::filesystem::exists(outPath)) {
+                    Logger::get()->info("↪️ [opt-symbols] File exists — skipping ({})", outPath);
+                    continue;
+                }
+
+                auto symbolsOpt = fetcher.getOptionSymbolsForDate(ticker, isoDate);
+                if (!symbolsOpt || symbolsOpt->empty()) {
+                    Logger::get()->warn("⚠ [opt-symbols] No symbols for {} as_of {}", ticker, isoDate);
+                    continue;
+                }
+
+                // opcjonalnie: sort + unique dla stabilności
+                std::vector<std::string> symbols = std::move(*symbolsOpt);
+                std::sort(symbols.begin(), symbols.end());
+                symbols.erase(std::unique(symbols.begin(), symbols.end()), symbols.end());
+
+                if (market_store::options::saveSymbolsToFile(outPath, symbols)) {
+                    Logger::get()->info("💾 [opt-symbols] Saved {} symbols for {} -> {}",
+                                        symbols.size(), ticker, outPath);
+                } else {
+                    Logger::get()->error("❌ [opt-symbols] Save failed for {}", outPath);
+                }
+            }
+
+            Logger::get()->info("🎯 Option Symbols phase finished for {} tickers (as of {}).",
+                                tickers.size(), isoDate);
         }
 
 
