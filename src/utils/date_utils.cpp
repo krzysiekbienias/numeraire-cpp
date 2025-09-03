@@ -49,7 +49,7 @@ QuantLib::Date toQLDateYYYYMMDD(const std::string& dateStr) {
 }
 
 
-std::string toStringYYYYMMDD(const QuantLib::Date& date) {
+std::string toYYYYMMDD(const QuantLib::Date& date) {
     std::ostringstream oss;
     oss << date.year() << "-";
     oss << std::setw(2) << std::setfill('0') << static_cast<int>(date.month()) << "-";
@@ -57,6 +57,34 @@ std::string toStringYYYYMMDD(const QuantLib::Date& date) {
     return oss.str();
 }
 
+static inline bool isdigit_uc(char c) {
+    return std::isdigit(static_cast<unsigned char>(c));
+}
+
+
+
+std::string toYYYYMMDD(std::string_view s) {
+// Jeśli już ISO: "YYYY-MM-DD" -> zwróć jak jest
+if (s.size() == 10 && s[4] == '-' && s[7] == '-' &&
+    isdigit_uc(s[0]) && isdigit_uc(s[1]) && isdigit_uc(s[2]) && isdigit_uc(s[3]) &&
+    isdigit_uc(s[5]) && isdigit_uc(s[6]) && isdigit_uc(s[8]) && isdigit_uc(s[9])) {
+    return std::string{s};
+    }
+
+// Oczekiwany input: "DD-MM-YYYY" -> konwersja na ISO
+if (s.size() == 10 && s[2] == '-' && s[5] == '-' &&
+    isdigit_uc(s[0]) && isdigit_uc(s[1]) &&
+    isdigit_uc(s[3]) && isdigit_uc(s[4]) &&
+    isdigit_uc(s[6]) && isdigit_uc(s[7]) && isdigit_uc(s[8]) && isdigit_uc(s[9])) {
+    // "DD-MM-YYYY" -> "YYYY-MM-DD"
+    return std::string(s.substr(6,4)) + "-" +
+           std::string(s.substr(3,2)) + "-" +
+           std::string(s.substr(0,2));
+    }
+
+// Nieznany format -> zwróć bez zmian (albo tu dodaj log, jeśli chcesz)
+return std::string{s};
+}
 
 bool isValidYYYYMMDD(const std::string& s) {
     // Szybki check formatu
@@ -64,10 +92,10 @@ bool isValidYYYYMMDD(const std::string& s) {
     for (int i : {0,1,2,3,5,6,8,9}) if (s[i] < '0' || s[i] > '9') return false;
 
     // Parsuj i zrób round-trip przez QuantLib,
-    // korzystając z istniejącego toStringYYYYMMDD (bez żadnych pomocników)
+    // korzystając z istniejącego toYYYYMMDD (bez żadnych pomocników)
     try {
         const auto ql = toQLDateYYYYMMDD(s);     // masz tę funkcję
-        return toStringYYYYMMDD(ql) == s;        // masz tę funkcję
+        return toYYYYMMDD(ql) == s;        // masz tę funkcję
     } catch (...) {
         return false;
     }

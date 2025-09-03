@@ -10,7 +10,7 @@ namespace date_utils {
  * @brief Validate that a string is a real calendar date in "yyyy-mm-dd".
  *
  * Fast format check followed by a round-trip via QuantLib:
- * parse with toQLDateYYYYMMDD() and compare with toStringYYYYMMDD().
+ * parse with toQLDateYYYYMMDD() and compare with toYYYYMMDD().
  *
  * @param s Candidate string, e.g. "2025-08-15".
  * @return true if @p s is a valid ISO date; false otherwise.
@@ -46,7 +46,9 @@ std::set<QuantLib::Date> loadBankHolidaysISO(const std::string& holidaysPath);
 QuantLib::Date toQLDateDDMMYYYY (const std::string& dateStr);
 QuantLib::Date toQLDateYYYYMMDD(const std::string& dateStr);
 std::string toStringDDMMYYYY(const QuantLib::Date& date);
-std::string toStringYYYYMMDD(const QuantLib::Date& date);
+std::string toYYYYMMDD(const QuantLib::Date& date);
+//overloaded version
+std::string toYYYYMMDD(std::string_view date);
 std::string toStringYYMMDD(const QuantLib::Date& date);
 
 //Extracting
