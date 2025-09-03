@@ -22,6 +22,9 @@
 
 #include "database/db_connection.hpp"
 #include "market_store/spot_store.hpp"
+#include "market_store/options_selectors.hpp"
+
+
 
 
 int main(int argc, char **argv) {
@@ -51,9 +54,9 @@ int main(int argc, char **argv) {
         Logger::get()->error("❌ Failed to open database connection at: {}", dbPath);
         return 2;
     }
-    
+
     TradeDao tradeDao(dbc);
-    const auto trades = tradeDao.getAllTrades();
+    const std::vector<Trade> trades = tradeDao.getAllTrades();
 
 
     // Extraction of tickers from a trade object.
@@ -143,9 +146,10 @@ int main(int argc, char **argv) {
         if (cli::has(args.phases, cli::Phase::OptionSymbols)) {
             print_utils::printBoxedLabel("Option Symbols Fetching");
             const std::string dateOptionSymbols =
-            projectPath + "/" + cfg.at("MARKET_CACHE_DIR") + "/" + cfg.at("OPTION_SYMBOLS_TARGET_DIR") + "/" + isoDate;
+                    projectPath + "/" + cfg.at("MARKET_CACHE_DIR") + "/" + cfg.at("OPTION_SYMBOLS_TARGET_DIR") + "/" +
+                    isoDate;
             std::filesystem::create_directories(dateOptionSymbols);
-            for (const auto& ticker : tickers) {
+            for (const auto &ticker: tickers) {
                 const std::string outPath = dateOptionSymbols + "/" + ticker + "_" + isoDate + ".json";
 
                 if (std::filesystem::exists(outPath)) {
@@ -176,7 +180,46 @@ int main(int argc, char **argv) {
                                 tickers.size(), isoDate);
         }
 
+        std::optional<std::vector<std::string> > loadedSymbolsPerTicker;
+        if (cli::has(args.phases, cli::Phase::OptionValues)) {
+            print_utils::printBoxedLabel("Option Pricing Fetching");
+            // load symbols for date and ticker.
+            // We need one path to load symbols
+            // One target folder for storing option values.
 
+            const std::string optionSymbolsDir =
+                    projectPath + "/" + cfg.at("MARKET_CACHE_DIR") + "/" + cfg.at("OPTION_SYMBOLS_TARGET_DIR");
+
+
+            const std::string underlyingPriceDir = projectPath + "/" + cfg.at("MARKET_CACHE_DIR") + "/" + cfg.at(
+                                                       "SPOT_PRICE_TARGET_DIR");
+            //we need here to traverse through trades not through tickers.
+            for (const auto& [meta, assetData] : trades) {  // <<— destrukturyzacja Trade
+                // bierzemy tylko equity
+                if (const auto* eq = std::get_if<EquityTradeData>(&assetData);
+                    eq && !eq->underlying_ticker.empty()) {
+                    const std::string& ticker      = eq->underlying_ticker;
+                    const std::string& maturityFromDB = meta.trade_maturity;    // not correct format must be changed
+                    const std::string maturityISO=date_utils::toYYYYMMDD(maturityFromDB);
+
+
+                    if (maturityISO.empty()) {
+                        Logger::get()->warn("⚠ [opt-values] Trade {} has empty maturity — skip", meta.trade_id);
+                        continue;
+                    }
+                    std::string optionSymbolsDirPath=optionSymbolsDir+"/"+isoDate+"/"+ticker+"_"+isoDate+".json";
+                    loadedSymbolsPerTicker=market_store::options::loadSymbolsFromFile(optionSymbolsDirPath);
+                    Logger::get()->info("Loaded {} options symbols for {}",loadedSymbolsPerTicker->size(),ticker);
+                    std::vector<OccSymbol> occVectors;
+                    //inside parseAllVector we traverse through all symbols per ticker so be careful about performance
+                    occVectors=parseAllVec(*loadedSymbolsPerTicker);
+                    Logger::get()->info("Symbols strings parsed to OCC structure.");
+                    std::vector<OccSymbol> filteredToNearestExpiry;
+                    filteredToNearestExpiry=nearestExpiry(occVectors,maturityISO);
+                    Logger::get()->info("Filtered OCC to the nearest expiry.");
+                }
+            }
+        }
     }
     return 0;
 }
