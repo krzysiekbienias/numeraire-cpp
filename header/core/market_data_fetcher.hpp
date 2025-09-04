@@ -17,6 +17,9 @@ public:
     std::optional<std::vector<std::string>>
     getOptionSymbolsForDate(const std::string& underlyingTicker,
                             const std::string& asOfISO) const;
+    std::optional<nlohmann::json>
+    getOptionOpenCloseBySymbol(const std::string& optionSymbol,
+                               const std::string& asOfISO) const;
 
     // ---- Historical (pure HTTP)
     std::optional<std::vector<double>>

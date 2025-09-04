@@ -48,6 +48,32 @@ MarketDataFetcher::getSpotCloseForDate(const std::string& ticker,
     return j["close"].get<double>();
 }
 
+std::optional<nlohmann::json>
+MarketDataFetcher::getOptionOpenCloseBySymbol(const std::string& optionSymbol,
+                                              const std::string& asOfISO) const
+{
+    // Polygon v1: /v1/open-close/{stocks|options}/{symbol}/{date}
+    std::string url =
+        "https://api.polygon.io/v1/open-close/"
+        + cpr::util::urlEncode(optionSymbol) + "/"
+        + cpr::util::urlEncode(asOfISO)
+        + "?adjusted=true&apiKey=" + m_apiKey;
+
+    Logger::get()->info("🔍 [opt-values] GET {}", url);
+    auto resp = cpr::Get(cpr::Url{url});
+    if (resp.status_code != 200) {
+        Logger::get()->error("❌ [opt-values] HTTP {} for {} {}", resp.status_code, optionSymbol, asOfISO);
+        return std::nullopt;
+    }
+
+    try {
+        nlohmann::json j = nlohmann::json::parse(resp.text);
+        return j;
+    } catch (const std::exception& e) {
+        Logger::get()->error("❌ [opt-values] JSON parse: {} for {} {}", e.what(), optionSymbol, asOfISO);
+        return std::nullopt;
+    }
+}
 
 // market_data_fetcher.cpp
 std::optional<std::vector<std::string>>
