@@ -36,7 +36,7 @@ loadSymbolsFromFile(const std::string& baseCacheDir,
                     const std::string& asOfDDMMYYYY,
                     const std::string& ticker)
 {
-    return ::market_store::options::loadSymbolsFromFile(
+    return loadSymbolsFromFile(
         makeFilePath(baseCacheDir, asOfDDMMYYYY, ticker)
     );
 }

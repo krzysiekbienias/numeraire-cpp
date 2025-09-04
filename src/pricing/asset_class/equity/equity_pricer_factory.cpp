@@ -83,7 +83,7 @@ std::vector<std::string> EquityPricerFactory::getScheduleDateStrings() const {
 
     std::vector<std::string> dateStrings;
     for (const auto& qlDate : schedule) {
-        dateStrings.push_back(date_utils::toStringYYYYMMDD(qlDate));
+        dateStrings.push_back(date_utils::toYYYYMMDD(qlDate));
     }
     return dateStrings;
 }
