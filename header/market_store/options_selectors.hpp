@@ -53,8 +53,57 @@ std::optional<OccSymbol> parseOne(const std::string& occ);
 
 std::vector<OccSymbol> parseAllVec(const std::vector<std::string>& symbols);
 
+/**
+ * @brief Converts a payoff string ("Call" / "Put") into an OCC option type character.
+ *
+ * This helper maps human-readable payoff values (e.g., from a database field)
+ * to the OCC symbol convention:
+ *   - "Call" → 'C'
+ *   - "Put"  → 'P'
+ *
+ * The comparison is case-sensitive only for the listed variants
+ * ("Call", "CALL", "call", "Put", "PUT", "put").
+ *
+ * @param payoff Input string representing the payoff type.
+ * @return std::optional<char>
+ *         - 'C' if the payoff is a call option
+ *         - 'P' if the payoff is a put option
+ *         - std::nullopt if the input string does not match a recognized payoff
+ *
+ * @note This function is intended for bridging between database payoff flags
+ *       ("Call"/"Put") and OCC symbols ('C'/'P').
+ *
+ * @code
+ * if (auto type = payoffToOccType(trade.payoff)) {
+ *     // Use *type as 'C' or 'P'
+ * } else {
+ *     // Handle invalid payoff
+ * }
+ * @endcode
+ */
+
+inline std::optional<char> payoffToOccType(const std::string& payoff) {
+    if (payoff == "Call" || payoff == "CALL" || payoff == "call") return 'C';
+    if (payoff == "Put"  || payoff == "PUT"  || payoff == "put")  return 'P';
+    return std::nullopt; // nieznane/niepoprawne
+}
 
 std::vector<OccSymbol>
 nearestExpiry(const std::vector<OccSymbol>& all,
               const std::string& targetMaturityISO,
               bool prefer_future = true);
+
+//version with optionType filter and fallback
+std::vector<OccSymbol>
+nearestExpiry(const std::vector<OccSymbol>& all,
+              const std::string& targetMaturityISO,
+              bool preferFuture,
+              std::optional<char> typeFilter,
+              bool fallbackToAny = true);
+
+void sortInPlaceByStrike(std::vector<OccSymbol>& v);
+
+int nearestIdxBySpot(const std::vector<OccSymbol>& v, double spot);
+
+
+
