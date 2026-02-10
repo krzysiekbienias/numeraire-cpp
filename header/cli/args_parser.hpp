@@ -2,7 +2,7 @@
 #pragma once
 #include <string>
 #include <optional>
-
+#include <vector>
 namespace cli {
 
     enum class Phase : unsigned {
@@ -32,7 +32,7 @@ namespace cli {
         std::string error;
     };
 
-    ParseResult parse(int argc, char** argv);   // pure: no I/O
+    ParseResult parse(const std::vector<std::string>& args);   // pure: no I/O
     std::string help_text();                    // just returns the text
 
 } // namespace cli

@@ -5,13 +5,12 @@
 #include <string>
 #include <algorithm>
 #include <set>
-#include <cctype>
 #include <unordered_map>
 #include "utils/logger.hpp"
 #include "utils/print_utils.hpp"
 #include "utils/path_utils.hpp"
 #include "utils/json_utils.hpp"
-#include "utils/holiday_utils.hpp"
+
 #include "utils/date_utils.hpp"
 #include "database/trade_dao.hpp"
 #include "core/market_data_fetcher.hpp"
@@ -23,8 +22,7 @@
 #include "database/db_connection.hpp"
 #include "market_store/spot_store.hpp"
 #include "market_store/options_selectors.hpp"
-
-
+#include "market_store/option_prices.hpp"
 
 
 int main(int argc, char **argv) {
@@ -32,15 +30,50 @@ int main(int argc, char **argv) {
     std::string projectPath, configPath;
 
     // =========================================================================
-    // 🔧 Resolve project/config paths from argv[0]
+    // 🧺 Capture argv into modern containers ASAP
     // =========================================================================
-    if (argc > 0 && argv && argv[0]) {
-        projectPath = resolveProjectPath(argv[0]);
-        configPath = resolveMainConfigPath(argv[0]);
-    } else {
+    if (argc <= 0 || argv == nullptr || argv[0] == nullptr) {
         std::cerr << "❌ argv[0] unavailable — cannot resolve paths.\n";
         return 1;
     }
+
+    // rawArgs includes argv[0] (program path/name)
+    std::vector<std::string> rawArgs;
+    rawArgs.reserve(static_cast<std::size_t>(argc));
+    for (int i = 0; i < argc; ++i) {
+        rawArgs.emplace_back(argv[i] ? argv[i] : "");
+    }
+
+    // args excludes argv[0] — this is what you typically want to parse/test
+    std::vector<std::string> args;
+    if (rawArgs.size() > 1) {
+        args.assign(rawArgs.begin() + 1, rawArgs.end());
+    }
+
+    // (Optional) quick debug:
+    // for (std::size_t i = 0; i < args.size(); ++i) std::cout << i << ": " << args[i] << "\n";
+
+
+    // =========================================================================
+    // 🖥️  Parse CLI arguments (--date, --range, --phase, ...)
+    // =========================================================================
+    auto res = cli::parse(args);
+    if (!res.error.empty()) {
+        std::cerr << "❌ " << res.error << "\n\n" << cli::help_text();
+        return 1;
+    }
+    if (res.args->showHelp) {
+        std::cout << cli::help_text();
+        return 0;
+    }
+
+    // =========================================================================
+    // 🔧 Resolve project/config paths from argv[0]
+    // =========================================================================
+
+    projectPath = resolveProjectPath(argv[0]);
+    configPath = resolveMainConfigPath(argv[0]);
+
     // =========================================================================
     // 📦 Load configuration (main + secrets)
     // =========================================================================
@@ -77,18 +110,6 @@ int main(int argc, char **argv) {
             tickers.insert(eq.underlying_ticker);
     }
 
-    // =========================================================================
-    // 🖥️  Parse CLI arguments (--date, --range, --phase, ...)
-    // =========================================================================
-    auto res = cli::parse(argc, argv);
-    if (!res.error.empty()) {
-        std::cerr << "❌ " << res.error << "\n\n" << cli::help_text();
-        return 1;
-    }
-    if (res.args->showHelp) {
-        std::cout << cli::help_text();
-        return 0;
-    }
 
     // =========================================================================
     // 🗂️  Derived paths & calendars (spot file, holidays)
@@ -98,11 +119,14 @@ int main(int argc, char **argv) {
                            "/spot_snapshot_" + res.args->dateISO + ".json";
 
     const std::string optionSymbolsDir =
-                    projectPath  + cfg.at("MARKET_CACHE_DIR")  + cfg.at("OPTION_SYMBOLS_TARGET_DIR");
+            projectPath + cfg.at("MARKET_CACHE_DIR") + cfg.at("OPTION_SYMBOLS_TARGET_DIR");
 
 
-    const std::string underlyingPriceDir = projectPath  + cfg.at("MARKET_CACHE_DIR")  + cfg.at(
+    const std::string underlyingPriceDir = projectPath + cfg.at("MARKET_CACHE_DIR") + cfg.at(
                                                "SPOT_PRICE_TARGET_DIR");
+
+    const std::string optionValuesTargetDir = projectPath + cfg.at("MARKET_CACHE_DIR") +
+                                              cfg.at("OPTION_PRICES_TARGET_DIR") + "/" + res.args->dateISO;
 
     std::string holidayPath = projectPath + "/" + cfg.at("HOLIDAYS_FILE");
     auto bankHolidays = date_utils::loadBankHolidaysISO(holidayPath);
@@ -111,10 +135,10 @@ int main(int argc, char **argv) {
     // =========================================================================
     // 🧾 Shorthands & flags
     // =========================================================================
-    const auto &args = *res.args;
+    const cli::Args parsed = *res.args;
 
-    const bool single = !args.dateISO.empty();
-    const bool ranged = !args.startISO.empty() || !args.endISO.empty();
+    const bool single = !parsed.dateISO.empty();
+    const bool ranged = !parsed.startISO.empty() || !parsed.endISO.empty();
 
     // =========================================================================
     // 🌐 Initialize market data fetcher (Polygon)
@@ -123,7 +147,7 @@ int main(int argc, char **argv) {
 
 
     if (single) {
-        const std::string &isoDate = args.dateISO;
+        const std::string &isoDate = parsed.dateISO;
         // ---------------------------------------------------------------------
         // ✅ Validate date & skip weekends/holidays early
         // ---------------------------------------------------------------------
@@ -144,7 +168,7 @@ int main(int argc, char **argv) {
         // ---------------------------------------------------------------------
         // 📈 Phase: Spot prices
         // ---------------------------------------------------------------------
-        if (cli::has(args.phases, cli::Phase::Spot)) {
+        if (cli::has(parsed.phases, cli::Phase::Spot)) {
             print_utils::printBoxedLabel("Spot Price Fetching");
             if (std::filesystem::exists(spotPath)) {
                 Logger::get()->info("Spot price file already exists. Skipping fetch ({})", spotPath);
@@ -181,7 +205,7 @@ int main(int argc, char **argv) {
         // ---------------------------------------------------------------------
         // 🧾 Phase: Option symbols (contracts list)
         // ---------------------------------------------------------------------
-        if (cli::has(args.phases, cli::Phase::OptionSymbols)) {
+        if (cli::has(parsed.phases, cli::Phase::OptionSymbols)) {
             print_utils::printBoxedLabel("Option Symbols Fetching");
             const std::string dateOptionSymbols =
                     projectPath + "/" + cfg.at("MARKET_CACHE_DIR") + "/" + cfg.at("OPTION_SYMBOLS_TARGET_DIR") + "/" +
@@ -201,7 +225,7 @@ int main(int argc, char **argv) {
                     continue;
                 }
 
-                // opcjonalnie: sort + unique dla stabilności
+                // optional: sort + unique for stability
                 std::vector<std::string> symbols = std::move(*symbolsOpt);
                 std::sort(symbols.begin(), symbols.end());
                 symbols.erase(std::unique(symbols.begin(), symbols.end()), symbols.end());
@@ -221,7 +245,7 @@ int main(int argc, char **argv) {
         // ---------------------------------------------------------------------
         // 💵 Phase: Option values (per-trade selection → pricing)
         // ---------------------------------------------------------------------
-        if (cli::has(args.phases, cli::Phase::OptionValues)) {
+        if (cli::has(parsed.phases, cli::Phase::OptionValues)) {
             std::optional<std::vector<std::string> > loadedSymbolsPerTicker;
             print_utils::printBoxedLabel("Option Pricing Fetching");
             // load symbols for date and ticker.
@@ -232,16 +256,24 @@ int main(int argc, char **argv) {
 
 
             // Iterate by trades (not by tickers) — equity-only
-            for (const auto& [meta, assetData] : trades) {  // <<— destrukturyzacja Trade
+            for (const auto &[meta, assetData]: trades) {
+                // <<— destrukturyzacja Trade
 
-                if (const auto* eq = std::get_if<EquityTradeData>(&assetData);
+                if (const auto *eq = std::get_if<EquityTradeData>(&assetData);
                     eq && !eq->underlying_ticker.empty()) {
                     const std::string &ticker = eq->underlying_ticker;
                     const std::string &maturityFromDB = meta.trade_maturity; // not correct format must be changed
                     const std::string maturityISO = date_utils::toYYYYMMDD(maturityFromDB);
-                    auto & payoffTypeOpt=eq->payoff;
+                    auto &payoffTypeOpt = eq->payoff;
 
-
+                    // 👮‍♀️check to avoid fetching data if they already exist
+                    std::string optionValuesTargetPath =
+                            optionValuesTargetDir + "/" + ticker + "_" + isoDate + "_option_values.json";
+                    if (std::filesystem::exists(optionValuesTargetPath)) {
+                        Logger::get()->info("↪️ [opt-values] Exists — skip fetching for {} @ {} ({})",
+                                            ticker, isoDate, optionValuesTargetPath);
+                        continue; // ← NIE pobieramy symboli, nie liczymy ATM, nie strzelamy do API
+                    }
 
 
                     if (maturityISO.empty()) {
@@ -258,14 +290,14 @@ int main(int argc, char **argv) {
                     Logger::get()->info("Symbols strings parsed to OCC structure.");
 
 
-                    std::string payoffType ="Call";
-                    if (payoffTypeOpt && (*payoffTypeOpt=="Call" || *payoffTypeOpt=="Put")) {
-                        payoffType=*payoffTypeOpt;
-                    }
-                    else {payoffType="Call";}
+                    std::string payoffType = "Call";
+                    if (payoffTypeOpt && (*payoffTypeOpt == "Call" || *payoffTypeOpt == "Put")) {
+                        payoffType = *payoffTypeOpt;
+                    } else { payoffType = "Call"; }
                     std::optional<char> occPayoff = payoffToOccType(payoffType);
 
-                    std::vector<OccSymbol> filteredToNearestExpiry = nearestExpiry(occVectors, maturityISO,true,occPayoff);
+                    std::vector<OccSymbol> filteredToNearestExpiry = nearestExpiry(
+                        occVectors, maturityISO, true, occPayoff);
                     Logger::get()->info("Filtered OCC to the nearest expiry.");
                     auto underlyingPriceOpt = market_store::loadSpotFromFile(spotPath, ticker);
                     double underlyingSpot = 0.0;
@@ -279,13 +311,43 @@ int main(int argc, char **argv) {
                         Logger::get()->error("NO spot for {} @ {}", ticker, isoDate);;
                     }
                     sortInPlaceByStrike(filteredToNearestExpiry);
-                    int atTheMoneyIndex=nearestIdxBySpot(filteredToNearestExpiry,underlyingSpot);
+                    int atTheMoneyIndex = nearestIdxBySpot(filteredToNearestExpiry, underlyingSpot);
                     Logger::get()->info("Index of at the money found.");
 
+                    std::vector<OccSymbol> finalOCCLeader = pickAroundATM(filteredToNearestExpiry, underlyingSpot);
+                    Logger::get()->info("Final leader of contracts created.");
+                    std::vector<std::string> finalSymbols = toFullSymbols(finalOCCLeader);
+                    //containers for JSON available and missing
+                    std::vector<nlohmann::json> optionValuesBatch;
+                    optionValuesBatch.reserve(finalSymbols.size());
+                    std::vector<nlohmann::json> missingOptionValues;
+                    missingOptionValues.reserve(finalSymbols.size());
+                    for (std::string symbol: finalSymbols) {
+                        auto marketOptionValues = fetcher.getOptionOpenCloseBySymbol(symbol, isoDate);
+                        if (!marketOptionValues) {
+                            missingOptionValues.emplace_back(symbol);
+                            continue;
+                        }
+                        const nlohmann::json &payload = *marketOptionValues;
+                        // additional check if close price exists to avoid rubish fields in
+                        const bool hasClosePriceField = payload.contains("close");
+                        if (!hasClosePriceField) {
+                            missingOptionValues.emplace_back(symbol);
+                            continue;
+                        }
+                        optionValuesBatch.push_back(payload);
+                    }
+                    const std::size_t total = finalSymbols.size();
+                    const std::size_t found = optionValuesBatch.size();
+                    const std::size_t missing = missingOptionValues.size();
+                    const double hitRate =
+                            total > 0 ? 100 * static_cast<double>(found) / static_cast<double>(total) : 0;
 
+                    Logger::get()->info("📊 [opt-values] {}: found {}/{} ({:.1f}%), missing {}",
+                                        ticker, found, total, hitRate, missing);
 
+                    market_store::options::saveOptionValuesToFile(optionValuesTargetPath, optionValuesBatch);
                 }
-
             }
         }
     }

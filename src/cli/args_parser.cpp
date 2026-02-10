@@ -20,58 +20,99 @@ static void apply_phase_token(Phase& out, const std::string& tok, std::string& e
     else err = "unknown phase: " + tok;
 }
 
-ParseResult parse(int argc, char** argv) {
-    Args a; std::string err;
+ParseResult parse(const std::vector<std::string>& args) {
+    Args parsedArgs;
+    std::string err;
 
-    for (int i = 1; i < argc; ++i) {
-        std::string k = argv[i];
-        auto need = [&](const char* name)-> const char* {
-            if (i + 1 >= argc) { err = std::string("missing value for ") + name; return nullptr; }
-            return argv[++i];
+    for (std::size_t i = 0; i < args.size(); ++i) {
+        const std::string& k = args[i];
+
+        auto need = [&](const char* name) -> const std::string* {
+            if (i + 1 >= args.size()) {
+                err = std::string("missing value for ") + name;
+                return nullptr;
+            }
+            ++i;                 // consume value token
+            return &args[i];
         };
 
-        if      (k == "--date")      { if (auto v = need("--date")) a.dateISO = v; else return {{}, err}; }
-        else if (k == "--start")     { if (auto v = need("--start")) a.startISO = v; else return {{}, err}; }
-        else if (k == "--end")       { if (auto v = need("--end")) a.endISO = v; else return {{}, err}; }
-        else if (k == "--holidays")  { if (auto v = need("--holidays")) a.holidaysCsv = v; else return {{}, err}; }
+        if      (k == "--date") {
+            if (auto v = need("--date")) parsedArgs.dateISO = *v; else return {{}, err};
+        }
+        else if (k == "--start") {
+            if (auto v = need("--start")) parsedArgs.startISO = *v; else return {{}, err};
+        }
+        else if (k == "--end") {
+            if (auto v = need("--end")) parsedArgs.endISO = *v; else return {{}, err};
+        }
+        else if (k == "--holidays") {
+            if (auto v = need("--holidays")) parsedArgs.holidaysCsv = *v; else return {{}, err};
+        }
         else if (k == "--phase") {
-            if (const char* v = need("--phase")) {
-                std::string phases = v; size_t pos = 0;
+            if (const std::string* v = need("--phase")) {
+                const std::string& phases = *v;
+                std::size_t pos = 0;
+
                 while (true) {
-                    size_t comma = phases.find(',', pos);
-                    std::string tok = phases.substr(pos, (comma == std::string::npos) ? std::string::npos : comma - pos);
+                    std::size_t comma = phases.find(',', pos);
+                    std::string tok =
+                        phases.substr(pos, (comma == std::string::npos) ? std::string::npos : (comma - pos));
+
                     if (!tok.empty()) {
-                        std::string e; apply_phase_token(a.phases, tok, e);
+                        std::string e;
+                        apply_phase_token(parsedArgs.phases, tok, e);
                         if (!e.empty()) return {{}, e};
                     }
+
                     if (comma == std::string::npos) break;
                     pos = comma + 1;
                 }
-            } else return {{}, err};
-        } else if (k == "--help" || k == "-h") {
-            a.showHelp = true;
-        } else {
+            } else {
+                return {{}, err};
+            }
+        }
+        else if (k == "--help" || k == "-h") {
+            parsedArgs.showHelp = true;
+        }
+        else {
             return {{}, "unknown flag: " + k};
         }
     }
 
-    // ENV / DEV defaults if no date/range given
-    if (a.dateISO.empty() && a.startISO.empty() && a.endISO.empty()) {
-        if (const char* env = std::getenv("VALUATION_DATE")) a.dateISO = env;
-        else if (DEV_DEFAULT_VALUATION_DATE && *DEV_DEFAULT_VALUATION_DATE) a.dateISO = DEV_DEFAULT_VALUATION_DATE;
+    if (parsedArgs.showHelp) {
+        return {parsedArgs, {}};
     }
 
-    const bool single = !a.dateISO.empty();
-    const bool ranged = !a.startISO.empty() || !a.endISO.empty();
+    // ENV / DEV defaults if no date/range given
+    if (parsedArgs.dateISO.empty() && parsedArgs.startISO.empty() && parsedArgs.endISO.empty()) {
+        if (const char* env = std::getenv("VALUATION_DATE")) parsedArgs.dateISO = env;
+        else if (DEV_DEFAULT_VALUATION_DATE && *DEV_DEFAULT_VALUATION_DATE) parsedArgs.dateISO = DEV_DEFAULT_VALUATION_DATE;
+    }
+
+    const bool single = !parsedArgs.dateISO.empty();
+    const bool ranged = !parsedArgs.startISO.empty() || !parsedArgs.endISO.empty();
     if (single && ranged) return {{}, "use either --date OR --start/--end"};
     if (!single && !ranged) return {{}, "provide --date YYYY-MM-DD or --start/--end"};
-    if (ranged && (a.startISO.empty() || a.endISO.empty()))
+    if (ranged && (parsedArgs.startISO.empty() || parsedArgs.endISO.empty()))
         return {{}, "both --start and --end must be provided (YYYY-MM-DD)"};
 
-    if (a.phases == Phase::None) a.phases = Phase::Spot; // default
+    if (parsedArgs.phases == Phase::None) parsedArgs.phases = Phase::Spot; // default
 
-    return {a, {}};
+    return {parsedArgs, {}};
 }
+
+// Backwards-compatible wrapper:
+ParseResult parse(int argc, char** argv) {
+    std::vector<std::string> args;
+    if (argc > 1 && argv) {
+        args.reserve(static_cast<std::size_t>(argc - 1));
+        for (int i = 1; i < argc; ++i) {
+            args.emplace_back(argv[i] ? argv[i] : "");
+        }
+    }
+    return parse(args);
+}
+
 
 std::string help_text() {
     return
