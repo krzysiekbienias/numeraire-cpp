@@ -12,14 +12,6 @@ class ScheduleGenerator {
 public:
     ScheduleGenerator();
 
-    // Public API: string-based
-    void setCalendar(const std::string& calendar);
-    void setFrequency(const std::string& frequency);
-    void setDateCorrectionRule(const std::string& convention);
-    void setDateGenerationRule(const std::string& rule);
-    void setDayCounter(const std::string& dayCounter);
-
-    // Enum-based setters
     void setCalendar(CalendarType calendar);
     void setFrequency(Frequency frequency);
     void setDateCorrectionRule(DateConvention convention);
@@ -35,7 +27,7 @@ public:
     QuantLib::Schedule generate(const std::string& startDate, const std::string& endDate) const;
     
     
-    //geters
+    //getters
     CalendarType getCalendarType() const;
     Frequency getFrequency() const;
     DateConvention getDateConvention() const;
@@ -43,6 +35,11 @@ public:
     
     QuantLib::DayCounter getDayCounter() const;
     DayCount getDayCountEnum() const;
+
+    // Introspection / behavior helpers (test-friendly)
+    QuantLib::Date adjust(const QuantLib::Date& d) const;
+    bool isBusinessDay(const QuantLib::Date& d) const;
+
     
     
 

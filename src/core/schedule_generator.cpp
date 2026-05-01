@@ -15,37 +15,12 @@
 
 
 
-ScheduleGenerator::ScheduleGenerator()
-    : m_calendarType(CalendarType::UK),
-      m_frequencyEnum(Frequency::Monthly),
-      m_dateConvention(DateConvention::Following),
-      m_dateRule(DateGenerationRule::Forward),
-      m_dayCountEnum(DayCount::Actual365) {
-    setCalendar(m_calendarType);
-    setFrequency(m_frequencyEnum);
-    setDateCorrectionRule(m_dateConvention);
-    setDateGenerationRule(m_dateRule);
-    setDayCounter(m_dayCountEnum);
-}
-
-void ScheduleGenerator::setCalendar(const std::string& calendar) {
-    setCalendar(enum_utils::toCalendarType(calendar));
-}
-
-void ScheduleGenerator::setFrequency(const std::string& frequency) {
-    setFrequency(enum_utils::toFrequency(frequency));
-}
-
-void ScheduleGenerator::setDateCorrectionRule(const std::string& convention) {
-    setDateCorrectionRule(enum_utils::toDateConvention(convention));
-}
-
-void ScheduleGenerator::setDateGenerationRule(const std::string& rule) {
-    setDateGenerationRule(enum_utils::toDateGenerationRule(rule));
-}
-
-void ScheduleGenerator::setDayCounter(const std::string& dayCounter) {
-    setDayCounter(enum_utils::toDayCount(dayCounter));
+ScheduleGenerator::ScheduleGenerator() {
+    setCalendar(CalendarType::UK);
+    setFrequency(Frequency::Monthly);
+    setDateCorrectionRule(DateConvention::Following);
+    setDateGenerationRule(DateGenerationRule::Forward);
+    setDayCounter(DayCount::Actual365);
 }
 
 void ScheduleGenerator::setCalendar(CalendarType calendar) {
@@ -97,11 +72,11 @@ void ScheduleGenerator::setDayCounter(DayCount dc) {
 
 
 void ScheduleGenerator::configureFromMap(const std::unordered_map<std::string, std::string>& cfg) {
-    setCalendar(cfg.at("CALENDAR"));
-    setFrequency(cfg.at("FREQUENCY"));
-    setDateCorrectionRule(cfg.at("BUSINESS_DAY_CONVENTION"));
-    setDateGenerationRule(cfg.at("DATE_GENERATION_RULE"));
-    setDayCounter(cfg.at("DAY_COUNT"));
+    setCalendar(enum_utils::toCalendarType(cfg.at("CALENDAR")));
+    setFrequency(enum_utils::toFrequency(cfg.at("FREQUENCY")));
+    setDateCorrectionRule(enum_utils::toDateConvention(cfg.at("BUSINESS_DAY_CONVENTION")));
+    setDateGenerationRule(enum_utils::toDateGenerationRule(cfg.at("DATE_GENERATION_RULE")));
+    setDayCounter(enum_utils::toDayCount(cfg.at("DAY_COUNT")));
 }
 
 QuantLib::Schedule ScheduleGenerator::generate(const std::string& start, const std::string& end) const {
@@ -139,4 +114,13 @@ QuantLib::DayCounter ScheduleGenerator::getDayCounter() const { return m_dayCoun
 
 DayCount ScheduleGenerator::getDayCountEnum() const {
     return m_dayCountEnum;
+}
+
+
+QuantLib::Date ScheduleGenerator::adjust(const QuantLib::Date& d) const {
+    return m_calendar.adjust(d, m_convention);
+}
+
+bool ScheduleGenerator::isBusinessDay(const QuantLib::Date& d) const {
+    return m_calendar.isBusinessDay(d);
 }
