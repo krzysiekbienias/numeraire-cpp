@@ -5,6 +5,7 @@
 #include <ql/time/businessdayconvention.hpp>
 #include <ql/time/daycounter.hpp>
 #include <string>
+#include <vector>
 
 #include "enums/schedule_enums.hpp"
 
@@ -24,6 +25,9 @@ public:
     
     void configureFromMap(const std::unordered_map<std::string, std::string>& cfg);
 
+    /// Generates a QuantLib::Schedule between two dates.
+    /// @param startDate  Start date in DD-MM-YYYY format, e.g. "01-01-2024"
+    /// @param endDate    End date in DD-MM-YYYY format,   e.g. "31-12-2024"
     QuantLib::Schedule generate(const std::string& startDate, const std::string& endDate) const;
     
     
@@ -35,6 +39,10 @@ public:
     
     QuantLib::DayCounter getDayCounter() const;
     DayCount getDayCountEnum() const;
+
+    // Year fraction calculations
+    double computeYearFraction(const std::string& startDate, const std::string& endDate) const;
+    std::vector<double> computeYearFractionVector(const QuantLib::Schedule& schedule) const;
 
     // Introspection / behavior helpers (test-friendly)
     QuantLib::Date adjust(const QuantLib::Date& d) const;

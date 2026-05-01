@@ -117,6 +117,23 @@ DayCount ScheduleGenerator::getDayCountEnum() const {
 }
 
 
+double ScheduleGenerator::computeYearFraction(const std::string& startDate, const std::string& endDate) const {
+    QuantLib::Date start = date_utils::toQLDateDDMMYYYY(startDate);
+    QuantLib::Date end   = date_utils::toQLDateDDMMYYYY(endDate);
+    double yf = m_dayCounter.yearFraction(start, end);
+    Logger::get()->info("📐 Year fraction from {} to {}: {}", startDate, endDate, yf);
+    return yf;
+}
+
+std::vector<double> ScheduleGenerator::computeYearFractionVector(const QuantLib::Schedule& schedule) const {
+    std::vector<double> dts;
+    dts.reserve(schedule.size() > 0 ? schedule.size() - 1 : 0);
+    for (size_t i = 0; i + 1 < schedule.size(); ++i) {
+        dts.push_back(m_dayCounter.yearFraction(schedule[i], schedule[i + 1]));
+    }
+    return dts;
+}
+
 QuantLib::Date ScheduleGenerator::adjust(const QuantLib::Date& d) const {
     return m_calendar.adjust(d, m_convention);
 }

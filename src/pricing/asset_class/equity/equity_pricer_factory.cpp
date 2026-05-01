@@ -101,18 +101,7 @@ double EquityPricerFactory::computeYearFraction() const {
         throw std::runtime_error("Valuation date or maturity date is missing.");
     }
 
-    QuantLib::Date startDate = date_utils::toQLDateDDMMYYYY(m_valuationDate);
-    QuantLib::Date endDate = date_utils::toQLDateDDMMYYYY(trade.meta.trade_maturity);
-
-    const auto& dayCounter = m_scheduleGen.getDayCounter();
-    double yearFraction = dayCounter.yearFraction(startDate, endDate);
-
-    Logger::get()->info("📐 Year fraction from {} to {} using {}: {}",
-                        m_valuationDate, trade.meta.trade_maturity,
-                        static_cast<int>(m_scheduleGen.getDayCountEnum()),  // optional: log enum index
-                        yearFraction);
-
-    return yearFraction;
+    return m_scheduleGen.computeYearFraction(m_valuationDate, trade.meta.trade_maturity);
 }
 
 std::vector<double> EquityPricerFactory::computeYearFractionVector() const {
@@ -120,17 +109,8 @@ std::vector<double> EquityPricerFactory::computeYearFractionVector() const {
         throw std::runtime_error("❌ Cannot compute year fraction vector: trade not set.");
     }
 
-    QuantLib::Schedule schedule = buildSchedule();  // wygeneruj harmonogram
-
-    const auto& dayCounter = m_scheduleGen.getDayCounter();
-    std::vector<double> dts;
-
-    for (size_t i = 0; i < schedule.size() - 1; ++i) {
-        double dt = dayCounter.yearFraction(schedule[i], schedule[i + 1]);
-        dts.push_back(dt);
-    }
-
-    return dts;
+    QuantLib::Schedule schedule = buildSchedule();
+    return m_scheduleGen.computeYearFractionVector(schedule);
 }
 
 void EquityPricerFactory::setMarketEnvironment(const MarketEnvironment& env){
