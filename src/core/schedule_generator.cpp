@@ -1,6 +1,5 @@
 #include "core/schedule_generator.hpp"
 #include "utils/enum_mappers.hpp"
-#include "utils/logger.hpp"
 #include "utils/date_utils.hpp"
 
 #include <ql/time/calendars/unitedkingdom.hpp>
@@ -10,8 +9,6 @@
 #include <ql/time/daycounters/actual365fixed.hpp>
 #include <ql/time/daycounters/actual360.hpp>
 #include <ql/time/daycounters/thirty360.hpp>
-#include <stdexcept>
-#include <sstream>
 
 
 
@@ -120,9 +117,7 @@ DayCount ScheduleGenerator::getDayCountEnum() const {
 double ScheduleGenerator::computeYearFraction(const std::string& startDate, const std::string& endDate) const {
     QuantLib::Date start = date_utils::toQLDateDDMMYYYY(startDate);
     QuantLib::Date end   = date_utils::toQLDateDDMMYYYY(endDate);
-    double yf = m_dayCounter.yearFraction(start, end);
-    Logger::get()->info("📐 Year fraction from {} to {}: {}", startDate, endDate, yf);
-    return yf;
+    return m_dayCounter.yearFraction(start, end);
 }
 
 std::vector<double> ScheduleGenerator::computeYearFractionVector(const QuantLib::Schedule& schedule) const {
